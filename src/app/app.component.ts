@@ -6,7 +6,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StartPage } from '../pages/start/start';
-import { authFirebaseService } from '../providers/firebase-service/firebase.service'
+import { authFirebaseService } from '../providers/firebase-service/firebase-service'
 import { timer } from 'rxjs/observable/timer';
 
 @Component({
