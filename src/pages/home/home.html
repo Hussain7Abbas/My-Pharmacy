@@ -1,0 +1,105 @@
+
+<ion-header>
+    <!-- ================ Nav Bar Component ================= -->
+    <!-- ============--> <nav-bar></nav-bar>  <!-- ==========-->
+    <!-- ================ Nav Bar Component ================= -->
+</ion-header>
+
+<!-- **************************************************************************************************** -->
+<!-- =============================================== User =============================================== -->
+<!-- =============================================== Home =============================================== -->
+<!-- =============================================== Page =============================================== -->
+<!-- **************************************************************************************************** -->
+
+
+
+<ion-content *ngIf="isUser">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingText="اسحب للتحديث"
+        refreshingSpinner="crescent"
+        refreshingText="جارِ التحديث...">
+      </ion-refresher-content>
+    </ion-refresher>
+
+    <div padding>
+      <h1 style="color: #339999;">هل تريد السؤال عن دواء؟</h1>
+      <button id="askButton" ion-button block color="primary" (click)='goAddQues()'>
+        <ion-icon name='md-add'></ion-icon>&nbsp; &nbsp;اضافة منشور
+      </button>
+    </div>
+    <!-- ============================================================================================== -->
+    <!-- ================================= My Questions Section ======================================= -->
+    <!-- ============================================================================================== -->
+    <div id="myQues"> <!-- ===== My Questions Title ===== -->
+        <h1 id="myQuesTitle">الاسئلة</h1>
+    </div>
+    <!-- ============================ The list that contains all sliding items ============================ -->
+    <ion-list>
+      <ion-item id="ionItem" *ngFor="let item of myObject.slice().reverse()"> <!-- ===== ion-item ===== -->
+        <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">
+          <img src="../../assets/imgs/userBlack.png" style="width: 50px; height: 50px;"> <!-- ===== The status Picture of post ===== -->
+        </ion-avatar>
+        <div class="p-textDiv"> <!-- ===== The div which contain all the texts ===== -->
+          <div> <!-- ===== the div which contain all the texts ===== -->
+            <h2 class="postHeaderTitle">{{item[1]['name']}}</h2> <!-- ===== The status of post ===== -->
+            <p class="postDate">{{item[1]['postDate']}}</p> <!-- ===== The date of post ===== -->
+          </div>
+          <h2 class="postTitle">{{item[1]['postBody']}}</h2> <!-- ===== The title of post ===== -->
+        </div>
+        <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+          loadingSpinner="crescent"
+          loadingText="تحميل المزيد">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+
+
+<!-- **************************************************************************************************** -->
+<!-- ============================================= Pharmacy ============================================= -->
+<!-- =============================================== Home =============================================== -->
+<!-- =============================================== Page =============================================== -->
+<!-- **************************************************************************************************** -->
+
+
+
+
+<ion-content *ngIf="!isUser">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="اسحب للتحديث"
+      refreshingSpinner="crescent"
+      refreshingText="جارِ التحديث...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- ============================ The list that contains all items ============================ -->
+  <ion-list>
+    <ion-item id="ionItem" *ngFor="let item of myObject.slice().reverse()"> <!-- ===== ion-item ===== -->
+      <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">
+        <img src="../../assets/imgs/userBlack.png" style="width: 50px; height: 50px;"> <!-- ===== The status Picture of post ===== -->
+      </ion-avatar>
+      <div class="p-textDiv"> <!-- ===== The div which contain all the texts ===== -->
+        <div> <!-- ===== the div which contain all the texts ===== -->
+          <h2 class="postHeaderTitle">{{item[1]['name']}}</h2> <!-- ===== The status of post ===== -->
+          <p class="postDate">{{item[1]['postDate']}}</p> <!-- ===== The date of post ===== -->
+        </div>
+        <h2 class="postTitle">{{item[1]['postBody']}}</h2> <!-- ===== The title of post ===== -->
+      </div>
+      <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="تحميل المزيد">
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
