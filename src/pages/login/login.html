@@ -21,7 +21,8 @@
    <br>
    
    <button ion-button block (click)="onLogin()"><ion-icon name="ios-person-outline"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
-   <a href="" target="-blank">هل نسيت كلمة المرور</a>
+ <a href="" target="-blank" (click)="forgetPassword()" >هل نسيت كلمة المرور</a> 
+  
    <br><br>
    <button class="infoBotton" ion-button block (click)="logInFacebook()"  >
        <ion-icon name="logo-facebook"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;

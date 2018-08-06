@@ -30,7 +30,7 @@ export class RegisterPage {
     zone: '',
     userType: '',
     pharmacyReplyNo: '0',
-    pharmacyAdress: ' '
+    pharmacyAdress: ''
   }
  
   

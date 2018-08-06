@@ -21,10 +21,10 @@ export class postsFirebaseService {
 
 
   constructor(public db:AngularFireDatabase) {
-
+    
   }
 
-
+ 
   addPosts(myList:postModel) {
     return this.dataList.push(myList);
   }
@@ -48,7 +48,8 @@ export class postsFirebaseService {
 // ========================================================================================================
 // ********************************************************************************************************
 
-import { AngularFireAuth } from 'angularfire2/auth';
+
+import { AngularFireAuth } from 'angularFire2/auth';
 import { UserDataModel } from '../../model/DataModels';
 
 @Injectable()
@@ -71,14 +72,18 @@ export class authFirebaseService {
       return this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(loginUser => {
         localStorage.setItem('uid', loginUser.user.uid)
-        this.setUserInfoLocalStorage(authData)
+        this.setUserInfoLocalStorage()
     })
 
     }
+     // ============================ forget password function  ===========================
 
-
+     
+      forgetPasswordUser(email:any) {
+        return this.afAuth.auth.sendPasswordResetEmail(email);
+        }
     // ============================ Set user data at the local storage ===========================
-    setUserInfoLocalStorage(authData){
+    setUserInfoLocalStorage(){
       let usersListObject = this.db.object('userData')
 
       usersListObject.snapshotChanges().subscribe(action=>{
@@ -86,12 +91,11 @@ export class authFirebaseService {
           alert('No Data')
         } else {
           this.itemArray.push(action.payload.val() as UserDataModel)
-          this.myObject = Object.entries(this.itemArray[0])
+          this.myObject = Object.entries(this.itemArray[0])   
 
             for (const item of this.myObject) {
               if (item[1]['uid'] == localStorage.getItem('uid')) {
-                let userInfoData = [authData, item[1], item[0]]
-                localStorage.setItem("userData", JSON.stringify(userInfoData))
+                localStorage.setItem("userData", JSON.stringify(item[1]));
                 this._Events.publish("auth:Success")
                 localStorage.setItem('isLogin','true')
               }
@@ -105,8 +109,21 @@ export class authFirebaseService {
     regesterWithEmail(authData, userData){
         return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
         .then(user=>{
-          localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
-          userData.uid = localStorage.getItem('uid')
+        
+
+        // ========================================================================
+        // ========== Setting the user information in the local storage ===========
+        // ========================================================================
+        localStorage.setItem('isLogin','true')
+        localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
+        userData.uid = localStorage.getItem('uid')
+        // ========================================================================
+        // ========== Setting the user information in the local storage ===========
+        // ========================================================================
+
+
+        
         // ========================================================================
         // ====================== User Profile Details ============================
         // ========================================================================
@@ -118,9 +135,8 @@ export class authFirebaseService {
             userType: userData.userType,
             pharmacyReplyNo: userData.pharmacyReplyNo,
             pharmacyAdress: userData.pharmacyAdress
-        }).then((posta)=>{
-          console.log(posta);
-          this.setUserInfoLocalStorage(authData)
+        }).then(()=>{
+          this._Events.publish("auth:Success")
         })
         // ========================================================================
         // ====================== User Profile Details ============================
@@ -130,13 +146,8 @@ export class authFirebaseService {
         })
     }
 
-    editUserProfile($key, myList:UserDataModel) {
-      return this.usersList.update($key, myList);
-    }
-
     logOut(){
       this.afAuth.auth.signOut()
       localStorage.setItem('isLogin','false')
     }
 }
-

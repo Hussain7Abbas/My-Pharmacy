@@ -1,8 +1,3 @@
-<!-- ========================SplashScreen============================ -->
-<div *ngIf="showSplash" class="splash">
-  <img src="../assets/imgs/logo.png" class="spinner">
-</div>
-
 <!-- =============================== SideBar ============================== -->
   <ion-menu [content]="mycontent">
     <ion-content>
@@ -14,6 +9,9 @@
             <h2 style="line-height: 36px; font-weight: 900; color: white;">{{userInfo['name'] || username}}</h2>
           </ion-item> -->
         </div>
+
+
+
         <ion-list>
             <ion-item (click)="goAbout()" menuClose>
               <ion-icon class="ionIconList"name='information-circle'></ion-icon>
@@ -34,7 +32,7 @@
   </ion-menu>
 
 <!-- =============================== app declaration ============================== -->
-  <ion-nav #mycontent [root]="rootPage"></ion-nav>
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>  
 
 
 

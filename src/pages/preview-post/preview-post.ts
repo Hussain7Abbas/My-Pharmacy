@@ -35,7 +35,7 @@ export class PreviewPostPage {
     comments: []
   }
 
-  isUser: boolean = Boolean(JSON.parse(localStorage["userData"])[1]['userType'] == 'user')
+  isUser: boolean = Boolean(JSON.parse(localStorage["userData"])['userType'] == 'user')
   thePost = JSON.parse(localStorage["thePost"]);
   userData = JSON.parse(localStorage["userData"]);
   isCommentAvailable: Boolean = true

@@ -22,14 +22,10 @@ import { PreviewPostPage } from '../pages/preview-post/preview-post';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { EmailComposer } from "@ionic-native/email-composer";
-import { Camera } from "@ionic-native/camera";
-
 // ==================================== Firebase =====================================
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-
+import { AngularFireAuth } from 'angularFire2/auth';
 
 import { postsFirebaseService } from '../providers/firebase-service/firebase-service';
 import { authFirebaseService } from '../providers/firebase-service/firebase-service';
@@ -95,10 +91,8 @@ const firebaseConfig = {
     // ================ Firebase ==============
     AngularFireAuth,
     postsFirebaseService,
-    authFirebaseService,
+    authFirebaseService
     // ================ Firebase ==============
-    EmailComposer,
-    Camera
   ]
 })
 export class AppModule {}
