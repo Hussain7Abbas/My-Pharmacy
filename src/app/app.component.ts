@@ -2,10 +2,17 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+<<<<<<< HEAD
 import { timer } from 'rxjs/observable/timer';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 // import { ProfilePage } from '../pages/profile/profile';
+=======
+
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
+import { ProfilePage } from '../pages/profile/profile';
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
 import { TabsPage } from '../pages/tabs/tabs';
 import { StartPage } from '../pages/start/start';
 
@@ -19,7 +26,11 @@ export class MyApp {
   @ViewChild(Nav) nav:Nav;
 
   rootPage:any
+<<<<<<< HEAD
   showSplash = true; // <-- show animation
+=======
+
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
   constructor( platform: Platform, public _Events:Events, statusBar: StatusBar, splashScreen: SplashScreen, public _authFirebaseService:authFirebaseService) {
     if (localStorage.getItem('isLogin') == 'true'){
       this.rootPage = TabsPage
@@ -37,8 +48,11 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+<<<<<<< HEAD
       timer(3000).subscribe(() => this.showSplash = false) // <-- hide animation after 3s
 
+=======
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
     });
   }
   // goProfile(){

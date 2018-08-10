@@ -49,7 +49,11 @@ export class postsFirebaseService {
 // ********************************************************************************************************
 
 
+<<<<<<< HEAD
 import { AngularFireAuth } from 'angularfire2/auth';
+=======
+import { AngularFireAuth } from 'angularFire2/auth';
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
 import { UserDataModel } from '../../model/DataModels';
 
 @Injectable()

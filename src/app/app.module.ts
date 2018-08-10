@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import { EmailComposer } from '@ionic-native/email-composer';
+=======
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+<<<<<<< HEAD
 import { Camera } from '@ionic-native/camera';
+=======
+
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
 import { HeroPage } from '../pages/hero/hero';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -26,7 +33,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // ==================================== Firebase =====================================
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+<<<<<<< HEAD
 import { AngularFireAuth } from 'angularfire2/auth';
+=======
+import { AngularFireAuth } from 'angularFire2/auth';
+
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
 import { postsFirebaseService } from '../providers/firebase-service/firebase-service';
 import { authFirebaseService } from '../providers/firebase-service/firebase-service';
 
@@ -91,10 +103,15 @@ const firebaseConfig = {
     // ================ Firebase ==============
     AngularFireAuth,
     postsFirebaseService,
+<<<<<<< HEAD
     authFirebaseService,
     // ================ Firebase ==============
     EmailComposer,
     Camera
+=======
+    authFirebaseService
+    // ================ Firebase ==============
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
   ]
 })
 export class AppModule {}
