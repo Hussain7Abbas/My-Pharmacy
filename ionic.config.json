@@ -1,0 +1,13 @@
+{
+  "name": "MyPharmacy",
+  "integrations": {
+    "cordova": {}
+  },
+<<<<<<< HEAD
+  "type": "ionic-angular"
+}
+=======
+  "type": "ionic-angular",
+  "app_id": ""
+}
+>>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
