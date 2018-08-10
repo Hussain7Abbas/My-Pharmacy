@@ -1,0 +1,47 @@
+
+
+<!-- لا يوجد ناف بار في صفحة تسجيل الدخول يوجد فقط هيدر كبير فيه اسم الصفحة -->
+
+
+<ion-content padding>
+
+    <h1 >تسجيل دخول   </h1>
+  
+    <ion-item class="ion-label">
+       <ion-label floating >  البريد الالكتروني او رقم الهاتف</ion-label>
+       <ion-input [(ngModel)]="userAuthData.email" ></ion-input>
+   </ion-item>
+   
+   <ion-item class="ion-label" >
+       <ion-label floating>كلمة المرور</ion-label>
+       <ion-input [(ngModel)]="userAuthData.password" ></ion-input>
+   </ion-item> 
+   
+   
+   <br>
+   
+   <button ion-button block (click)="onLogin()"><ion-icon name="ios-person-outline"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
+ <a href="" target="-blank" (click)="forgetPassword()" >هل نسيت كلمة المرور</a> 
+  
+   <br><br>
+   <button class="infoBotton" ion-button block (click)="logInFacebook()"  >
+       <ion-icon name="logo-facebook"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        تسجيل بواسطة فيس بوك 
+     </button>
+     <br>
+     <button class="infoBotton"ion-button block (click)="logInGoogle()" >
+       <ion-icon name="logo-google"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+       تسجيل بواسطة جيميل
+     </button>
+     <br><br>
+   
+     <button ion-button block (click)="registerOn()" >
+       <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; 
+       انشاء حساب
+     </button>
+   <!-- <h2>مستخدم = user@gmail.com</h2>
+   <h2>صيدلية = pharmacy@gmail.com</h2>
+   <h2>كلمة المرور لكلاهما = 123456</h2> -->
+   
+   
+</ion-content>

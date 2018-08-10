@@ -1,0 +1,38 @@
+<!-- =============================== SideBar ============================== -->
+  <ion-menu [content]="mycontent">
+    <ion-content>
+        <div style="height: 156px; background-color: #339999;">
+          <img src="../assets/imgs/logo.png" style="width: 39%; margin-top: 5%; margin-right: 29%;">
+
+          <!-- <ion-item menuClose style="background-color: transparent;">
+            <img src="../assets/imgs/user.png" class="ionIconList">
+            <h2 style="line-height: 36px; font-weight: 900; color: white;">{{userInfo['name'] || username}}</h2>
+          </ion-item> -->
+        </div>
+
+
+
+        <ion-list>
+            <ion-item (click)="goAbout()" menuClose>
+              <ion-icon class="ionIconList"name='information-circle'></ion-icon>
+              <h2 style="line-height: 36px; font-weight: bold;">حول التطبيق</h2>
+            </ion-item>
+
+            <ion-item (click)="goInfo()" menuClose>
+                <ion-icon class="ionIconList" name='people'></ion-icon>
+                <h2 style="line-height: 36px; font-weight: bold;">اتصل بنا</h2>
+            </ion-item>
+
+          <ion-item (click)="onLogOut()" menuClose>
+            <ion-icon class="ionIconList" name='log-out'></ion-icon>
+            <h2 style="line-height: 36px; font-weight: bold;">تسجيل خروج</h2>
+          </ion-item>
+        </ion-list>
+    </ion-content>
+  </ion-menu>
+
+<!-- =============================== app declaration ============================== -->
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>  
+
+
+

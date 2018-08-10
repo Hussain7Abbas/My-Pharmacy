@@ -1,0 +1,85 @@
+page-search {
+//==============================================================================================
+//================================== Search Page CSS Style =====================================
+//==============================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//==============================================================================================
+//================================== Search Page CSS Style =====================================
+//==============================================================================================
+
+
+
+
+
+
+
+
+//======================================== by 'Hussain Abbas' ==================================
+//============================ Note for Saif: Don't Care about this Style :) ===================
+//====================================== Search Nav Bar Style ==================================
+    #navBarSearch{line-height: 40px; text-align: center; font-size: 2rem; height: 36px; padding: 0px; margin: 0px;}
+    .searchbar-ios {
+        padding: 0px;
+        min-height: 0px;
+        border-top: 0px solid transparent;
+        border-bottom: 0px solid black;
+        background: transparent;
+        position: absolute;
+        top: 2px; right: 43px;
+        width: calc(100% - 85px);
+        // border: solid 1px lightgray;
+        // border-radius: 10px;
+    }
+
+    .searchbar-ios .searchbar-input {
+        direction: rtl;
+    }
+    .searchbar-md {
+        padding: 0px;
+        position: absolute;
+        top: 2px; right: 43px;
+        width: calc(100% - 85px);
+    }
+    .searchbar-md  .searchbar-input {
+        border-radius: 2px;
+        background-position: right 8px center;
+        height: auto;
+        font-size: 1.6rem;
+        font-weight: 400;
+        line-height: 2rem;
+        color: black;
+        -webkit-box-shadow: 0 0 black;
+        box-shadow: 0 0 black;
+        direction: rtl;
+        // border: solid 1px lightgray;
+        // border-radius: 10px;
+    }
+    .searchbar-md .searchbar-search-icon {
+        top: 8px;
+    }
+//======================================== by 'Hussain Abbas' ==================================
+//============================ Note for Saif: Don't Care about this Style :) ===================
+//====================================== Search Nav Bar Style ==================================
+}
