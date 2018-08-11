@@ -51,7 +51,6 @@ h1{
 .toolbar-title-ios,
 .toolbar-title-md{
     color: white;
-<<<<<<< HEAD
 }
 
 
@@ -97,11 +96,11 @@ h1{
 .spinner {
     width: 150px;
     height: 150px;
-  
+
     position: relative;
     margin: 100px auto;
   }
-  
+
   .double-bounce1, .double-bounce2 {
     width: 100%;
     height: 100%;
@@ -110,30 +109,28 @@ h1{
     position: absolute;
     top: 0;
     left: 0;
-    
+
     -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
     animation: sk-bounce 2.0s infinite ease-in-out;
   }
-  
+
   .double-bounce2 {
     -webkit-animation-delay: -1.0s;
     animation-delay: -1.0s;
   }
-  
+
   @-webkit-keyframes sk-bounce {
     0%, 100% { -webkit-transform: scale(0.0) }
     50% { -webkit-transform: scale(1.0) }
   }
-  
+
   @keyframes sk-bounce {
-    0%, 100% { 
+    0%, 100% {
       transform: scale(0.0);
       -webkit-transform: scale(0.0);
-    } 50% { 
+    } 50% {
       transform: scale(1.0);
       -webkit-transform: scale(1.0);
     }
   }
-=======
-}
->>>>>>> 53aa97bca37d9746137e948936bb3564739b12b1
+
