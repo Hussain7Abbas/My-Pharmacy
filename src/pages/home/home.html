@@ -11,7 +11,18 @@
 <!-- =============================================== Page =============================================== -->
 <!-- **************************************************************************************************** -->
 
+
+
 <ion-content *ngIf="isUser">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingText="اسحب للتحديث"
+        refreshingSpinner="crescent"
+        refreshingText="جارِ التحديث...">
+      </ion-refresher-content>
+    </ion-refresher>
+
     <div padding>
       <h1 style="color: #339999;">هل تريد السؤال عن دواء؟</h1>
       <button id="askButton" ion-button block color="primary" (click)='goAddQues()'>
@@ -26,7 +37,7 @@
     </div>
     <!-- ============================ The list that contains all sliding items ============================ -->
     <ion-list>
-      <ion-item id="ionItem" *ngFor="let item of myObject"> <!-- ===== ion-item ===== -->
+      <ion-item id="ionItem" *ngFor="let item of myObject.slice().reverse()"> <!-- ===== ion-item ===== -->
         <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">
           <img src="../../assets/imgs/userBlack.png" style="width: 50px; height: 50px;"> <!-- ===== The status Picture of post ===== -->
         </ion-avatar>
@@ -39,7 +50,13 @@
         </div>
         <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
       </ion-item>
-    </ion-list>      
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+          loadingSpinner="crescent"
+          loadingText="تحميل المزيد">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-content>
 
 
@@ -55,9 +72,17 @@
 
 
 <ion-content *ngIf="!isUser">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="اسحب للتحديث"
+      refreshingSpinner="crescent"
+      refreshingText="جارِ التحديث...">
+    </ion-refresher-content>
+  </ion-refresher>
   <!-- ============================ The list that contains all items ============================ -->
   <ion-list>
-    <ion-item id="ionItem" *ngFor="let item of myObject"> <!-- ===== ion-item ===== -->
+    <ion-item id="ionItem" *ngFor="let item of myObject.slice().reverse()"> <!-- ===== ion-item ===== -->
       <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">
         <img src="../../assets/imgs/userBlack.png" style="width: 50px; height: 50px;"> <!-- ===== The status Picture of post ===== -->
       </ion-avatar>
@@ -71,4 +96,10 @@
       <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="تحميل المزيد">
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

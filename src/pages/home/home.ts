@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController, ModalController, Events } from 'ionic-angular';
-import { LoginPage } from '../login/login'
+import { Component, ViewChild } from '@angular/core';
+import { NavController, ModalController, Events, ToastController, Content, LoadingController } from 'ionic-angular';
 import { AddPostPage } from '../add-post/add-post'
 import { PreviewPostPage } from '../preview-post/preview-post'
 import { postsFirebaseService } from '../../providers/firebase-service/firebase-service'
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; 
 import { postModel } from '../../model/DataModels'
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-home',
@@ -22,81 +22,98 @@ export class HomePage {
     comments: []
   }
   
-  isUser: boolean = Boolean(JSON.parse(localStorage["userData"])['userType'] == 'user')
-
-  postList:AngularFireObject<any>
+  // check the user type (user = true , pharmacy = false)
+  isUser: boolean = Boolean(JSON.parse(localStorage["userData"])[1]['userType'] == 'user')
+  @ViewChild(Content) content: Content;
   
-  itemArray = []
+  postsRef:AngularFireList<any>
   myObject = []
+  myLimit = 0
+  myListCount = 0
 
-  constructor(public navCtrl: NavController, public _Events: Events, public modalCtrl: ModalController, public _postsFirebaseService:postsFirebaseService, public db:AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public _LoadingController:LoadingController, public _ToastController:ToastController, public _Events: Events, public modalCtrl: ModalController, public _postsFirebaseService:postsFirebaseService, public db:AngularFireDatabase) {
     localStorage.setItem('navTitle', 'الرئيسية') // هذا المتغير في مساحة الخزن المحلية يقوم بتغيير عنوان الناف بار
-
-    this.postList = this.db.object('Posts')
-
-
-    this.loadData()
-
-  }
-
-
-
-  toPage(){
-    this.navCtrl.push(LoginPage)
-  }
-
-  setData(){
-    this.myObject = []
-    this.postList.snapshotChanges().subscribe(action=>{
-      if (action.payload.val() == null || action.payload.val() == undefined) {
-        alert('No Data')
-      } else {
-        this.itemArray.push(action.payload.val() as postModel)
-        this.myObject = Object.entries(this.itemArray[0])
-      }
-  })
-  }
-
-
-  loadData(){
-    this.myObject = []
+    this.postsRef = this.db.list("Posts")
+    this.postsRef.query.once('value', action => {this.myListCount = Object.entries(action.val()).length})
+    // Call "Load data" function to set data into "myObject" array
     this.setData()
+
   }
 
-  // onEdit(myList){
-  //   this._FirebaseServiceProvider.updatePosts(myList)
-  // }
-
-  // onDelete(key){
-  //   this._postsFirebaseService.deletePosts(key)
-  //   this.myfilter = []
-  //   this.setData()
-  // }
+  // get Data from firebase into "myObject" array
+  setData(){
+      let loading = this._LoadingController.create({
+        spinner: "crescent",
+        content: 'يرجى الانتظار'
+      });
+      loading.present();
+      this.myObject = []
+      this.myLimit += 10
+      this.postsRef.query.orderByChild('postDate').limitToLast(this.myLimit).once('value', action => {
+        for (let post in action.val()) {
+          this.myObject.push([
+            post,
+            action.val()[post] as postModel
+          ])
+        }
+      }).then(()=>{
+        loading.dismiss();
+      })
+  }
 
   goAddQues(){
+    // open addPost page as a modal
     let addPostModal = this.modalCtrl.create(AddPostPage);
     addPostModal.present();
-
-    // setTimeout(() => {
-    //   if (localStorage.getItem('reloadHome') == 'reload'){
-    //     this.loadData()
-    //     console.log('Loaded');
-        
-    //     localStorage.setItem('reloadHome', 'none')
-    //   }else if (localStorage.getItem('reloadHome') == 'close'){
-    //     localStorage.setItem('reloadHome', 'none')
-    //   }else{
-    //     console.log('nothing');
-        
-    //   }
-    // }, 1000);
+    // Refresh data when the post has bening added
+    this._Events.subscribe("post:Added", ()=>{
+      const toast = this._ToastController.create({
+        message: 'تم نشر المنشور',
+        duration: 2000
+      });
+      toast.present();
+      this.navCtrl.setRoot(TabsPage)
+    })
   }
 
   goPreviewQues(Post){
+    // open previewPost page as a modal
     let PreviewPostModal = this.modalCtrl.create(PreviewPostPage);
     PreviewPostModal.present();
-    
+    // pass post data to previewPost page
     localStorage.setItem("thePost", JSON.stringify(Post));
+  }
+
+// ionic refresher function
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.navCtrl.setRoot(TabsPage)
+      refresher.complete();
+    }, 2000);
+  }
+
+// ionic infinity scroll function
+  doInfinite(infiniteScroll) {
+    if (this.myLimit > this.myListCount){
+      // console.log();
+      
+
+      setTimeout(() => {
+        this.content.scrollTo(0, this.content.scrollHeight - 63, 300);
+        const toast = this._ToastController.create({
+          message: 'لا توجد المزيد من المنشورات',
+          duration: 2000
+        });
+        toast.present();
+        infiniteScroll.complete();
+      }, 1000); 
+
+    }else if (this.myLimit < this.myListCount){
+      setTimeout(() => {
+        this.setData()
+        infiniteScroll.complete();
+      }, 500);    
+    }
 
   }
 
