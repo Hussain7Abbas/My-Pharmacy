@@ -1,167 +1,169 @@
 
 <!-- ==================<userProfile>=================== -->
-<ion-content *ngIf="isUser">
+    <ion-content *ngIf="isUser">
 
-    <!-- ====== <Nav Bar Component> ================= -->
-         <!-- ===--> <nav-bar></nav-bar>  <!-- ===-->
-    <!-- ======</ Nav Bar Component> ================= -->
-    
-    <!-- ===============<userImage&userName>================== -->      
-    <div class="prof">
-        <img class="userimg" src="assets/imgs/user.png"/>          
-        <h2>حلا حازم  </h2>
-      </div>
-    <!-- ==================</userImage&userName>=============== -->
-    <!-- =================<segmentsPart>======================= -->
-        <ion-segment [(ngModel)]="pet">
-          <ion-segment-button  value="deatils">
-            التفاصيل
-           </ion-segment-button>
-          <ion-segment-button value="Qesition">
-            الأسئلة
-           </ion-segment-button>
-          </ion-segment>
-    <!-- ==================</segmentsPart>==================== -->
-    <!-- ==================<contentDetails>=================== -->
-    <div padding  [ngSwitch]="pet">
-        <ion-list   *ngSwitchCase="'deatils'">
-            <ion-grid>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">المحافظة:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >القادسية</h4>
-                      </ion-col>
-                  </ion-row>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">المنطقة:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >حي الفرات</h4>
-                      </ion-col>
-                  </ion-row>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">البريد الالكتروني:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >hala.hazem@gmail.com</h4>
-                      </ion-col>
-                  </ion-row>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">كلمة المرور:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >54g8p@3!0</h4>
-                      </ion-col>
-                  </ion-row>
-              </ion-grid>
-              <button ion-button full color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
-          </ion-list>
-      </div>
-    <!-- ==================</contentDetails>==================== -->
-    <!-- ==================<contentQuestions>=================== -->
-    <div [ngSwitch]="pet">
-        <ion-list *ngSwitchCase="'Qesition'" >
-            <ion-list id="qesitionList">
-                <ion-item-sliding>
-                    <ion-item id="ionItem"> <!-- ===== ion-item ===== -->
-                        <div style="position: absolute; right: 8px; top: 10px;">
-                            <img src="../../assets/imgs/answered.png" style="width: 45px; height: 45px;"> <!-- ===== The status Picture of post ===== -->
-                            <p class="replyNo">12</p> <!-- ===== The number of the replies of hte post ===== -->
-                          </div>
-                        <div class="textDiv"> <!-- ===== The div which contain all the texts ===== -->
-                            <div> <!-- ===== the div which contain all the texts ===== -->
-                                <h2 class="postHeaderTitle">تمت الاجابة</h2> <!-- ===== The status of post ===== -->
-                                <p class="postDate">6/8/2018</p> <!-- ===== The date of post ===== -->
-                              </div>
-                            <h2 class="postTitle">براسيتمول</h2> <!-- ===== The title of post ===== -->
-                          </div>
-                      </ion-item>
-                    <ion-item-options side="right"> <!-- ===== The Delete button on the right side ===== -->
-                        <button ion-button color="danger"  class="slideButton"><ion-icon name="md-trash"></ion-icon>حذف</button>
-                      </ion-item-options>
-                    <ion-item-options side="left"> <!-- ===== The Edit button on the left side ===== -->
-                        <button ion-button color="primary"  class="slideButton"><ion-icon name="md-create"></ion-icon>تعديل</button>
-                      </ion-item-options>
-                  </ion-item-sliding>
-              </ion-list>
-          </ion-list>
-     </div>
-    <!-- ===============</contentQuestions>================== -->
-</ion-content>
-<!-- ==================</userProfile>=================== -->
+        <!-- ====== <Nav Bar Component> ================= -->
+             <!-- ===--> <nav-bar></nav-bar>  <!-- ===-->
+        <!-- ======</ Nav Bar Component> ================= -->
 
-<!-- =================<pharmacyProfile>================= -->
-<ion-content *ngIf="!isUser">
-    <!-- ============<Nav Bar Component>============== -->
-        <!-- ====--> <nav-bar></nav-bar>  <!-- =====-->
-    <!-- ======</ Nav Bar Component> ================= -->
-
-    <!-- ==============<pharmacyImage&pharmacyName>============ -->           
-    <div class="prof">
-        <img class="userimg" src="assets/imgs/pharmacy.png"/>          
-        <h2>صيدلية الامل</h2>
-      </div> 
-    <!-- ============</pharmacyImage&pharmacyName>============= -->  
-    <!-- =================<segmentsPart>======================= -->       
-        <ion-segment [(ngModel)]="pet">
-            <ion-segment-button  value="deatils">
+        <!-- ===============<userImage&userName>================== -->      
+        <div class="prof">
+            <img class="userimg" src="assets/imgs/user.png"/>          
+            <h2>{{userData[1].name}}</h2>
+          </div>
+        <!-- ==================</userImage&userName>=============== -->
+        <!-- =================<segmentsPart>======================= -->
+            <ion-segment [(ngModel)]="pet">
+              <ion-segment-button  value="deatils">
                 التفاصيل
-              </ion-segment-button>
-          </ion-segment>
-    <!-- =================</segmentsPart>====================== -->
-    <!-- ==============<pharmacyContentDetails>================ -->
-    <div padding  [ngSwitch]="pet">
-        <ion-list   *ngSwitchCase="'deatils'">
-            <ion-grid>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">المحافظة:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >القادسية</h4>
-                      </ion-col>
-                  </ion-row>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">المنطقة:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >حي الجزائر</h4>
-                      </ion-col>
-                  </ion-row>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">البريد الالكتروني:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >My.Pharmacy@gmail.com</h4>
-                      </ion-col>
-                  </ion-row>
-                <ion-row class="infoDiv">
-                    <ion-col>
-                        <h4 class="infoTitle">كلمة المرور:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <h4 class="infoText" >123456</h4>
-                      </ion-col>
-                  </ion-row>
-                <ion-row class="infoDiv" >
-                    <ion-col>
-                        <h4 class="infoTitle">العنوان:</h4>
-                      </ion-col>
-                    <ion-col>
-                        <ion-textarea>حي الاسكان شارع منجا العلوية</ion-textarea>              
-                      </ion-col>
-                  </ion-row>                 
-              </ion-grid>
-                <button ion-button full color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
-          </ion-list>
-      </div>
-    <!-- ==============</pharmacyContentDetails>================ -->
-</ion-content>
-<!-- =================<pharmacyProfile>================= -->
+               </ion-segment-button>
+              <ion-segment-button value="Qesition">
+                الأسئلة
+               </ion-segment-button>
+              </ion-segment>
+        <!-- ==================</segmentsPart>==================== -->
+        <!-- ==================<contentDetails>=================== -->
+        <div padding  [ngSwitch]="pet">
+            <ion-list   *ngSwitchCase="'deatils'">
+                <ion-grid>
+                    <ion-row class="infoDiv">
+                        <ion-col>
+                            <h4 class="infoTitle">المحافظة:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[1].province}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv">
+                        <ion-col>
+                            <h4 class="infoTitle">المنطقة:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[1].zone}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv">
+                        <ion-col>
+                            <h4 class="infoTitle">البريد الالكتروني:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[0].email}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv">
+                        <ion-col>
+                            <h4 class="infoTitle">كلمة المرور:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[0].password}}</h4>
+                          </ion-col>
+                      </ion-row>
+                  </ion-grid>
+                  <button ion-button full (click)="editPro()" color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
+              </ion-list>
+          </div>
+        <!-- ==================</contentDetails>==================== -->
+        <!-- ==================<contentQuestions>=================== -->
+        <div [ngSwitch]="pet">
+            <ion-list *ngSwitchCase="'Qesition'" >
+                <ion-list id="qesitionList">
+                    <ion-item-sliding>
+                        <ion-item id="ionItem"> <!-- ===== ion-item ===== -->
+                            <div style="position: absolute; right: 8px; top: 10px;">
+                                <img src="../../assets/imgs/answered.png" style="width: 45px; height: 45px;"> <!-- ===== The status Picture of post ===== -->
+                                <p class="replyNo">12</p> <!-- ===== The number of the replies of hte post ===== -->
+                              </div>
+                            <div class="textDiv"> <!-- ===== The div which contain all the texts ===== -->
+                                <div> <!-- ===== the div which contain all the texts ===== -->
+                                    <h2 class="postHeaderTitle">تمت الاجابة</h2> <!-- ===== The status of post ===== -->
+                                    <p class="postDate">6/8/2018</p> <!-- ===== The date of post ===== -->
+                                  </div>
+                                <h2 class="postTitle">براسيتمول</h2> <!-- ===== The title of post ===== -->
+                              </div>
+                          </ion-item>
+                        <ion-item-options side="right"> <!-- ===== The Delete button on the right side ===== -->
+                            <button ion-button color="danger"  class="slideButton"><ion-icon name="md-trash"></ion-icon>حذف</button>
+                          </ion-item-options>
+                        <ion-item-options side="left"> <!-- ===== The Edit button on the left side ===== -->
+                            <button ion-button color="primary" class="slideButton"><ion-icon name="md-create"></ion-icon>تعديل</button>
+                          </ion-item-options>
+                      </ion-item-sliding>
+                  </ion-list>
+              </ion-list>
+         </div>
+        <!-- ===============</contentQuestions>================== -->
+    </ion-content>
+    <!-- ==================</userProfile>=================== -->
+    
+    <!-- =================<pharmacyProfile>================= -->
+    <ion-content *ngIf="!isUser">
+        <!-- ============<Nav Bar Component>============== -->
+            <!-- ====--> <nav-bar></nav-bar>  <!-- =====-->
+        <!-- ======</ Nav Bar Component> ================= -->
+    
+        <!-- ==============<pharmacyImage&pharmacyName>============ -->           
+        <div class="prof">
+            <ion-icon *ngIf="!visitShow" class="backButton" (click)="goBack()" style="position: absolute; top: 50px; right: 16px; " name='md-arrow-back'></ion-icon>
+            <img class="userimg" src="assets/imgs/pharmacy.png"/>          
+            <h2>{{userData[1].name}}</h2>
+          </div> 
+        <!-- ============</pharmacyImage&pharmacyName>============= -->  
+        <!-- =================<segmentsPart>======================= -->       
+            <ion-segment [(ngModel)]="pet">
+                <ion-segment-button  value="deatils">
+                    التفاصيل
+                  </ion-segment-button>
+              </ion-segment>
+        <!-- =================</segmentsPart>====================== -->
+        <!-- ==============<pharmacyContentDetails>================ -->
+        <div padding  [ngSwitch]="pet">
+            <ion-list   *ngSwitchCase="'deatils'">
+                <ion-grid>
+                    <ion-row class="infoDiv">
+                        <ion-col>
+                            <h4 class="infoTitle">المحافظة:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[1].province}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv">
+                        <ion-col>
+                            <h4 class="infoTitle">المنطقة:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[1].zone}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv" *ngIf="visitShow">
+                        <ion-col>
+                            <h4 class="infoTitle">البريد الالكتروني:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[0].email}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv" *ngIf="visitShow">
+                        <ion-col>
+                            <h4 class="infoTitle">كلمة المرور:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[0].password}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv" >
+                        <ion-col>
+                            <h4 class="infoTitle">العنوان:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <ion-textarea>حي الاسكان شارع منجا العلوية</ion-textarea>              
+                          </ion-col>
+                      </ion-row>                 
+                  </ion-grid>
+                    <button *ngIf="visitShow" ion-button full (click)="editPro()" color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
+              </ion-list>
+          </div>
+        <!-- ==============</pharmacyContentDetails>================ -->
+    </ion-content>
+    <!-- =================<pharmacyProfile>================= -->
+    

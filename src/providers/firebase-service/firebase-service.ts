@@ -29,7 +29,7 @@ export class postsFirebaseService {
     return this.dataList.push(myList);
   }
 
-  updatePosts(myList:postModel, $key) {
+  updatePosts($key, myList:postModel) {
     return this.dataList.update($key, myList);
   }
 
@@ -134,6 +134,10 @@ export class authFirebaseService {
       }).catch(error=>{
       console.error(error)
       })
+  }
+
+  editUserProfile($key, myList:UserDataModel) {
+    return this.usersList.update($key, myList);
   }
 
     logOut(){

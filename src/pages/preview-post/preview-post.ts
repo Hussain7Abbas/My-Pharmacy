@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Events, ViewController } from 'ionic-angular';
-import { replyModel, postModel } from '../../model/DataModels'
+import { IonicPage, NavController, Events, ViewController, LoadingController } from 'ionic-angular';
+import { replyModel, postModel, UserDataModel } from '../../model/DataModels'
 import { postsFirebaseService } from '../../providers/firebase-service/firebase-service'
-import { AngularFireList } from "angularfire2/database"; 
+import { AngularFireList } from "angularfire2/database";
+import { AngularFireDatabase } from 'angularfire2/database';
+import { ProfilePage } from '../profile/profile';
 
 /**
  * Generated class for the PreviewPostPage page.
@@ -20,7 +22,7 @@ export class PreviewPostPage {
 
   replyData:replyModel = {
     pharmacyName: '',
-    pharmacyUid: '',
+    pharmacyKey: '',
     date: '',
     price: '',
     details: ''
@@ -42,7 +44,7 @@ export class PreviewPostPage {
   postComments = []
   listComments: AngularFireList<any>
 
-  constructor(public navCtrl: NavController, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public navCtrl: NavController, public db:AngularFireDatabase, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.postData = this.thePost[1]
 
@@ -63,13 +65,36 @@ export class PreviewPostPage {
 
    onComment(){
     var date = new Date
-    this.replyData.pharmacyName = this.userData['name']
-    this.replyData.pharmacyUid = localStorage.getItem('uid')
+    this.replyData.pharmacyName = this.userData[1]['name']
+    this.replyData.pharmacyKey = this.userData[2]
     this.replyData.date = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
     this.postData.comments.push(this.replyData)
-    this._postsFirebaseService.updatePosts(this.postData,this.thePost[0])
+    this._postsFirebaseService.updatePosts(this.thePost[0], this.postData)
     
     this.viewCtrl.dismiss();
    }
 
+   openProfile(profileKey){
+    let loading = this._LoadingController.create({
+      spinner: "crescent",
+      content: 'جارِ التحميل'
+    });
+    loading.present()
+    
+      console.log(profileKey);
+
+      this.db.object("userData/" + profileKey).snapshotChanges().subscribe(action=>{
+        let profileData = action.payload.val() as UserDataModel
+        let userProfile = [
+          [{}],
+          profileData
+        ]
+        console.log(userProfile);
+        localStorage.setItem("visitProfile", "true")
+        this.navCtrl.push(ProfilePage, {userProfile})
+        loading.dismiss() 
+      });
+
+    
+   }
 }

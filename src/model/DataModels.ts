@@ -19,7 +19,7 @@ export interface postModel {
 
 export interface replyModel {
     pharmacyName: string;
-    pharmacyUid: any;
+    pharmacyKey: any;
     date: string;
     price: string;
     details: string;

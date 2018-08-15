@@ -14,7 +14,7 @@ export class AddPostPage {
 
   replyData:replyModel = {
     pharmacyName: '',
-    pharmacyUid: '',
+    pharmacyKey: '',
     date: '',
     price: '',
     details: ''
@@ -42,40 +42,40 @@ export class AddPostPage {
     this.replyData.pharmacyName = ''
     this.replyData.details = 'لا توجد تعليقات بعد'
     this.replyData.price = ''
-    this.replyData.pharmacyUid = localStorage.getItem('uid')
+    this.replyData.pharmacyKey = localStorage.getItem('uid')
   }
 
   goBack(){
     this.viewCtrl.dismiss();
    }
 
-  imgActionSheet(){
-    const actionSheet = this._ActionSheetController.create({
-      title: 'حدد طريقة اختيار صورة الدواء',
-      buttons: [
-        {
-          icon: 'images',
-          text: 'المعرض',
-          role: 'destructive',
-          handler: () => {
-            this.openGalary()
-          }
-        },
-        {
-          icon: 'md-camera',
-          text: 'الكامرة',
-          handler: () => {
-            this.openCamera()
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+  // imgActionSheet(){
+  //   const actionSheet = this._ActionSheetController.create({
+  //     title: 'حدد طريقة اختيار صورة الدواء',
+  //     buttons: [
+  //       {
+  //         icon: 'images',
+  //         text: 'المعرض',
+  //         role: 'destructive',
+  //         handler: () => {
+  //           this.openGalary()
+  //         }
+  //       },
+  //       {
+  //         icon: 'md-camera',
+  //         text: 'الكامرة',
+  //         handler: () => {
+  //           this.openCamera()
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
 
-  openGalary(){
+  // openGalary(){
 
-  }
+  // }
 
   openCamera(){
     const options: CameraOptions = {
@@ -98,14 +98,25 @@ export class AddPostPage {
       uploadTask.putString(this.currentImg, 'data_url').then(()=>{
         uploadTask.getDownloadURL().then((url)=>{
           this.imgURl = url
-          this._Events.publish('img:Uploaded')
+
+          let date = new Date
+          this.postData.comments.push(this.replyData)
+          this.postData.uidUser = localStorage.getItem("uid")
+          this.postData.name = this.userData[1]['name']
+          this.postData.postDate = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
+          this.postData.postImg = this.imgURl
+          this._postsFirebaseService.addPosts(this.postData).then(()=>{
+            this._Events.publish("post:Added")
+            this.viewCtrl.dismiss();
+            this.saveLoading.dismiss();
+          })
+
         })
       })
   }
 
   onAddPost(){
     let date = new Date
-
     this.saveLoading = this._LoadingController.create({
       spinner: "crescent",
       content: 'جارِ النشر'
@@ -116,11 +127,8 @@ export class AddPostPage {
       this.imgUpload()
     }else{
       this._Events.publish('img:Uploaded')
-    }
-    this._Events.subscribe('img:Uploaded', ()=>{
-      console.log("we start");
       this.postData.comments.push(this.replyData)
-      this.postData.uidUser = localStorage.getItem('uid')
+      this.postData.uidUser = localStorage.getItem("uid")
       this.postData.name = this.userData[1]['name']
       this.postData.postDate = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
       this.postData.postImg = this.imgURl
@@ -128,125 +136,7 @@ export class AddPostPage {
         this._Events.publish("post:Added")
         this.viewCtrl.dismiss();
         this.saveLoading.dismiss();
-      })
-    })
+      })      
+    }
   }
 }
-
-
-
-
-
-
-
-// ??? ?? constructor
-
-//     mySelectedPhoto;
-//     loading;
-//     currentPhoto ;
-//     imgSource;
-
-// //// ????? ?????
-
-
-
-  
-// takePhoto(){
-//   const options: CameraOptions = {
-//     targetHeight:200,
-//     targetWidth:200,
-//     destinationType : this.camera.DestinationType.DATA_URL,
-//     encodingType:this.camera.EncodingType.JPEG,
-//     mediaType: this.camera.MediaType.PICTURE,
-//     sourceType:this.camera.PictureSourceType.PHOTOLIBRARY
-//   }
-  
-//   this.camera.getPicture(options).then((imageData) =>{
-//       this.loading = this.loadingCtrl.create({
-//           content: "Update photo wait ..."
-//            });
-//     this.loading.present();
-//   this.mySelectedPhoto = this.dataURLtoBlob('data:image/jpeg;base64,'+imageData);
-//       this.upload();
-          
-//           },(err)=>{
-//       console.log(err);
-//           });
-  
-  
-//   }
-  
-      
-      
-//   dataURLtoBlob(myURL){
-//       let binary = atob(myURL.split(',')[1]);
-//   let array = [];
-//   for (let i = 0 ; i < binary.length;i++){
-//       array.push(binary.charCodeAt(i));
-//   }
-//       return new Blob([new Uint8Array(array)],{type:'image/jpeg'});
-//   }    
-      
-      
-//   upload(){
-//   if(this.mySelectedPhoto){
-//       var uploadTask = firebase.storage().ref().child('images/'+this.auth.auth.currentUser.email+".jpg");
-//       var put = uploadTask.put(this.mySelectedPhoto);
-//       put.then(this.onSuccess,this.onErrors);
-
-//       var sub = this.db.list("users",ref => ref.orderByChild("email").equalTo(this.auth.auth.currentUser.email)).snapshotChanges().subscribe(data => {
-
-//         uploadTask.getDownloadURL().then(url =>{
-          
-          
-//           this.db.list("users").update(data[0].payload.key,{
-//             image:url
-//           }).then( ()=> {
-            
- 
-//             var cont = this.db.list("vote",ref => ref.orderByChild("email").equalTo(this.auth.auth.currentUser.email)).snapshotChanges().subscribe(vdata => {
-
-//               vdata.forEach(vimgs => {
-
-//                 this.db.list("vote").update(vimgs.key,{
-//                   image:url,
-//                 }).then( ()=> {cont.unsubscribe()})
-
-//               });
-
-//             });
-
-//           })
-
-      
-          
-//         });
-
-
-//       });
-      
-      
-//   }
-//   }    
-      
-//   onSuccess=(snapshot)=>{
-//       this.currentPhoto = snapshot.downloadURL;
-
-//       this.loading.dismiss();
-//   } 
-      
-//   onErrors=(error)=>{
-
-//       this.loading.dismiss();
-
-
-//   }   
-      
-//   getMyURL(){
-//       firebase.storage().ref().child('images/'+this.auth.auth.currentUser.email+".jpg").getDownloadURL().then((url)=>{
-//           this.imgSource = url;
-          
-//           })
-//   }
-      
-      

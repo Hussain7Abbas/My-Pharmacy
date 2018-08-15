@@ -7,6 +7,12 @@ page-profile {
         text-align: center;
         flex-flow: row;
     }
+
+    .backButton{color: white; font-size: 2.2rem; background-color: transparent; height: 20px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14);}
+
+    .prof ion-icon{
+        font-size: 2.2rem;
+    }
     // ================================ Info Details Image User ======================
     .userimg{
         max-width: 22%;
@@ -36,7 +42,7 @@ page-profile {
         text-align: center;
         font-size: 14pt;
     }
-    // ================================ Info Details Seqment Activated ===============
+    // ================================ Info Details Segment Activated ===============
     .segment-ios .segment-button.segment-activated{
         background-color: white;
         color:#339999;
