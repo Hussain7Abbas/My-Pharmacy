@@ -17,8 +17,8 @@
               <ion-segment-button  value="deatils">
                 التفاصيل
                </ion-segment-button>
-              <ion-segment-button value="Qesition">
-                الأسئلة
+               <ion-segment-button value="Qesition" (click)="loadMyPosts()">
+                    الأسئلة
                </ion-segment-button>
               </ion-segment>
         <!-- ==================</segmentsPart>==================== -->
@@ -67,28 +67,30 @@
         <div [ngSwitch]="pet">
             <ion-list *ngSwitchCase="'Qesition'" >
                 <ion-list id="qesitionList">
-                    <ion-item-sliding>
+                    <ion-item-sliding *ngFor="let item of myObject.slice().reverse()">
                         <ion-item id="ionItem"> <!-- ===== ion-item ===== -->
                             <div style="position: absolute; right: 8px; top: 10px;">
-                                <img src="../../assets/imgs/answered.png" style="width: 45px; height: 45px;"> <!-- ===== The status Picture of post ===== -->
-                                <p class="replyNo">12</p> <!-- ===== The number of the replies of hte post ===== -->
+                                <img src="../../assets/imgs/answered.png" *ngIf="item[1]['comments'].length > 1" style="width: 45px; height: 45px;"> <!-- ===== The status Picture of post ===== -->
+                                <img src="../../assets/imgs/notAnsweredYet.png" *ngIf="item[1]['comments'].length < 2" style="width: 45px; height: 45px;"> <!-- ===== The status Picture of post ===== -->
+                                <p class="replyNo">{{item[1]['comments'].length -1}}</p> <!-- ===== The number of the replies of hte post ===== -->
                               </div>
                             <div class="textDiv"> <!-- ===== The div which contain all the texts ===== -->
                                 <div> <!-- ===== the div which contain all the texts ===== -->
-                                    <h2 class="postHeaderTitle">تمت الاجابة</h2> <!-- ===== The status of post ===== -->
-                                    <p class="postDate">6/8/2018</p> <!-- ===== The date of post ===== -->
+                                    <h2 class="postHeaderTitle" *ngIf="item[1]['comments'].length > 1">تمت الاجابة</h2> <!-- ===== The status of post ===== -->
+                                    <h2 class="postHeaderTitle" *ngIf="item[1]['comments'].length < 2">لم تتم الاجابة بعد</h2> <!-- ===== The status of post ===== -->
+                                    <p class="postDate">{{item[1]['postDate']}}</p> <!-- ===== The date of post ===== -->
                                   </div>
-                                <h2 class="postTitle">براسيتمول</h2> <!-- ===== The title of post ===== -->
-                              </div>
-                          </ion-item>
+                                <h2 class="postTitle">{{item[1]['postBody']}}</h2> <!-- ===== The title of post ===== -->
+                            </div>
+                        </ion-item>
                         <ion-item-options side="right"> <!-- ===== The Delete button on the right side ===== -->
-                            <button ion-button color="danger"  class="slideButton"><ion-icon name="md-trash"></ion-icon>حذف</button>
+                            <button ion-button color="danger" (click)="onDelete(item[0])" class="slideButton"><ion-icon name="md-trash"></ion-icon>حذف</button>
                           </ion-item-options>
                         <ion-item-options side="left"> <!-- ===== The Edit button on the left side ===== -->
-                            <button ion-button color="primary" class="slideButton"><ion-icon name="md-create"></ion-icon>تعديل</button>
-                          </ion-item-options>
-                      </ion-item-sliding>
-                  </ion-list>
+                            <button ion-button color="primary" (click)="onEdit(item)" class="slideButton"><ion-icon name="md-create"></ion-icon>تعديل</button>
+                        </ion-item-options>
+                    </ion-item-sliding>
+                </ion-list>
               </ion-list>
          </div>
         <!-- ===============</contentQuestions>================== -->

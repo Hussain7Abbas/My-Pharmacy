@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, Events} from 'ionic-angular';
-import { authFirebaseService } from "../../providers/firebase-service/firebase-service";
-import { UserDataModel } from '../../model/DataModels';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController, ModalController, Events} from 'ionic-angular';
+import { authFirebaseService, postsFirebaseService } from "../../providers/firebase-service/firebase-service";
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; 
+import { AddPostPage } from '../add-post/add-post'
+import { UserDataModel, postModel } from '../../model/DataModels';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the ProfilePage page.
@@ -28,16 +31,26 @@ export class ProfilePage {
     pharmacyAdress: ' '
   }
 
+  postData:postModel = {
+    name: '',
+    uidUser: '',
+    postBody: '',
+    postImg: '',
+    postDate: '',
+    comments: []
+  }
+  
   pet="deatils"
 
+  postsRef:AngularFireList<any>
+  myObject = []
+
+  myUid = localStorage.getItem('uid')
   visitShow:boolean = false
   isUser: boolean
   userData = []
-  
-  
-  userKey
 
-  constructor(public navCtrl: NavController, _Events:Events, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public alertCtrl:AlertController, public _NavParams: NavParams) {
+  constructor(public navCtrl: NavController, public _Events:Events, public modalCtrl: ModalController, public _postsFirebaseService:postsFirebaseService, public db:AngularFireDatabase, public _LoadingController:LoadingController, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public alertCtrl:AlertController, public _NavParams: NavParams) {
 
     if (localStorage.getItem("visitProfile") == "true"){
       this.isUser = false
@@ -48,7 +61,6 @@ export class ProfilePage {
         this.userData = JSON.parse(localStorage["userData"]);
     }
     this.visitShow = Boolean(localStorage.getItem('uid') == this.userData[1]['uid'])
-
     localStorage.setItem('navTitle', 'الصفحة الشخصية') // هذا المتغير في مساحة الخزن المحلية يقوم بتغيير عنوان الناف بار
     this.userDataModel = this.userData[1]
   }
@@ -109,5 +121,52 @@ export class ProfilePage {
   
   goBack(){
     this.navCtrl.pop()
+  }
+
+  setData(){
+    let loading = this._LoadingController.create({
+      spinner: "crescent",
+      content: 'يرجى الانتظار'
+    });
+    loading.present();
+    this.postsRef = this.db.list("Posts")
+    this.myObject = []
+    this.postsRef.query.orderByChild('uidUser').equalTo('Z6cxuNh2euhcBfVobMjQg0DlY663').once('value', action => {
+      for (let key in action.val()) {
+        this.myObject.push([
+          key,
+          action.val()[key] as postModel
+        ])
+      }
+    }).then(()=>{
+      loading.dismiss();
+    })
+}
+
+  loadMyPosts(){
+    this.setData()
+  }
+
+  onDelete(key){
+    this._postsFirebaseService.deletePosts(key)
+    
+  }
+
+  onEdit(thePost){
+    localStorage.setItem('editPost', 'true')
+    localStorage.setItem("thePost", JSON.stringify(thePost));
+    // open addPost page as a modal
+    let addPostModal = this.modalCtrl.create(AddPostPage);
+    addPostModal.present();
+    // Refresh data when the post has bening added
+    this._Events.subscribe("post:Edit", ()=>{
+      const toast = this._ToastController.create({
+        message: 'حفظ التعديلات',
+        duration: 2000
+      });
+      toast.present();
+      this.navCtrl.setRoot(ProfilePage)
+      localStorage.setItem('editPost', 'false')
+    })
   }
 }

@@ -1,9 +1,9 @@
 
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="com.project.My_Pharmacy" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>صيدليتي</name>
+    <description>تطبيق صيدليتي Code For Iraq</description>
+    <author email="app.my.pharmacy@gmail.com" href="https://c4i.herokuapp.com">Code For Iraq</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
