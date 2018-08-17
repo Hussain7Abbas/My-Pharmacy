@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Events, ViewController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, Events, ViewController, LoadingController, ToastController } from 'ionic-angular';
 import { replyModel, postModel, UserDataModel } from '../../model/DataModels'
-import { postsFirebaseService } from '../../providers/firebase-service/firebase-service'
+import { postsFirebaseService, authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { AngularFireList } from "angularfire2/database";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ProfilePage } from '../profile/profile';
@@ -44,7 +44,7 @@ export class PreviewPostPage {
   postComments = []
   listComments: AngularFireList<any>
 
-  constructor(public navCtrl: NavController, public db:AngularFireDatabase, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public navCtrl: NavController, public db:AngularFireDatabase, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.postData = this.thePost[1]
 
@@ -64,14 +64,27 @@ export class PreviewPostPage {
    }
 
    onComment(){
-    var date = new Date
-    this.replyData.pharmacyName = this.userData[1]['name']
-    this.replyData.pharmacyKey = this.userData[2]
-    this.replyData.date = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
-    this.postData.comments.push(this.replyData)
-    this._postsFirebaseService.updatePosts(this.thePost[0], this.postData)
-    
-    this.viewCtrl.dismiss();
+    if (this.replyData.price.length < 1){
+      this._ToastController.create({
+        message: 'لا يمكنك ترك السعر فارغ',
+        duration: 2000
+      }).present()
+    }else{
+      var date = new Date
+      this.replyData.pharmacyName = this.userData[1]['name']
+      this.replyData.pharmacyKey = this.userData[2]
+      this.replyData.date = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
+      this.postData.comments.push(this.replyData)
+      this._postsFirebaseService.updatePosts(this.thePost[0], this.postData)
+  
+  
+      this.userData[1]['pharmacyReplyNo'] = Number(this.userData[1]['pharmacyReplyNo']) + 1
+      this._authFirebaseService.editUserProfile(this.userData[2], this.userData[1])
+      localStorage.setItem("userData", JSON.stringify(this.userData))
+      
+      this.viewCtrl.dismiss();
+    }
+
    }
 
    openProfile(profileKey){

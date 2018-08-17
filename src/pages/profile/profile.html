@@ -68,7 +68,7 @@
             <ion-list *ngSwitchCase="'Qesition'" >
                 <ion-list id="qesitionList">
                     <ion-item-sliding *ngFor="let item of myObject.slice().reverse()">
-                        <ion-item id="ionItem"> <!-- ===== ion-item ===== -->
+                        <ion-item id="ionItem" (click)="goPreviewQues(item)"> <!-- ===== ion-item ===== -->
                             <div style="position: absolute; right: 8px; top: 10px;">
                                 <img src="../../assets/imgs/answered.png" *ngIf="item[1]['comments'].length > 1" style="width: 45px; height: 45px;"> <!-- ===== The status Picture of post ===== -->
                                 <img src="../../assets/imgs/notAnsweredYet.png" *ngIf="item[1]['comments'].length < 2" style="width: 45px; height: 45px;"> <!-- ===== The status Picture of post ===== -->

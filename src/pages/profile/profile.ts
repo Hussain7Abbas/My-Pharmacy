@@ -5,6 +5,7 @@ import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { AddPostPage } from '../add-post/add-post'
 import { UserDataModel, postModel } from '../../model/DataModels';
 import { TabsPage } from '../tabs/tabs';
+import { PreviewPostPage } from '../preview-post/preview-post';
 
 /**
  * Generated class for the ProfilePage page.
@@ -131,7 +132,7 @@ export class ProfilePage {
     loading.present();
     this.postsRef = this.db.list("Posts")
     this.myObject = []
-    this.postsRef.query.orderByChild('uidUser').equalTo('Z6cxuNh2euhcBfVobMjQg0DlY663').once('value', action => {
+    this.postsRef.query.orderByChild('uidUser').equalTo(this.myUid).once('value', action => {
       for (let key in action.val()) {
         this.myObject.push([
           key,
@@ -149,7 +150,6 @@ export class ProfilePage {
 
   onDelete(key){
     this._postsFirebaseService.deletePosts(key)
-    
   }
 
   onEdit(thePost){
@@ -161,12 +161,20 @@ export class ProfilePage {
     // Refresh data when the post has bening added
     this._Events.subscribe("post:Edit", ()=>{
       const toast = this._ToastController.create({
-        message: 'حفظ التعديلات',
+        message: 'تم حفظ التعديلات',
         duration: 2000
       });
       toast.present();
       this.navCtrl.setRoot(ProfilePage)
       localStorage.setItem('editPost', 'false')
     })
+  }
+
+  goPreviewQues(Post){
+    // open previewPost page as a modal
+    let PreviewPostModal = this.modalCtrl.create(PreviewPostPage);
+    PreviewPostModal.present();
+    // pass post data to previewPost page
+    localStorage.setItem("thePost", JSON.stringify(Post));
   }
 }
