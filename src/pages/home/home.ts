@@ -99,7 +99,7 @@ export class HomePage {
       
 
       setTimeout(() => {
-        this.content.scrollTo(0, this.content.scrollHeight - 63, 300);
+        // this.content.scrollTo(0, this.content.scrollHeight - 63, 300);
         const toast = this._ToastController.create({
           message: 'لا توجد المزيد من المنشورات',
           duration: 2000

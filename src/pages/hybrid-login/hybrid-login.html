@@ -1,0 +1,55 @@
+    <!-- =============================== Nav Bar Header ============================== -->
+    <ion-header>
+      <div style="height: 40px; background-color: #50A7A7;">
+          <ion-title style="line-height: 40px; text-align: center;color: white;">اكمال عملية التسجيل</ion-title>
+      </div>
+      <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " name='arrow-down'></ion-icon>
+      <hr style="height: 1px; background-color: #f2f2f2;">
+    </ion-header>
+        <!-- =============================== Nav Bar Header ============================== -->
+<ion-content padding>       
+  <ion-segment [(ngModel)]="userInfoData.userType">
+      <ion-segment-button value="user">
+          مستخدم
+      </ion-segment-button>
+      <ion-segment-button value="pharmacy">
+          صيدلية
+      </ion-segment-button>
+  </ion-segment>
+
+
+  <ion-list style="color: #339999;">
+      <ion-item>
+          <ion-label style="color: #339999;" >المحافظة  :</ion-label>
+          <ion-select [(ngModel)]="userInfoData.province">
+              <ion-option value="الانبار">الانبار</ion-option>
+              <ion-option value="القادسية ">القادسية</ion-option>
+              <ion-option value="البصرة">البصرة</ion-option>
+          </ion-select>
+      </ion-item>
+      </ion-list>
+
+      <ion-list>
+          <ion-item >
+              <ion-label style="color: #339999;"> المنطقة :</ion-label>
+              <ion-select [(ngModel)]="userInfoData.zone">
+                  <ion-option value="الديوانية">الديوانية</ion-option>
+                  <ion-option value="الرمادي">الرمادي</ion-option>
+                  <ion-option value="الفلوجة">الفلوجة</ion-option>
+              </ion-select>
+          </ion-item>
+      </ion-list><br>
+              
+  <div id="ii" [ngSwitch]="userType" >  
+      <div  *ngSwitchCase="'pharmacy'">
+          <ion-label class="b">التقاط صورة لترخيص وزارة الصحة </ion-label>
+          <ion-icon  ios="ios-camera" md="md-camera" ></ion-icon>
+      </div>
+  <div  *ngSwitchCase="'user'">
+
+  </div> 
+  </div> 
+
+  <button *ngIf="loginType" ion-button block (click)="facebookLogin()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+  <button *ngIf="!loginType" ion-button block (click)="googleLogin()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+</ion-content> 

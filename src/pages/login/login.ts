@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController, LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, AlertController, LoadingController, ModalController} from 'ionic-angular';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { TabsPage } from '../tabs/tabs';
-
-import firebase, { database } from 'firebase';
 import { RegisterPage } from '../register/register';
-import { Message } from '../../../node_modules/@angular/compiler/src/i18n/i18n_ast';
+import { HybridLoginPage } from "../hybrid-login/hybrid-login";
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -30,16 +29,16 @@ export class LoginPage {
     zone: '',
     userType: '',
     pharmacyReplyNo: '0',
-    pharmacyAdress: ''
+    pharmacyAdress: 'لا يوجد عنوان بعد!'
   }
-
  
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public _authFirebaseService:authFirebaseService,
     public _Events:Events,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public _ModalController: ModalController
     ) {
   }
 
@@ -55,22 +54,24 @@ export class LoginPage {
     })
   }
   //--------------------------------------login with faceboook-----------------------------------------------
-    logInFacebook(){
-   this._authFirebaseService.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-   .then(res => {
-   
-     console.log(res);
-   })
+  logInFacebook(){
+    this._Events.subscribe('go:Register', ()=>{
+      this._ModalController.create(HybridLoginPage, {loginType: 'facebook'}).present()
+    })
+    this._Events.subscribe('auth:Success', ()=>{
+      this.navCtrl.setRoot(TabsPage)
+    })
   } 
     //--------------------------------------login with Google-----------------------------------------------
   logInGoogle(){
-    this._authFirebaseService.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(res => {
-      
-      console.log(res);
-
-  })
+    this._Events.subscribe('go:Register', ()=>{
+      this._ModalController.create(HybridLoginPage, {loginType: 'google'}).present()
+    })
+    this._Events.subscribe('auth:Success', ()=>{
+      this.navCtrl.setRoot(TabsPage)
+    })
   }
+
   registerOn(){
     this.navCtrl.setRoot(RegisterPage)
   }
@@ -105,26 +106,26 @@ export class LoginPage {
            // console.log('رسالة قصيرة ارسلت '+ data.recoverEmail);
           loading.present();
          this._authFirebaseService.forgetPasswordUser(data.recoverEmail).then(() =>{
-// 
-loading.dismiss().then(() => {
-  let alert = this.alertCtrl.create({
-    title: " تفحص صندوق بريدك",
-    subTitle:" تم اعادة كلمة المرور بنجاح ",
-    buttons: ['OK']
-  });
-alert.present();
-})
+
+          loading.dismiss().then(() => {
+            let alert = this.alertCtrl.create({
+              title: " تفحص صندوق بريدك",
+              subTitle:" تم اعادة كلمة المرور بنجاح ",
+              buttons: ['OK']
+            });
+          alert.present();
+          })
          }, error => {
        
            // alert ("error reset password in"+ error.message);
-loading.dismiss().then(() => {
-  let alert = this.alertCtrl.create({
-    title: "خطا في استعادة كلمة المرور ",
-    subTitle: error.message ,
-    buttons: ['OK']
-  });
-alert.present();
-})
+          loading.dismiss().then(() => {
+            let alert = this.alertCtrl.create({
+              title: "خطا في استعادة كلمة المرور ",
+              subTitle: error.message ,
+              buttons: ['OK']
+            });
+          alert.present();
+          })
          });
           }
         }
