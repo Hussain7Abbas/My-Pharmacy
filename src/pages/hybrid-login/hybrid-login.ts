@@ -30,28 +30,28 @@ goBack(){
 this.viewCtrl.dismiss();
 }
 
-facebookLogin(){
-    if (this.userType == 'user'){
-        this._authFirebaseService.loginWithFacebook(this.userInfoData)
-        this._Events.subscribe("auth:Success", ()=>{
-            this.viewCtrl.dismiss();
-            this.navCtrl.setRoot(TabsPage)
-        })
-    }else{
-        this._authFirebaseService.facebookPharmacy(this.userInfoData)
-    }
-}
+// facebookLogin(){
+//     if (this.userType == 'user'){
+//         this._authFirebaseService.loginWithFacebook(this.userInfoData)
+//         this._Events.subscribe("auth:Success", ()=>{
+//             this.viewCtrl.dismiss();
+//             this.navCtrl.setRoot(TabsPage)
+//         })
+//     }else{
+//         this._authFirebaseService.facebookPharmacy(this.userInfoData)
+//     }
+// }
 
-googleLogin(){
-    if (this.userType == 'user'){
-        this._authFirebaseService.googlePharmacy(this.userInfoData)
-        this._Events.subscribe("auth:Success", ()=>{
-            this.viewCtrl.dismiss();
-            this.navCtrl.setRoot(TabsPage)
-        })
-    }else{
-        this._authFirebaseService.googlePharmacy(this.userInfoData)
-    }
-}
+// googleLogin(){
+//     if (this.userType == 'user'){
+//         this._authFirebaseService.googlePharmacy(this.userInfoData)
+//         this._Events.subscribe("auth:Success", ()=>{
+//             this.viewCtrl.dismiss();
+//             this.navCtrl.setRoot(TabsPage)
+//         })
+//     }else{
+//         this._authFirebaseService.googlePharmacy(this.userInfoData)
+//     }
+// }
 
 }
