@@ -20,10 +20,14 @@
     <input class="medicineInput" placeholder="اكتب اسم الدواء هنا..." [(ngModel)]="postData.postBody">
   </div>
 
-  <div id="cameraContainer">
+  <div id="cameraContainer" *ngIf="isEdit">
+    <h2>المرفقات</h2>
+    <img src="{{postData.postImg}}" (click)="openCamera()" style="height: 200px;;">
+  </div>
+
+  <div id="cameraContainer_add" *ngIf="!isEdit">
     <h2>التقاط صورة للعلاج</h2>
-    <ion-icon (click)="imgActionSheet()" name='image'></ion-icon>
-    <p>{{imgURl}}</p>
+    <ion-icon (click)="openCamera()" name='camera'></ion-icon>
   </div>
 
   <div padding>

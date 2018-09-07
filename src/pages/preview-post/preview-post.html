@@ -42,7 +42,7 @@
 
     <ion-list *ngIf="isUser">
       <div *ngIf="isCommentAvailable">
-        <ion-item id="ionItem" *ngFor="let comment of postComments.slice().reverse()"> <!-- ===== ion-item ===== -->
+        <ion-item (click)="openProfile(comment['pharmacyKey'])" id="ionItem" *ngFor="let comment of postComments.slice().reverse()"> <!-- ===== ion-item ===== -->
           <!-- <h3>السعر: {{comment['price']}}</h3>
           <h3>التفاصيل: {{comment['details']}}</h3> -->
           <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">

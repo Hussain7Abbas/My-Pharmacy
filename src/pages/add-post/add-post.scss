@@ -26,8 +26,22 @@ page-add-post {
         border-top: solid 0.1px #BBBBBB; border-bottom: solid 0.1px #BBBBBB;
     }
 
-    #cameraContainer ion-icon{
+    #cameraContainer_add ion-icon{
         font-size: 4.2rem;
+    }
+
+    #cameraContainer{
+        padding: 10px 0px;
+        border-top: solid 0.1px #BBBBBB;
+    }
+
+    #cameraContainer h2{
+        margin-top: 0.8rem;
+    }
+
+    #cameraContainer img{
+        height: 220px;
+        // border: solid 1px #BBBBBB; border-radius: 15px;
     }
 
     // =============== Make style  to the default button  ===============

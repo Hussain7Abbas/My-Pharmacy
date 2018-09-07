@@ -14,6 +14,8 @@ import { SearchPage } from '../pages/search/search';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { StartPage } from '../pages/start/start';
+import { HybridLoginPage } from '../pages/hybrid-login/hybrid-login';
+
 
 import { NavBarComponent } from '../components/nav-bar/nav-bar';
 import { NotifiPage } from '../pages/notifi/notifi';
@@ -57,7 +59,8 @@ const firebaseConfig = {
     StartPage,
     NotifiPage,
     AddPostPage,
-    PreviewPostPage
+    PreviewPostPage,
+    HybridLoginPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,8 @@ const firebaseConfig = {
     StartPage,
     NotifiPage,
     AddPostPage,
-    PreviewPostPage
+    PreviewPostPage,
+    HybridLoginPage
   ],
   providers: [
     StatusBar,

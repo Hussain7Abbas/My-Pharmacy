@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, Events } from 'ionic-angular';
 
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 
 // ********************************************************************************************************
 // ========================================================================================================
@@ -29,7 +29,7 @@ export class postsFirebaseService {
     return this.dataList.push(myList);
   }
 
-  updatePosts(myList:postModel, $key) {
+  updatePosts($key, myList:postModel) {
     return this.dataList.update($key, myList);
   }
 
@@ -50,18 +50,23 @@ export class postsFirebaseService {
 
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { UserDataModel } from '../../model/DataModels';
+import { UserDataModel, pharmacyList, hybridLogin } from '../../model/DataModels';
+import firebase from 'firebase';
 
 @Injectable()
 export class authFirebaseService {
 
   private usersList = this.db.list<UserDataModel>('userData')
+  private pharmacyList = this.db.list<pharmacyList>('pharmacyList')
+  private facebookList = this.db.list<hybridLogin>('facebookPharmacy')
+  private googleList = this.db.list<hybridLogin>('googlePharmacy')
+
 
   postList:AngularFireObject<any>
   itemArray = []
   myObject = []
   myfilter = []
-
+  
   constructor(public afAuth: AngularFireAuth, public _Events:Events, public db:AngularFireDatabase, public loadingCtrl: LoadingController) {
 
   }
@@ -107,7 +112,7 @@ export class authFirebaseService {
     }
 
 
-    // ============================ Regester Function ===========================
+    // ========================== Regester Function =============================
     regesterWithEmail(authData, userData){
       return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
       .then(user=>{
@@ -136,8 +141,169 @@ export class authFirebaseService {
       })
   }
 
-    logOut(){
-      this.afAuth.auth.signOut()
-      localStorage.setItem('isLogin','false')
+  editUserProfile($key, myList:UserDataModel) {
+    return this.usersList.update($key, myList);
+  }
+
+  logOut(){
+    this.afAuth.auth.signOut()
+    localStorage.setItem('isLogin','false')
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    registerWithFacebook(userData){
+      this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .then(res => {
+        let facebookData = res.additionalUserInfo.profile
+        localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
+        userData.uid = localStorage.getItem('uid')
+      // ========================================================================
+      // ====================== User Profile Details ============================
+      // ========================================================================
+      this.usersList.push({
+        uid: userData.uid,
+        name: facebookData['name'],
+        province: userData.province,
+        zone: userData.zone,
+        userType: userData.userType,
+        pharmacyReplyNo: userData.pharmacyReplyNo,
+        pharmacyAdress: userData.pharmacyAdress
+    }).then((posta)=>{
+      console.log(posta);
+      this.setUserInfoLocalStorage({email: facebookData['email'], password: ''})
+    })
+    // ========================================================================
+    // ====================== User Profile Details ============================
+    // ========================================================================
+      })
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  loginWithFacebook(){
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .then(res => {
+      let facebookData = res.additionalUserInfo.profile
+      this.hybridUserFind(facebookData)
+      }).catch(err=>{
+        console.log(err);
+    })
+  }
+
+
+
+  loginWithGoogle(){
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then(res => {
+      let googleData = res.additionalUserInfo.profile
+      this.hybridUserFind(googleData)
+      }).catch(err=>{
+        console.log(err);
+    })
+  }
+
+
+
+  hybridUserFind(hybridData){
+    let postsRef:AngularFireList<any>
+    let hybridUser = []
+    postsRef = this.db.list("hybridPharmacy")
+    postsRef.query.orderByChild('id').equalTo(hybridData['id']).once('value', action => {
+      for (let key in action.val()) {
+        hybridUser.push([
+          key,
+          action.val()[key] as hybridLogin
+        ])
+      }
+    }).then(()=>{
+      if (hybridUser !== []){
+        this.hybridDataFind(hybridUser)
+      }else{
+        this._Events.publish('go:Register')
+      }
+    })
+  }
+
+
+
+
+  hybridDataFind(hybridUser){
+    if (hybridUser['key'] == 'inProgress'){
+      alert('جارِ مراجعة طلب تسجيلك')
+    }else{
+      localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
+    
+      let userDataInfo:AngularFireList<any>
+      let userData = []
+      userDataInfo = this.db.list("hybridPharmacy/" + hybridUser['key'])
+      userDataInfo.query.once('value', action => {
+        for (let key in action.val()) {
+          userData.push([
+            key,
+            action.val()[key] as UserDataModel
+          ])
+        }
+      }).then(()=>{
+          let userInfoData = [{email:'', password:''}, userData, userData['key']]
+          localStorage.setItem("userData", JSON.stringify(userInfoData))
+          this._Events.publish("auth:Success")
+          localStorage.setItem('isLogin','true')
+  
+      })
+    }
+  }
+
+
+
+  
+
+  
+  // registerGooglePharmcy(userData, googleData){
+  //   localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
+  //   userData.uid = localStorage.getItem('uid')
+  //   // ========================================================================
+  //   // ====================== User Profile Details ============================
+  //   // ========================================================================
+  //   this.pharmacyList.push({
+  //     id : googleData['id'],
+  //     userData : Object({
+  //     uid: userData.uid,
+  //     name: googleData['name'],
+  //     province: userData.province,
+  //     zone: userData.zone,
+  //     userType: userData.userType,
+  //     pharmacyReplyNo: userData.pharmacyReplyNo,
+  //     pharmacyAdress: userData.pharmacyAdress
+  //     })
+  //   }).then((posta)=>{
+  //   console.log(posta)
+  //   })
+  // }
+
 }
