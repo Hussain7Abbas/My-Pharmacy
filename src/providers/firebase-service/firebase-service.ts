@@ -44,7 +44,7 @@ export class postsFirebaseService {
 
 // ********************************************************************************************************
 // ========================================================================================================
-// ========================================= Posts Database Class =========================================
+// ========================================= contactUs Database Class =========================================
 // ========================================================================================================
 // ********************************************************************************************************
 
@@ -54,13 +54,12 @@ import { contactUs } from '../../model/DataModels';
 @Injectable()
 export class ContactUsFirebaseService {
 
-  private dataList = this.db.list<contactUs>('contactUs')
+  private dataList = this.db.list<contactUs>('/contactUs')
 
   constructor(public db:AngularFireDatabase) {
     
   }
 
- 
   addPosts(myList:contactUs) {
     return this.dataList.push(myList);
   }

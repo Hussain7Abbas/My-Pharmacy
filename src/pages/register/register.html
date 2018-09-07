@@ -49,7 +49,6 @@
       </ion-input>
       
     
-<<<<<<< HEAD
   </ion-item> 
   <ion-item no-lines  class="no-line error" *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
     <p *ngIf="myForm.value.email != ''" class="p">الايميل غير صالح</p> 
@@ -126,44 +125,6 @@
 
                <br>
 
-=======
-    <ion-item class="ion-label" >
-        <ion-label floating >البريد الالكتروني او رقم الهاتف</ion-label>
-        <ion-input [(ngModel)]="userAuthData.email"></ion-input>
-    </ion-item> 
-    <ion-item class="ion-label" >
-            <ion-label floating> كلمة المرور </ion-label>
-            <ion-input [(ngModel)]="userAuthData.password" ></ion-input>
-        </ion-item> 
-     <br>
-        <ion-list style="color: #339999;">
-                <ion-item>
-                  <ion-label style="color: #339999;" >المحافظة  :</ion-label>
-                  <ion-select [(ngModel)]="userInfoData.province">
-                    <ion-option value="الانبار">الانبار</ion-option>
-                    <ion-option value="القادسية ">القادسية</ion-option>
-                    <ion-option value="البصرة">البصرة</ion-option>
-                  </ion-select>
-                </ion-item>
-              </ion-list>
-       
-              <ion-list>
-                    <ion-item >
-                      <ion-label style="color: #339999;"> المنطقة :</ion-label>
-                      <ion-select [(ngModel)]="userInfoData.zone">
-                        <ion-option value="الديوانية">الديوانية</ion-option>
-                        <ion-option value="الرمادي">الرمادي</ion-option>
-                        <ion-option value="الفلوجة">الفلوجة</ion-option>
-                      </ion-select>
-                    </ion-item>
-                  </ion-list>
-             
-                 <br>
-                    
-                 <div id="ii" [ngSwitch]="userType" >  
-                   <div  *ngSwitchCase="'pharmacy'">
-                      <ion-label class="b">التقاط صورة لترخيص وزارة الصحة </ion-label>
->>>>>>> refs/remotes/origin/master
                   
 
                <div id="ii" [ngSwitch]="userType" >  
