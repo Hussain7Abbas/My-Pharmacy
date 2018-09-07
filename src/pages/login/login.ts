@@ -56,7 +56,7 @@ export class LoginPage {
   }
   //--------------------------------------login with faceboook-----------------------------------------------
     logInFacebook(){
-   this._authFirebaseService.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+   this._authFirebaseService.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider())
    .then(res => {
    
      console.log(res);
@@ -120,7 +120,8 @@ alert.present();
 loading.dismiss().then(() => {
   let alert = this.alertCtrl.create({
     title: "خطا في استعادة كلمة المرور ",
-    subTitle: error.message ,
+    // subTitle: error.message ,
+    subTitle:"يرجى اعادة المحاولة ",
     buttons: ['OK']
   });
 alert.present();
