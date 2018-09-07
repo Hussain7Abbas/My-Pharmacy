@@ -8,7 +8,7 @@
     <h1 >تسجيل دخول   </h1>
   
     <ion-item class="ion-label">
-       <ion-label floating >  البريد الالكتروني او رقم الهاتف</ion-label>
+       <ion-label floating > البريد الالكتروني  </ion-label>
        <ion-input [(ngModel)]="userAuthData.email" ></ion-input>
    </ion-item>
    
@@ -20,8 +20,13 @@
    
    <br>
    
+<<<<<<< HEAD
+   <button ion-button block (click)="onLogin()"><ion-icon name="ios-person-outline"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
+ <a (click)="forgetPassword()" >هل نسيت كلمة المرور</a> 
+=======
   <button ion-button block (click)="onLogin()"><ion-icon name="ios-person-outline"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
   <a (click)="forgetPassword()" >هل نسيت كلمة المرور</a> 
+>>>>>>> refs/remotes/origin/master
   
    <br><br>
    <button class="infoBotton" ion-button block (click)="logInFacebook()"  >

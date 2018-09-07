@@ -3,22 +3,130 @@
 
 
 <ion-content padding>
-    <h1 > انشاء حساب  </h1>
-        
-    <ion-segment [(ngModel)]="userType">
-      <ion-segment-button value="user">
-        مستخدم
-      </ion-segment-button>
-      <ion-segment-button value="pharmacy">
-       صيدلية
-      </ion-segment-button>
-    </ion-segment>
+
   
-  <ion-item class="ion-label">
-        <ion-label floating >  الاسم</ion-label>
-        <ion-input [(ngModel)]="userInfoData.name"></ion-input>
-    </ion-item>
+
+   
+
+  <h1 > انشاء حساب  </h1>
+
+      
+
+<ion-segment [(ngModel)]="userType">
+
+    <ion-segment-button value="user">
+
+      مستخدم
+
+    </ion-segment-button>
+
+    <ion-segment-button value="pharmacy">
+
+     صيدلية
+
+    </ion-segment-button>
+
+  </ion-segment>
+
+
+
+<ion-item class="ion-label"> 
+
+       <ion-label floating >  الاسم</ion-label>
+
+       <ion-input [(ngModel)]="userInfoData.name"></ion-input>
+
+  </ion-item>
+
+  <form [formGroup]="myForm">
+
+  <ion-item class="ion-label" >
+
+      <ion-label floating >البريد الالكتروني</ion-label>
+
+      <ion-input placeholder="email" [formControl]="myForm.controls['email']" [(ngModel)]="userInfoData.email" >
+
+      </ion-input>
+      
     
+<<<<<<< HEAD
+  </ion-item> 
+  <ion-item no-lines  class="no-line error" *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
+    <p *ngIf="myForm.value.email != ''" class="p">الايميل غير صالح</p> 
+     <p *ngIf="myForm.value.email == ''" class="p" >يتطلب ادخال الايميل</p>
+  </ion-item>
+
+  <ion-item class="ion-label" >
+
+          <ion-label floating> كلمة المرور </ion-label>
+
+        
+
+        <ion-input placeholder="password" type="password" [formControl]="myForm.controls['password']" [(ngModel)]="userInfoData.password"  ></ion-input>
+
+      </ion-item> 
+      <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
+          <p *ngIf="myForm.value.password != ''" class="p">كلمة المرور غير صالحة</p>
+          <p *ngIf="myForm.value.password == ''" class="p">يتطلب ادخال كلمة المرور</p>
+      </ion-item>
+
+    </form>
+
+    
+
+   <br>
+
+     <ion-list style="color: #339999;">
+
+              <ion-item>
+
+                <ion-label style="color: #339999;" >المحافظة  :</ion-label>
+
+                <ion-select [(ngModel)]="userInfoData.province">
+
+                  <ion-option value="الانبار">الانبار</ion-option>
+
+                  <ion-option value="القادسية ">القادسية</ion-option>
+
+                  <ion-option value="البصرة">البصرة</ion-option>
+
+                  
+
+                  
+
+                </ion-select>
+
+               </ion-item> 
+
+               </ion-list> 
+
+     
+
+            <ion-list>
+
+                  <ion-item >
+
+                    <ion-label style="color: #339999;"> المنطقة :</ion-label>
+
+                    <ion-select [(ngModel)]="userInfoData.zone">
+
+                      <ion-option value="الديوانية">الديوانية</ion-option>
+
+                      <ion-option value="الرمادي">الرمادي</ion-option>
+
+                      <ion-option value="الفلوجة">الفلوجة</ion-option>
+
+                    </ion-select>
+
+                  </ion-item>
+
+                </ion-list>
+
+           
+
+               <br>
+
+=======
     <ion-item class="ion-label" >
         <ion-label floating >البريد الالكتروني او رقم الهاتف</ion-label>
         <ion-input [(ngModel)]="userAuthData.email"></ion-input>
@@ -55,17 +163,37 @@
                  <div id="ii" [ngSwitch]="userType" >  
                    <div  *ngSwitchCase="'pharmacy'">
                       <ion-label class="b">التقاط صورة لترخيص وزارة الصحة </ion-label>
+>>>>>>> refs/remotes/origin/master
                   
-                     <ion-icon  ios="ios-camera" md="md-camera" ></ion-icon>
-                    </div>
-              <div  *ngSwitchCase="'user'">
 
-              </div> 
-                  </div> 
+               <div id="ii" [ngSwitch]="userType" >  
 
-                  <button ion-button block (click)="registerOn()">
-                      <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; 
-                      انشاء حساب
-                    </button>
-                 
+                 <div  *ngSwitchCase="'pharmacy'">
+
+                    <ion-label class="b">التقاط صورة لترخيص وزارة الصحة </ion-label>
+
+                
+
+                   <ion-icon  ios="ios-camera" md="md-camera" ></ion-icon>
+
+                  </div>
+
+            <div  *ngSwitchCase="'user'">
+
+
+
+            </div> 
+
+                </div> 
+
+<form [formGroup]="myForm">
+                <button ion-button block (click)="registerOn()" [disabled]="!myForm.valid">
+
+                    <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; 
+
+                    انشاء حساب
+
+                  </button>
+                </form>
+               
 </ion-content>

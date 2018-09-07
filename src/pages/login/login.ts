@@ -54,6 +54,14 @@ export class LoginPage {
     })
   }
   //--------------------------------------login with faceboook-----------------------------------------------
+<<<<<<< HEAD
+    logInFacebook(){
+   this._authFirebaseService.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider())
+   .then(res => {
+   
+     console.log(res);
+   })
+=======
   logInFacebook(){
     this._Events.subscribe('go:Register', ()=>{
       this._ModalController.create(HybridLoginPage, {loginType: 'facebook'}).present()
@@ -61,6 +69,7 @@ export class LoginPage {
     this._Events.subscribe('auth:Success', ()=>{
       this.navCtrl.setRoot(TabsPage)
     })
+>>>>>>> refs/remotes/origin/master
   } 
     //--------------------------------------login with Google-----------------------------------------------
   logInGoogle(){
@@ -118,6 +127,17 @@ export class LoginPage {
          }, error => {
        
            // alert ("error reset password in"+ error.message);
+<<<<<<< HEAD
+loading.dismiss().then(() => {
+  let alert = this.alertCtrl.create({
+    title: "خطا في استعادة كلمة المرور ",
+    // subTitle: error.message ,
+    subTitle:"يرجى اعادة المحاولة ",
+    buttons: ['OK']
+  });
+alert.present();
+})
+=======
           loading.dismiss().then(() => {
             let alert = this.alertCtrl.create({
               title: "خطا في استعادة كلمة المرور ",
@@ -126,6 +146,7 @@ export class LoginPage {
             });
           alert.present();
           })
+>>>>>>> refs/remotes/origin/master
          });
           }
         }
