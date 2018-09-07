@@ -12,12 +12,12 @@
         <form action="#">
         <label for="subject" >عنوان الرسالة :</label>
         <br>
-        <input [(ngModel)]="subject" required type="text"  name="subject" placeholder="مشكلة في التطبيق...">
+        <input [(ngModel)]="message.subject" required type="text" name="subject" placeholder="مشكلة في التطبيق...">
         <br>
         <br>
         <label for="body">نص الرسالة :</label>
         <br>
-        <textarea [(ngModel)]="body" required name="body" placeholder="لا استطيع العثور على اسئلتي التي قمت باضافتها سابقا؟" style="height:200px"></textarea>
+        <textarea [(ngModel)]="message.body" required name="body" placeholder="لا استطيع العثور على اسئلتي التي قمت باضافتها سابقا؟" style="height:200px"></textarea>
         <br>
         <br>
         <button ion-button full (click)="send()">

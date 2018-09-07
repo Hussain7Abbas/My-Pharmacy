@@ -29,7 +29,7 @@ export class AddPostPage {
     comments: []
   }
 
-  editPostData = JSON.parse(localStorage["thePost"]);
+  editPostData
 
   userData = JSON.parse(localStorage["userData"]);
 
@@ -49,6 +49,7 @@ export class AddPostPage {
     this.replyData.pharmacyKey = localStorage.getItem('uid')
 
     if (this.isEdit){
+      this.editPostData = JSON.parse(localStorage["thePost"]);
       console.log(this.editPostData);
       this.postData = this.editPostData[1]
       this.imgURl, this.oldImgURL = this.postData.postImg

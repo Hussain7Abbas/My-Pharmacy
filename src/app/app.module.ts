@@ -29,8 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { postsFirebaseService } from '../providers/firebase-service/firebase-service';
-import { authFirebaseService } from '../providers/firebase-service/firebase-service';
+import { postsFirebaseService, authFirebaseService, ContactUsFirebaseService } from '../providers/firebase-service/firebase-service';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrRhWVyR7IljNxfqOyM1olbuCKV0FF7Aw",
@@ -96,6 +95,7 @@ const firebaseConfig = {
     AngularFireAuth,
     postsFirebaseService,
     authFirebaseService,
+    ContactUsFirebaseService,
     // ================ Firebase ==============
     EmailComposer,
     Camera

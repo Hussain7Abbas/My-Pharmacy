@@ -19,6 +19,11 @@ export interface hybridLogin {
     key: String;
 }
 
+export interface contactUs {
+    message: String;
+    info: String;
+}
+
 export interface postModel {
     name: String;
     uidUser: String;
