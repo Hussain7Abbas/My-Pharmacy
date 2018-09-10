@@ -8,48 +8,47 @@
     </ion-header>
         <!-- =============================== Nav Bar Header ============================== -->
 <ion-content padding>       
-  <ion-segment [(ngModel)]="userInfoData.userType">
-      <ion-segment-button value="user">
-          مستخدم
-      </ion-segment-button>
-      <ion-segment-button value="pharmacy">
-          صيدلية
-      </ion-segment-button>
-  </ion-segment>
+
+
+    <div id="segmentCont">
+            <h1 style="width: 100%; text-align: center; font-size: 16pt;">الرجاء تحديد نوع المستخدم:</h1>
+
+        <button ion-button block id="user" class="segmentBtn activeSegment" (click)="segment('user')" style="right: 0px;">مستخدم</button>
+        <button ion-button block id="pharmacy" class="segmentBtn" (click)="segment('pharmacy')" style="left: 0px;">صيدلية</button>
+    </div>
+
+
 
 
   <ion-list style="color: #339999;">
-      <ion-item>
-          <ion-label style="color: #339999;" >المحافظة  :</ion-label>
-          <ion-select [(ngModel)]="userInfoData.province">
-              <ion-option value="الانبار">الانبار</ion-option>
-              <ion-option value="القادسية ">القادسية</ion-option>
-              <ion-option value="البصرة">البصرة</ion-option>
-          </ion-select>
-      </ion-item>
-      </ion-list>
+        <ion-item>
+            <ion-label style="color: #339999;" >المحافظة  :</ion-label>
+            <ion-select [(ngModel)]="userInfoData.province">
+                <ion-option value="الانبار">الانبار</ion-option>
+                <ion-option value="القادسية ">القادسية</ion-option>
+                <ion-option value="البصرة">البصرة</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    
+    <ion-list>
+        <ion-item >
+            <ion-label style="color: #339999;"> المنطقة :</ion-label>
+            <ion-select [(ngModel)]="userInfoData.zone">
+                <ion-option value="الديوانية">الديوانية</ion-option>
+                <ion-option value="الرمادي">الرمادي</ion-option>
+                <ion-option value="الفلوجة">الفلوجة</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list><br>
 
-      <ion-list>
-          <ion-item >
-              <ion-label style="color: #339999;"> المنطقة :</ion-label>
-              <ion-select [(ngModel)]="userInfoData.zone">
-                  <ion-option value="الديوانية">الديوانية</ion-option>
-                  <ion-option value="الرمادي">الرمادي</ion-option>
-                  <ion-option value="الفلوجة">الفلوجة</ion-option>
-              </ion-select>
-          </ion-item>
-      </ion-list><br>
               
-  <div id="ii" [ngSwitch]="userType" >  
-      <div  *ngSwitchCase="'pharmacy'">
-          <ion-label class="b">التقاط صورة لترخيص وزارة الصحة </ion-label>
-          <ion-icon  ios="ios-camera" md="md-camera" ></ion-icon>
-      </div>
-  <div  *ngSwitchCase="'user'">
+    <div id="camera" class="hiddenCam">
+        <h1 style="width: 100%; text-align: center; font-size: 16pt; margin-bottom: 10px;">التقاط صورة لترخيص وزارة الصحة </h1>
+        <ion-icon id="theIcon" ios="ios-camera" md="md-camera" ></ion-icon>
+        <ion-label style="font-size: 12pt; font-weight: bold; color: #800000">سيتم اغلاق حسابك اذا كان الترخيص مزيف</ion-label>
+    </div>
 
-  </div> 
-  </div> 
-
-  <button *ngIf="loginType" ion-button block (click)="facebookLogin()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
-  <button *ngIf="!loginType" ion-button block (click)="googleLogin()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+  <button *ngIf="isFacebook" ion-button block (click)="facebookRegister()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+  <button *ngIf="!isFacebook" ion-button block (click)="googleRegister()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
 </ion-content> 

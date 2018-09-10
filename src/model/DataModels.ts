@@ -9,19 +9,20 @@ export interface UserDataModel {
 }
 
 export interface pharmacyList {
-    id: String;
-    hybridKey: String;
-    userData: Array<UserDataModel>;
+    uid: String;
 }
 
-export interface hybridLogin {
-    id: String;
-    key: String;
-}
 
 export interface contactUs {
     message: String;
     info: String;
+}
+
+export interface notifi {
+    title: String;
+    body: String;
+    key: String;
+    isRead: Boolean;
 }
 
 export interface postModel {
