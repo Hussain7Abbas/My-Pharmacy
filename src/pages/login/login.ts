@@ -55,8 +55,10 @@ export class LoginPage {
   }
   //--------------------------------------login with faceboook-----------------------------------------------
   logInFacebook(){
-    this._Events.subscribe('go:Register', ()=>{
-      this._ModalController.create(HybridLoginPage, {loginType: 'facebook'}).present()
+    this._authFirebaseService.loginWithFacebook()
+    this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
+      console.log('facebook');
+      this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
     })
     this._Events.subscribe('auth:Success', ()=>{
       this.navCtrl.setRoot(TabsPage)
@@ -64,8 +66,10 @@ export class LoginPage {
   } 
     //--------------------------------------login with Google-----------------------------------------------
   logInGoogle(){
-    this._Events.subscribe('go:Register', ()=>{
-      this._ModalController.create(HybridLoginPage, {loginType: 'google'}).present()
+    this._authFirebaseService.loginWithGoogle()
+    this._Events.subscribe('go:Register_Google', (hybridData)=>{
+      console.log('google');
+      this._ModalController.create(HybridLoginPage, {loginType: 'google', hybridData: hybridData}).present()
     })
     this._Events.subscribe('auth:Success', ()=>{
       this.navCtrl.setRoot(TabsPage)

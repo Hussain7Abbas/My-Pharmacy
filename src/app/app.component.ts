@@ -18,10 +18,11 @@ import { authFirebaseService } from '../providers/firebase-service/firebase-serv
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
 
+  isLogin = Boolean(localStorage.getItem('isLogin') == 'true')
   rootPage:any
   showSplash = true; // <-- show animation
   constructor( platform: Platform, public _Events:Events, statusBar: StatusBar, splashScreen: SplashScreen, public _authFirebaseService:authFirebaseService) {
-    if (localStorage.getItem('isLogin') == 'true'){
+    if (this.isLogin){
       this.rootPage = TabsPage
     }else{
       this.rootPage = StartPage

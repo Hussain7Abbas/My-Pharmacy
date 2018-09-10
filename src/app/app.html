@@ -7,7 +7,7 @@
     </div>
 </div>
 <!-- =============================== SideBar ============================== -->
-  <ion-menu [content]="mycontent">
+  <ion-menu *ngIf="isLogin" [content]="mycontent">
     <ion-content>
         <div style="height: 156px; background-color: #339999;">
           <img src="../assets/imgs/logo.png" style="width: 39%; margin-top: 5%; margin-right: 29%;">

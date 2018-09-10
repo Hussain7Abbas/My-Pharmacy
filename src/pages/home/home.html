@@ -15,14 +15,6 @@
 
 <ion-content *ngIf="isUser">
 
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content
-        pullingText="اسحب للتحديث"
-        refreshingSpinner="crescent"
-        refreshingText="جارِ التحديث...">
-      </ion-refresher-content>
-    </ion-refresher>
-
     <div padding>
       <h1 style="color: #339999;">هل تريد السؤال عن دواء؟</h1>
       <button id="askButton" ion-button block color="primary" (click)='goAddQues()'>
@@ -36,6 +28,14 @@
         <h1 id="myQuesTitle">الاسئلة</h1>
     </div>
     <!-- ============================ The list that contains all sliding items ============================ -->
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingText="اسحب للتحديث"
+        refreshingSpinner="crescent"
+        refreshingText="جارِ التحديث...">
+      </ion-refresher-content>
+    </ion-refresher>
+    
     <ion-list>
       <ion-item id="ionItem" *ngFor="let item of myObject.slice().reverse()"> <!-- ===== ion-item ===== -->
         <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">

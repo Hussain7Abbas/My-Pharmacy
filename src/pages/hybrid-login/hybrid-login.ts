@@ -4,7 +4,6 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { TabsPage } from '../tabs/tabs';
 
 
-@IonicPage()
 @Component({
   selector: 'page-hybrid-login',
   templateUrl: 'hybrid-login.html',
@@ -19,39 +18,50 @@ export class HybridLoginPage {
     pharmacyAdress: 'لا يوجد عنوان بعد!'
 }
 
-userType = "user";
-loginType = Boolean(this.navParams.get('loginType') == 'facebook')
+isFacebook = Boolean(this.params.get('loginType') == 'facebook')
+hybridData = this.params.get('hybridData')
 
-constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService) {
+constructor(public navCtrl: NavController, public params: NavParams, public _ViewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService) {
+console.log(this.hybridData);
 
 }
 
 goBack(){
-this.viewCtrl.dismiss();
+this._ViewCtrl.dismiss();
 }
 
-// facebookLogin(){
-//     if (this.userType == 'user'){
-//         this._authFirebaseService.loginWithFacebook(this.userInfoData)
-//         this._Events.subscribe("auth:Success", ()=>{
-//             this.viewCtrl.dismiss();
-//             this.navCtrl.setRoot(TabsPage)
-//         })
-//     }else{
-//         this._authFirebaseService.facebookPharmacy(this.userInfoData)
-//     }
-// }
+facebookRegister(){
+    this._authFirebaseService.registerFacebook(this.userInfoData, this.hybridData)
+    this._Events.subscribe("auth:Success", ()=>{
+        this._ViewCtrl.dismiss();
+        this.navCtrl.setRoot(TabsPage)
+    })
+}
 
-// googleLogin(){
-//     if (this.userType == 'user'){
-//         this._authFirebaseService.googlePharmacy(this.userInfoData)
-//         this._Events.subscribe("auth:Success", ()=>{
-//             this.viewCtrl.dismiss();
-//             this.navCtrl.setRoot(TabsPage)
-//         })
-//     }else{
-//         this._authFirebaseService.googlePharmacy(this.userInfoData)
-//     }
-// }
+googleRegister(){
+    this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
+    this._Events.subscribe("auth:Success", ()=>{
+        this._ViewCtrl.dismiss();
+        this.navCtrl.setRoot(TabsPage)
+    })
+}
+
+segment(userType){
+    let userSegment = document.getElementById('user')
+    let pharmacySegment = document.getElementById('pharmacy')
+    let cameraSegment = document.getElementById('camera')
+
+    if (userType == 'pharmacy'){
+        userSegment.classList.remove('activeSegment')
+        pharmacySegment.classList.add('activeSegment')
+        cameraSegment.classList.add('visableCam')
+        this.userInfoData.userType = userType
+    }else{
+        pharmacySegment.classList.remove('activeSegment')
+        userSegment.classList.add('activeSegment')
+        cameraSegment.classList.remove('visableCam')
+        this.userInfoData.userType = userType
+    }
+}
 
 }
