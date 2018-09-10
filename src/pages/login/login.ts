@@ -46,12 +46,16 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
    //--------------------------------------login with Email--------------------------------------------
-  onLogin(AuthData){
+  // onLogin(AuthData){
+    onLogin(){try{
     console.log(this.userAuthData)
     this._authFirebaseService.loginWithEmail(this.userAuthData)
       this._Events.subscribe("auth:Success", ()=>{
           this.navCtrl.setRoot(TabsPage)
     })
+  } catch (error) {
+  
+  }
   }
   //--------------------------------------login with faceboook-----------------------------------------------
   logInFacebook(){

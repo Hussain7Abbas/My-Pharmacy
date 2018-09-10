@@ -76,7 +76,7 @@ export class ContactUsFirebaseService {
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserDataModel, pharmacyList, hybridLogin } from '../../model/DataModels';
 import firebase from 'firebase';
-
+import { AlertController} from 'ionic-angular';
 @Injectable()
 export class authFirebaseService {
 
@@ -91,7 +91,7 @@ export class authFirebaseService {
   myObject = []
   myfilter = []
   
-  constructor(public afAuth: AngularFireAuth, public _Events:Events, public db:AngularFireDatabase, public loadingCtrl: LoadingController) {
+  constructor(public afAuth: AngularFireAuth, public _Events:Events, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController) {
 
   }
 
@@ -102,6 +102,43 @@ export class authFirebaseService {
       .then(loginUser => {
         localStorage.setItem('uid', loginUser.user.uid)
         this.setUserInfoLocalStorage(authData)
+    }).then(loginUser=>{
+    },error=>{
+      const invalid_email = this.alertCtrl.create({
+        title: "تنبيه",
+        subTitle: "الايميل غير صالح ",
+        buttons: ['موافق']
+      });
+      const network_error = this.alertCtrl.create({
+        title: "تنبيه",
+        subTitle: "خطأ في الاتصال في الانترنيت",
+        buttons: ['موافق']
+      });
+      const user_not_found = this.alertCtrl.create({
+        title: "تنبيه",
+        subTitle: "لا يوجد حساب بهذا الايميل",
+        buttons: ['موافق']
+      });
+      const wrong_password = this.alertCtrl.create({
+        title: "تنبيه",
+        subTitle: "كلمة المرور غير صحيحة",
+        buttons: ['موافق']
+      });
+     
+      if (error.code=="auth/invalid-email") {
+        invalid_email.present();
+      
+    }
+    if (error.code=="auth/user-not-found") {
+      user_not_found.present();
+    }
+    if (error.code=="auth/network-request-failed") {
+      network_error.present();
+    }
+    if (error.code=="auth/wrong-password") {
+      wrong_password.present();
+    }
+  
     })
 
     }
@@ -161,9 +198,55 @@ export class authFirebaseService {
       // ====================== User Profile Details ============================
       // ========================================================================
       }).catch(error=>{
-      console.error(error)
-      })
-  }
+        const email_already_in_use = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "الايميل مسجل به مسبقا",
+          buttons: ['موافق']
+        });
+          
+        
+        const weak_password = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "كلمة المرور ضعيفة",
+          buttons: ['موافق']
+        });
+        const invalid_email = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "الايميل غير صالح ",
+          buttons: ['موافق']
+        });
+        const network_error = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "خطأ في الاتصال في الانترنيت",
+          buttons: ['موافق']
+        });
+        const user_not_found = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "لا يوجد حساب",
+          buttons: ['موافق']
+        });
+        if (error.code=="auth/email-already-in-use") {
+          email_already_in_use.present();
+        }
+        if (error.code=="auth/weak-password") {
+          weak_password.present();
+        }
+        if (error.code=="auth/invalid-email") {
+          invalid_email.present();
+        
+      }
+      if (error.code=="auth/user-not-found") {
+        user_not_found.present();
+      }
+      if (error.code=="auth/network-request-failed") {
+        network_error.present();
+      }
+    
+        })
+    }
+      
+      
+  
 
   editUserProfile($key, myList:UserDataModel) {
     return this.usersList.update($key, myList);

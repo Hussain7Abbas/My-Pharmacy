@@ -3,7 +3,9 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TabsPage } from '../tabs/tabs';
-
+import { errorHandler } from '@angular/platform-browser/src/browser';
+import { AlertController,LoadingController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -55,7 +57,10 @@ export class RegisterPage {
 
     public _Events:Events,
 
-    public fb: FormBuilder) {
+    public fb: FormBuilder,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController) {
   this.myForm = this.fb.group({
     password: new FormControl(null,Validators.compose([Validators.required,Validators.minLength(5)])),
     email: new FormControl(null, Validators.compose([ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]))
@@ -66,16 +71,61 @@ export class RegisterPage {
 
     console.log('ionViewDidLoad RegisterPage');
   }
-  registerOn(){
+
+
+   registerOn(){
+   
+       try {
+         
+       
     this.userInfoData.userType=this.userType
     this._authFirebaseService.regesterWithEmail(this.userAuthData,this.userInfoData)
     this._Events.subscribe("auth:Success", ()=>{
       this.navCtrl.setRoot(TabsPage)
+    
+    
     })
-   }
+  
+}
+   catch (error) {
+  //   const email_already_in_use = this.alertCtrl.create({
+  //     title: "خطاء",
+  //     subTitle: "الاميل موجود مسبقا",
+  //     buttons: ['موافق']
+  //   });
+      
+    
+  //   const weak_password = this.alertCtrl.create({
+  //     title: "خطاء",
+  //     subTitle: "كلمة المرور ضعيفة",
+  //     buttons: ['موافق']
+  //   });
+  //   const invalid_email = this.alertCtrl.create({
+  //     title: "خطاء",
+  //     subTitle: "الايميل غير صالح ",
+  //     buttons: ['موافق']
+  //   });
+
+  //   if (error.code=="auth/email-already-in-use") { 
+  //   email_already_in_use.present();
+  //   }
+  //   if (error.code=="auth/weak-password") {
+  //     weak_password.present();
+  //   }
+  //   if (error.code=="auth/invalid-email") {
+  //     invalid_email.present();
+    
+  // }
+  
+     
+   
+      
   }
   
+   
+   }
+  
+  
 
-
+  }
  
-

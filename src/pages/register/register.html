@@ -44,7 +44,7 @@
 
       <ion-label floating >البريد الالكتروني</ion-label>
 
-      <ion-input placeholder="email" [formControl]="myForm.controls['email']" [(ngModel)]="userInfoData.email" >
+      <ion-input placeholder="email" [formControl]="myForm.controls['email']" [(ngModel)]="userAuthData.email" >
 
       </ion-input>
       
@@ -61,7 +61,7 @@
 
         
 
-        <ion-input placeholder="password" type="password" [formControl]="myForm.controls['password']" [(ngModel)]="userInfoData.password"  ></ion-input>
+        <ion-input placeholder="password" type="password" [formControl]="myForm.controls['password']" [(ngModel)]="userAuthData.password"  ></ion-input>
 
       </ion-item> 
       <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
