@@ -5,7 +5,7 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { TabsPage } from '../tabs/tabs';
 import { errorHandler } from '@angular/platform-browser/src/browser';
 import { AlertController,LoadingController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+
 /**
  * Generated class for the RegisterPage page.
  *
@@ -59,11 +59,16 @@ export class RegisterPage {
 
     public fb: FormBuilder,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
-    private toastCtrl: ToastController) {
+    public loadingCtrl: LoadingController
+    ) {
   this.myForm = this.fb.group({
     password: new FormControl(null,Validators.compose([Validators.required,Validators.minLength(5)])),
-    email: new FormControl(null, Validators.compose([ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]))
+    email: new FormControl(null, Validators.compose([ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+   name: new FormControl(null, Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])),
+   province: new FormControl(null,Validators.required),
+   zone: new FormControl(null,Validators.required)
+   
+
   })
 }
 

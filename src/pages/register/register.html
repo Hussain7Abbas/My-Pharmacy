@@ -7,20 +7,20 @@
   
 
    
-
+  
   <h1 > انشاء حساب  </h1>
 
       
 
-<ion-segment [(ngModel)]="userType">
+<ion-segment [(ngModel)]="userType"  >
 
-    <ion-segment-button value="user">
+    <ion-segment-button value="user"  >
 
       مستخدم
 
     </ion-segment-button>
 
-    <ion-segment-button value="pharmacy">
+    <ion-segment-button value="pharmacy" >
 
      صيدلية
 
@@ -28,17 +28,20 @@
 
   </ion-segment>
 
-
+  <form [formGroup]="myForm">
 
 <ion-item class="ion-label"> 
 
        <ion-label floating >  الاسم</ion-label>
 
-       <ion-input [(ngModel)]="userInfoData.name"></ion-input>
+       <ion-input placeholder="الاسم" [formControl]="myForm.controls['name']" [(ngModel)]="userInfoData.name"></ion-input>
 
   </ion-item>
-
-  <form [formGroup]="myForm">
+  <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
+    <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يتجاوز الاسم ثلاثة احرف</p>
+    <p *ngIf="myForm.value.name == ''" class="p">يتطلب ادخال الاسم</p>
+</ion-item>
+ 
 
   <ion-item class="ion-label" >
 
@@ -69,7 +72,7 @@
           <p *ngIf="myForm.value.password == ''" class="p">يتطلب ادخال كلمة المرور</p>
       </ion-item>
 
-    </form>
+    
 
     
 
@@ -81,7 +84,7 @@
 
                 <ion-label style="color: #339999;" >المحافظة  :</ion-label>
 
-                <ion-select [(ngModel)]="userInfoData.province">
+                <ion-select [(ngModel)]="userInfoData.province" [formControl]="myForm.controls['province']" >
 
                   <ion-option value="الانبار">الانبار</ion-option>
 
@@ -107,7 +110,7 @@
 
                     <ion-label style="color: #339999;"> المنطقة :</ion-label>
 
-                    <ion-select [(ngModel)]="userInfoData.zone">
+                    <ion-select [(ngModel)]="userInfoData.zone"[formControl]="myForm.controls['zone']" >
 
                       <ion-option value="الديوانية">الديوانية</ion-option>
 
@@ -122,10 +125,10 @@
                 </ion-list>
 
            
-
+              </form>
                <br>
 
-                  
+ 
 
                <div id="ii" [ngSwitch]="userType" >  
 

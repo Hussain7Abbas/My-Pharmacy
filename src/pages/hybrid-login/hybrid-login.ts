@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage ,NavController, NavParams, Events, ViewController } from 'ionic-angular';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { TabsPage } from '../tabs/tabs';
-
-
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 @Component({
   selector: 'page-hybrid-login',
   templateUrl: 'hybrid-login.html',
@@ -17,14 +16,19 @@ export class HybridLoginPage {
     pharmacyReplyNo: '0',
     pharmacyAdress: 'لا يوجد عنوان بعد!'
 }
-
+myForm: FormGroup;
 isFacebook = Boolean(this.params.get('loginType') == 'facebook')
 hybridData = this.params.get('hybridData')
 
-constructor(public navCtrl: NavController, public params: NavParams, public _ViewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService) {
-console.log(this.hybridData);
-
+constructor(public navCtrl: NavController, public params: NavParams, public _ViewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService,public fb: FormBuilder,) {
+ console.log(this.hybridData);
+this.myForm = this.fb.group({
+ userType: new FormControl(null,Validators.required),
+   province: new FormControl(null,Validators.required),
+   zone: new FormControl(null,Validators.required)
+})
 }
+
 
 goBack(){
 this._ViewCtrl.dismiss();

@@ -18,12 +18,12 @@
     </div>
 
 
-
+    <form [formGroup]="myForm">
 
   <ion-list style="color: #339999;">
         <ion-item>
             <ion-label style="color: #339999;" >المحافظة  :</ion-label>
-            <ion-select [(ngModel)]="userInfoData.province">
+            <ion-select [(ngModel)]="userInfoData.province" [formControl]="myForm.controls['province']" >
                 <ion-option value="الانبار">الانبار</ion-option>
                 <ion-option value="القادسية ">القادسية</ion-option>
                 <ion-option value="البصرة">البصرة</ion-option>
@@ -34,13 +34,15 @@
     <ion-list>
         <ion-item >
             <ion-label style="color: #339999;"> المنطقة :</ion-label>
-            <ion-select [(ngModel)]="userInfoData.zone">
+            <ion-select [(ngModel)]="userInfoData.zone" [formControl]="myForm.controls['zone']" >
                 <ion-option value="الديوانية">الديوانية</ion-option>
                 <ion-option value="الرمادي">الرمادي</ion-option>
                 <ion-option value="الفلوجة">الفلوجة</ion-option>
             </ion-select>
         </ion-item>
-    </ion-list><br>
+    </ion-list>
+    </form>
+    <br>
 
               
     <div id="camera" class="hiddenCam">
@@ -48,7 +50,8 @@
         <ion-icon id="theIcon" ios="ios-camera" md="md-camera" ></ion-icon>
         <ion-label style="font-size: 12pt; font-weight: bold; color: #800000">سيتم اغلاق حسابك اذا كان الترخيص مزيف</ion-label>
     </div>
-
-  <button *ngIf="isFacebook" ion-button block (click)="facebookRegister()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
-  <button *ngIf="!isFacebook" ion-button block (click)="googleRegister()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+    <form [formGroup]="myForm">
+  <button *ngIf="isFacebook" ion-button block (click)="facebookRegister()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+  <button *ngIf="!isFacebook" ion-button block (click)="googleRegister()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+    </form>
 </ion-content> 
