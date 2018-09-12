@@ -20,7 +20,7 @@ export class MyApp {
 
   isLogin = Boolean(localStorage.getItem('isLogin') == 'true')
   rootPage:any
-  showSplash = true; // <-- show animation
+  
   constructor( platform: Platform, public _Events:Events, statusBar: StatusBar, splashScreen: SplashScreen, public _authFirebaseService:authFirebaseService) {
     if (this.isLogin){
       this.rootPage = TabsPage
@@ -38,7 +38,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      timer(3000).subscribe(() => this.showSplash = false) // <-- hide animation after 3s
 
     });
   }

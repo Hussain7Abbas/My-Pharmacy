@@ -90,6 +90,9 @@ page-home {
     position: absolute;
     top: calc(1.7rem + 13px); left: 0px;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 //==============================================================================================
 //====================================== Common CSS Style ======================================

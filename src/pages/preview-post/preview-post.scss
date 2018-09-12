@@ -122,6 +122,8 @@ page-preview-post {
     height: 70px;
     margin-top: 1px;
     border-bottom: solid 1px #c8c7cc;
+    // overflow: auto;
+    display: inline-block;
 }
 
 // =============== set the default border of ion-item in ion-list to zero ===============
@@ -143,10 +145,11 @@ page-preview-post {
 }
 // =============== The Name of the medicine ===============
 .postTitle{
-    width: 100%;
     text-align: center;
     position: absolute;
     top: calc(1.7rem + 13px); left: 0px;
     font-weight: bold;
+    text-align: right;
 }
+
 }
