@@ -39,7 +39,7 @@
   </ion-item>
   <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
     <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يتجاوز الاسم ثلاثة احرف</p>
-    <p *ngIf="myForm.value.name == ''" class="p">يتطلب ادخال الاسم</p>
+    <p *ngIf="myForm.value.name == ''" class="p">يرجى ادخال الاسم</p>
 </ion-item>
  
 
@@ -55,7 +55,7 @@
   </ion-item> 
   <ion-item no-lines  class="no-line error" *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
     <p *ngIf="myForm.value.email != ''" class="p">الايميل غير صالح</p> 
-     <p *ngIf="myForm.value.email == ''" class="p" >يتطلب ادخال الايميل</p>
+     <p *ngIf="myForm.value.email == ''" class="p" >يرجى ادخال الايميل</p>
   </ion-item>
 
   <ion-item class="ion-label" >
@@ -69,7 +69,7 @@
       </ion-item> 
       <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
           <p *ngIf="myForm.value.password != ''" class="p">كلمة المرور غير صالحة</p>
-          <p *ngIf="myForm.value.password == ''" class="p">يتطلب ادخال كلمة المرور</p>
+          <p *ngIf="myForm.value.password == ''" class="p">يرجى ادخال كلمة المرور</p>
       </ion-item>
 
     

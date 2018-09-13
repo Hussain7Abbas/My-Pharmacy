@@ -105,7 +105,7 @@
     
         <!-- ==============<pharmacyImage&pharmacyName>============ -->           
         <div class="prof">
-            <ion-icon *ngIf="!visitShow" class="backButton" (click)="goBack()" style="position: absolute; top: 50px; right: 16px; " name='md-arrow-back'></ion-icon>
+            <ion-icon *ngIf="visitShow" class="backButton" (click)="goBack()" style="position: absolute; top: 50px; right: 16px; " name='md-arrow-back'></ion-icon>
             <img class="userimg" src="assets/imgs/pharmacy.png"/>          
             <h2>{{userData[1].name}}</h2>
           </div> 
@@ -121,48 +121,73 @@
         <div padding  [ngSwitch]="pet">
             <ion-list   *ngSwitchCase="'deatils'">
                 <ion-grid>
+
+
                     <ion-row class="infoDiv">
                         <ion-col>
                             <h4 class="infoTitle">المحافظة:</h4>
-                          </ion-col>
+                        </ion-col>
+
                         <ion-col>
                             <h4 class="infoText" >{{userData[1].province}}</h4>
                           </ion-col>
-                      </ion-row>
+                    </ion-row>
+
+
                     <ion-row class="infoDiv">
                         <ion-col>
                             <h4 class="infoTitle">المنطقة:</h4>
-                          </ion-col>
+                        </ion-col>
+
                         <ion-col>
                             <h4 class="infoText" >{{userData[1].zone}}</h4>
-                          </ion-col>
-                      </ion-row>
-                    <ion-row class="infoDiv" *ngIf="visitShow">
-                        <ion-col>
-                            <h4 class="infoTitle">البريد الالكتروني:</h4>
-                          </ion-col>
-                        <ion-col>
-                            <h4 class="infoText" >{{userData[0].email}}</h4>
-                          </ion-col>
-                      </ion-row>
-                    <ion-row class="infoDiv" *ngIf="visitShow">
-                        <ion-col>
-                            <h4 class="infoTitle">كلمة المرور:</h4>
-                          </ion-col>
-                        <ion-col>
-                            <h4 class="infoText" >{{userData[0].password}}</h4>
-                          </ion-col>
-                      </ion-row>
+                        </ion-col>
+                    </ion-row>
+
+
                     <ion-row class="infoDiv" >
                         <ion-col>
                             <h4 class="infoTitle">العنوان:</h4>
-                          </ion-col>
+                        </ion-col>
+
                         <ion-col>
-                            <ion-textarea>حي الاسكان شارع منجا العلوية</ion-textarea>              
+                            <h2 class="infoText" text-wrap>{{userData[1].pharmacyAdress}}</h2>              
+                        </ion-col>
+                    </ion-row>
+    
+    
+                    <ion-row class="infoDiv" >
+                        <ion-col>
+                            <h4 class="infoTitle">عدد الردود:</h4>
+                        </ion-col>
+                        <ion-col>
+                            <ion-textarea class="infoText">{{userData[1].pharmacyReplyNo}}</ion-textarea>              
+                        </ion-col>
+                    </ion-row>
+
+
+                    <ion-row class="infoDiv" *ngIf="!visitShow">
+                        <ion-col>
+                            <h4 class="infoTitle">البريد الالكتروني:</h4>
+                        </ion-col>
+
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[0].email}}</h4>
+                        </ion-col>
+                    </ion-row>
+
+
+                    <ion-row class="infoDiv" *ngIf="!visitShow">
+                        <ion-col>
+                            <h4 class="infoTitle">كلمة المرور:</h4>
+                        </ion-col>
+
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[0].password}}</h4>
                           </ion-col>
-                      </ion-row>                 
+                    </ion-row>                     
                   </ion-grid>
-                    <button *ngIf="visitShow" ion-button full (click)="editPro()" color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
+                    <button *ngIf="!visitShow" ion-button full (click)="editPro()" color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
               </ion-list>
           </div>
         <!-- ==============</pharmacyContentDetails>================ -->

@@ -47,7 +47,7 @@ export class ProfilePage {
   myObject = []
 
   myUid = localStorage.getItem('uid')
-  visitShow:boolean = false
+  visitShow:boolean = true
   isUser: boolean
   userData = []
 
@@ -61,7 +61,7 @@ export class ProfilePage {
         this.isUser = Boolean(JSON.parse(localStorage["userData"])[1]['userType'] == 'user')
         this.userData = JSON.parse(localStorage["userData"]);
     }
-    this.visitShow = Boolean(localStorage.getItem('uid') == this.userData[1]['uid'])
+    this.visitShow = Boolean(localStorage.getItem('uid') != this.userData[1]['uid'])
     localStorage.setItem('navTitle', 'الصفحة الشخصية') // هذا المتغير في مساحة الخزن المحلية يقوم بتغيير عنوان الناف بار
     this.userDataModel = this.userData[1]
   }

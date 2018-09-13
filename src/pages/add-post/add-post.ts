@@ -106,7 +106,15 @@ export class AddPostPage {
             this.postData.comments.push(this.replyData)
             this.postData.uidUser = localStorage.getItem("uid")
             this.postData.name = this.userData[1]['name']
-            this.postData.postDate = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
+            let nowDay:String
+            let nowMonth:String
+            if (date.getDate() < 10){
+              nowDay = String('0' + date.getDate())
+            }else{nowDay = String(date.getDate())}
+            if ((date.getMonth().valueOf()+1) < 10){
+              nowMonth = String('0' + (date.getMonth().valueOf()+1))
+            }else{nowMonth = String(((date.getMonth().valueOf()+1)))}
+            this.postData.postDate = nowDay + "/" + nowMonth + "/" + date.getFullYear()
             this.postData.postImg = this.imgURl
             this._postsFirebaseService.addPosts(this.postData).then(()=>{
               this._Events.publish("post:Added")
@@ -160,7 +168,15 @@ export class AddPostPage {
           this.postData.comments.push(this.replyData)
           this.postData.uidUser = localStorage.getItem("uid")
           this.postData.name = this.userData[1]['name']
-          this.postData.postDate = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
+          let nowDay:String
+          let nowMonth:String
+          if (date.getDate() < 10){
+            nowDay = String('0' + date.getDate())
+          }else{nowDay = String(date.getDate())}
+          if ((date.getMonth().valueOf()+1) < 10){
+            nowMonth = String('0' + (date.getMonth().valueOf()+1))
+          }else{nowMonth = String(((date.getMonth().valueOf()+1)))}
+          this.postData.postDate = nowDay + "/" + nowMonth + "/" + date.getFullYear()
           this.postData.postImg = this.imgURl
           this._postsFirebaseService.addPosts(this.postData).then(()=>{
             this._Events.publish("post:Added")

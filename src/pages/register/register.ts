@@ -64,7 +64,7 @@ export class RegisterPage {
   this.myForm = this.fb.group({
     password: new FormControl(null,Validators.compose([Validators.required,Validators.minLength(5)])),
     email: new FormControl(null, Validators.compose([ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
-   name: new FormControl(null, Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])),
+   name: new FormControl(null, Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(30), Validators.pattern('[a-zA-Zأ-ي -]*')])),
    province: new FormControl(null,Validators.required),
    zone: new FormControl(null,Validators.required)
    

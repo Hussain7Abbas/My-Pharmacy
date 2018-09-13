@@ -73,7 +73,23 @@ export class PreviewPostPage {
       var date = new Date
       this.replyData.pharmacyName = this.userData[1]['name']
       this.replyData.pharmacyKey = this.userData[2]
-      this.replyData.date = date.getDate() + "/" + (date.getMonth().valueOf()+1) + "/" + date.getFullYear()
+      let nowDay:String
+      let nowMonth:String
+      let nowHours:String
+      let nowMinuts:String
+      if (date.getDate() < 10){
+        nowDay = String('0' + date.getDate())
+      }else{nowDay = String(date.getDate())}
+      if ((date.getMonth().valueOf()+1) < 10){
+        nowMonth = String('0' + (date.getMonth().valueOf()+1))
+      }else{nowMonth = String(((date.getMonth().valueOf()+1)))}
+      if (date.getHours() < 10){
+        nowHours = String('0' + (date.getHours()))
+      }else{nowHours = String(date.getHours())}
+      if (date.getMinutes() < 10){
+        nowMinuts = String('0' + (date.getMinutes()))
+      }else{nowMinuts = String(date.getMinutes())}
+      this.replyData.date = nowDay + "/" + nowMonth + "/" + date.getFullYear() + '/' + nowHours + ':' + nowMinuts
       this.postData.comments.push(this.replyData)
       this._postsFirebaseService.updatePosts(this.thePost[0], this.postData)
   
