@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Loading } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TabsPage } from '../tabs/tabs';
@@ -48,7 +48,7 @@ export class RegisterPage {
   myForm: FormGroup;
 
   userType="user";
-
+loader: any;
   constructor(public navCtrl: NavController,
 
     public navParams: NavParams,
@@ -70,6 +70,7 @@ export class RegisterPage {
    
 
   })
+
 }
 
   ionViewDidLoad() {
@@ -79,58 +80,44 @@ export class RegisterPage {
 
 
    registerOn(){
+ 
    
        try {
-         
        
+         
     this.userInfoData.userType=this.userType
     this._authFirebaseService.regesterWithEmail(this.userAuthData,this.userInfoData)
     this._Events.subscribe("auth:Success", ()=>{
-      this.navCtrl.setRoot(TabsPage)
-    
+     
     
     })
+    
+    let alert = this.alertCtrl.create({
+      title: " تفحص صندوق بريدك",
+      subTitle:" تم ارسال رابط التحقق الي الايميل الخاص بك  ",
+      buttons: ['OK']
+    });
+  alert.present();
+ 
   
 }
    catch (error) {
-  //   const email_already_in_use = this.alertCtrl.create({
-  //     title: "خطاء",
-  //     subTitle: "الاميل موجود مسبقا",
-  //     buttons: ['موافق']
-  //   });
-      
-    
-  //   const weak_password = this.alertCtrl.create({
-  //     title: "خطاء",
-  //     subTitle: "كلمة المرور ضعيفة",
-  //     buttons: ['موافق']
-  //   });
-  //   const invalid_email = this.alertCtrl.create({
-  //     title: "خطاء",
-  //     subTitle: "الايميل غير صالح ",
-  //     buttons: ['موافق']
-  //   });
-
-  //   if (error.code=="auth/email-already-in-use") { 
-  //   email_already_in_use.present();
-  //   }
-  //   if (error.code=="auth/weak-password") {
-  //     weak_password.present();
-  //   }
-  //   if (error.code=="auth/invalid-email") {
-  //     invalid_email.present();
-    
-  // }
   
-     
-   
-      
   }
   
-   
+  
    }
-  
-  
+ 
+   presentLoading() {
+    this.loader = this.loadingCtrl.create({
+      content: "يرجى الانتظار",
+      spinner: "crescent",
+      
+    });
+   this.loader.present(); 
+    this.loader.dismiss();
 
   }
- 
+   
+  
+}
