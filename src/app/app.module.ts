@@ -21,6 +21,7 @@ import { NavBarComponent } from '../components/nav-bar/nav-bar';
 import { NotifiPage } from '../pages/notifi/notifi';
 import { AddPostPage } from '../pages/add-post/add-post';
 import { PreviewPostPage } from '../pages/preview-post/preview-post';
+import { OneSignal } from "@ionic-native/onesignal";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -98,7 +99,8 @@ const firebaseConfig = {
     ContactUsFirebaseService,
     // ================ Firebase ==============
     EmailComposer,
-    Camera
+    Camera,
+    OneSignal
   ]
 })
 export class AppModule {}

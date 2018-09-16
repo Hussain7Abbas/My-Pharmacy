@@ -10,7 +10,7 @@
 
 <ion-content>
 
-    <ion-card style="border: solid 0px; border-radius: 30px; margin-bottom: 3px;">
+    <ion-card style="border: solid 0px; border-radius: 30px;">
         <ion-card-header>
             <img src="../../assets/imgs/ranking.png" style="height: 50%; width: 50%; margin-right: 25%">
         </ion-card-header>
@@ -19,7 +19,7 @@
         </ion-card-content>
     </ion-card>
 
-    <div *ngIf="!isUser" id="myQues" style="background-color: white;"> <!-- ===== My Questions Title ===== -->
+    <div *ngIf="!isUser" id="myQues" style="background-color: white; margin-top: -7px;"> <!-- ===== My Questions Title ===== -->
         <h1 id="myQuesTitle" style="color: #339999; font-weight: bold;">نقاطي: {{myPoints}}</h1>
     </div>
 
