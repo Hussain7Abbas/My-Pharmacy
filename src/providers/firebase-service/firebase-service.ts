@@ -77,6 +77,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { UserDataModel, pharmacyList } from '../../model/DataModels';
 import firebase from 'firebase';
 import { AlertController} from 'ionic-angular';
+
 @Injectable()
 export class authFirebaseService {
 
@@ -97,9 +98,11 @@ export class authFirebaseService {
     loginWithEmail(authData){
       return this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(loginUser => {
-        const emailVerified = loginUser.user.emailVerified;
-        if (emailVerified == true){
-    localStorage.setItem('uid', loginUser.user.uid)
+        const emailVerified = loginUser.user.emailVerified.valueOf();
+        console.log(emailVerified);
+        
+        if (emailVerified){
+        localStorage.setItem('uid', loginUser.user.uid)
         this.setUserInfoLocalStorage(authData)
         }else {
           const email_verify = this.alertCtrl.create({
@@ -152,6 +155,23 @@ export class authFirebaseService {
   
     }
    
+
+
+    checkVerified(authData){
+      return this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
+      .then(loginUser => {
+        console.log(loginUser.user.emailVerified.valueOf());
+        setTimeout(()=>{
+          if (loginUser.user.emailVerified.valueOf()){
+            localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
+            this.setUserInfoLocalStorage(authData)
+          }else{
+            this.afAuth.auth.signOut()
+            this.checkVerified(authData)
+          }
+        }, 1000);
+      })
+    }
      // ============================ forget password function  ===========================
 
      
@@ -187,13 +207,8 @@ export class authFirebaseService {
     regesterWithEmail(authData, userData){
       return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
       .then(user=>{
-        firebase.auth().currentUser.sendEmailVerification();
-          const useractiv =user.credential
-          if (useractiv){
-        localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
-        userData.uid = localStorage.getItem('uid')
-      }else {
-      }
+        localStorage.setItem('uid', user.user.uid)
+        userData.uid = user.user.uid
       // ========================================================================
       // ====================== User Profile Details ============================
       // ========================================================================
@@ -205,9 +220,8 @@ export class authFirebaseService {
           userType: userData.userType,
           pharmacyReplyNo: userData.pharmacyReplyNo,
           pharmacyAdress: userData.pharmacyAdress
-      }).then((posta)=>{
-        console.log(posta);
-        this.setUserInfoLocalStorage(authData)
+      }).then(()=>{
+        
       })
       // ========================================================================
       // ====================== User Profile Details ============================

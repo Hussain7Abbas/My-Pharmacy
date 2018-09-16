@@ -4,7 +4,6 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
 import { HybridLoginPage } from "../hybrid-login/hybrid-login";
-
 /**
  * Generated class for the LoginPage page.
  *
@@ -31,7 +30,14 @@ export class LoginPage {
     pharmacyReplyNo: '0',
     pharmacyAdress: 'لا يوجد عنوان بعد!'
   }
- loader:any;
+
+
+  loader = this.loadingCtrl.create({
+    content: " يرجى الانتظار",
+    spinner: "crescent",
+  })
+
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public _authFirebaseService:authFirebaseService,
@@ -48,16 +54,16 @@ export class LoginPage {
   }
    //--------------------------------------login with Email--------------------------------------------
   // onLogin(AuthData){
-    onLogin()
-    {try{
+    onLogin(){
+  
       console.log(this.userAuthData)
+      this.loader.present();
       this._authFirebaseService.loginWithEmail(this.userAuthData)
         this._Events.subscribe("auth:Success", ()=>{
-            this.navCtrl.setRoot(TabsPage)
+          this.loader.dismiss();
+          this.navCtrl.setRoot(TabsPage)
       })
-    } catch (error) {
-  
-    }
+
   }
   //--------------------------------------login with faceboook-----------------------------------------------
   logInFacebook(){
@@ -143,13 +149,5 @@ export class LoginPage {
       ]
     });
     prompt.present();
-  }
- 
-  presentLoading() {
-    this.loader = this.loadingCtrl.create({
-      content: " يرجى الانتظار",
-      spinner: "crescent",
-    });
-   this.loader.present();
   }
 }

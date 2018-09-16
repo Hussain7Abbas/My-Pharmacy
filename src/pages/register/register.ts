@@ -3,9 +3,11 @@ import { IonicPage, NavController, NavParams, Events, Loading } from 'ionic-angu
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TabsPage } from '../tabs/tabs';
-import { errorHandler } from '@angular/platform-browser/src/browser';
+import firebase from 'firebase';
 import { AlertController,LoadingController } from 'ionic-angular';
+import { EmailComposer } from '@ionic-native/email-composer'
 
+// import { LoginPage} from '../login/login';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -48,7 +50,15 @@ export class RegisterPage {
   myForm: FormGroup;
 
   userType="user";
-loader: any;
+  loader = this.loadingCtrl.create({
+    content: "جار انشاء حساب",
+    spinner: "crescent",
+  })
+  checkerLoader = this.loadingCtrl.create({
+    content: "سيتم تسجيل دخولك بعد الضغط على الرابط",
+    spinner: "crescent",
+  })
+
   constructor(public navCtrl: NavController,
 
     public navParams: NavParams,
@@ -59,12 +69,13 @@ loader: any;
 
     public fb: FormBuilder,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public _EmailComposer:EmailComposer
     ) {
   this.myForm = this.fb.group({
     password: new FormControl(null,Validators.compose([Validators.required,Validators.minLength(5)])),
     email: new FormControl(null, Validators.compose([ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
-   name: new FormControl(null, Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(12), Validators.pattern('[a-zA-Zأ-ي -]*')])),
+   name: new FormControl(null, Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(20), Validators.pattern('[a-zA-Zأ-ي -]*')])),
    province: new FormControl(null,Validators.required),
    zone: new FormControl(null,Validators.required)
    
@@ -79,44 +90,24 @@ loader: any;
   }
 
 
-   registerOn(){
- 
-   
-       try {
-       
-         
+  registerOn(){
+    this.loader.present(); 
     this.userInfoData.userType=this.userType
-    this._authFirebaseService.regesterWithEmail(this.userAuthData,this.userInfoData)
-    this._Events.subscribe("auth:Success", ()=>{
-     
-    
+    this._authFirebaseService.regesterWithEmail(this.userAuthData,this.userInfoData).then(()=>{
+      this.loader.dismiss();
+      firebase.auth().currentUser.sendEmailVerification();
+      this.checkerLoader.present()
+      this.alertCtrl.create({
+        title: " تفحص صندوق بريدك",
+        subTitle:" تم ارسال رابط التحقق الي الايميل الخاص بك  ",
+        buttons: ['OK']
+      })
+      this._authFirebaseService.checkVerified(this.userAuthData)
     })
-    
-    let alert = this.alertCtrl.create({
-      title: " تفحص صندوق بريدك",
-      subTitle:" تم ارسال رابط التحقق الي الايميل الخاص بك  ",
-      buttons: ['OK']
-    });
-  alert.present();
- 
-  
-}
-   catch (error) {
-  
-  }
-  
-  
-   }
- 
-   presentLoading() {
-    this.loader = this.loadingCtrl.create({
-      content: "يرجى الانتظار",
-      spinner: "crescent",
-      
-    });
-   this.loader.present(); 
-    this.loader.dismiss();
-
+    this._Events.subscribe("auth:Success", ()=>{
+      this.checkerLoader.dismiss()
+      this.navCtrl.setRoot(TabsPage)
+    })
   }
    
   

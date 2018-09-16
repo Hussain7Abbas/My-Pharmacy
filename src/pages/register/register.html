@@ -38,7 +38,7 @@
 
   </ion-item>
   <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
-    <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يتجاوز الاسم ثلاثة احرف</p>
+    <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يكون طول الاسم 3-20 حرف</p>
     <p *ngIf="myForm.value.name == ''" class="p">يرجى ادخال الاسم</p>
 </ion-item>
  
