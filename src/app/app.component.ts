@@ -7,7 +7,8 @@ import { ContactPage } from '../pages/contact/contact';
 // import { ProfilePage } from '../pages/profile/profile';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StartPage } from '../pages/start/start';
-
+import { OneSignal } from "@ionic-native/onesignal";
+import { authFirebaseService } from "../providers/firebase-service/firebase-service";
 
 @Component({
  templateUrl: 'app.html'

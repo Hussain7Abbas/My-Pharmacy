@@ -31,7 +31,7 @@ export class LoginPage {
     pharmacyReplyNo: '0',
     pharmacyAdress: 'لا يوجد عنوان بعد!'
   }
- 
+ loader:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public _authFirebaseService:authFirebaseService,
@@ -40,6 +40,7 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public _ModalController: ModalController
     ) {
+     
   }
 
   ionViewDidLoad() {
@@ -80,6 +81,7 @@ export class LoginPage {
       this.navCtrl.setRoot(TabsPage)
     })
   }
+ 
 
   registerOn(){
     this.navCtrl.setRoot(RegisterPage)
@@ -142,5 +144,12 @@ export class LoginPage {
     });
     prompt.present();
   }
-
+ 
+  presentLoading() {
+    this.loader = this.loadingCtrl.create({
+      content: " يرجى الانتظار",
+      spinner: "crescent",
+    });
+   this.loader.present();
+  }
 }

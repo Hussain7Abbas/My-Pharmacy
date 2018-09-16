@@ -97,8 +97,20 @@ export class authFirebaseService {
     loginWithEmail(authData){
       return this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(loginUser => {
-        localStorage.setItem('uid', loginUser.user.uid)
+        const emailVerified = loginUser.user.emailVerified;
+        if (emailVerified == true){
+    localStorage.setItem('uid', loginUser.user.uid)
         this.setUserInfoLocalStorage(authData)
+        }else {
+          const email_verify = this.alertCtrl.create({
+            title: "تنبيه",
+            subTitle: "يرجى تفعيل حسابك عن طريق الرابط المرسل الى الايميل الخاص بك",
+            buttons: ['حسنا']
+          });
+          email_verify.present();
+          this.afAuth.auth.signOut();
+        }
+    
     }).then(loginUser=>{
     },error=>{
       const invalid_email = this.alertCtrl.create({
@@ -137,8 +149,9 @@ export class authFirebaseService {
     }
   
     })
-
+  
     }
+   
      // ============================ forget password function  ===========================
 
      
@@ -170,12 +183,17 @@ export class authFirebaseService {
     }
 
 
-    // ========================== Regester Function =============================
+    // ========================== Register Function =============================
     regesterWithEmail(authData, userData){
       return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
       .then(user=>{
+        firebase.auth().currentUser.sendEmailVerification();
+          const useractiv =user.credential
+          if (useractiv){
         localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
         userData.uid = localStorage.getItem('uid')
+      }else {
+      }
       // ========================================================================
       // ====================== User Profile Details ============================
       // ========================================================================
@@ -242,7 +260,7 @@ export class authFirebaseService {
         })
     }
       
-      
+     
   
 
   editUserProfile($key, myList:UserDataModel) {
