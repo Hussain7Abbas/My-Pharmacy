@@ -5,7 +5,7 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { TabsPage } from '../tabs/tabs';
 import { errorHandler } from '@angular/platform-browser/src/browser';
 import { AlertController,LoadingController } from 'ionic-angular';
-
+// import { LoginPage} from '../login/login';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -81,15 +81,14 @@ loader: any;
 
    registerOn(){
  
-   
        try {
        
          
     this.userInfoData.userType=this.userType
     this._authFirebaseService.regesterWithEmail(this.userAuthData,this.userInfoData)
     this._Events.subscribe("auth:Success", ()=>{
-     
-    
+    this.navCtrl.setRoot('LoginPage')
+   
     })
     
     let alert = this.alertCtrl.create({

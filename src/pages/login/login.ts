@@ -4,7 +4,6 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
 import { HybridLoginPage } from "../hybrid-login/hybrid-login";
-
 /**
  * Generated class for the LoginPage page.
  *
@@ -53,7 +52,9 @@ export class LoginPage {
     this._authFirebaseService.loginWithEmail(this.userAuthData)
       this._Events.subscribe("auth:Success", ()=>{
           this.navCtrl.setRoot(TabsPage)
+
     })
+    
     this.loader.dismiss();
   } catch (error) {
   

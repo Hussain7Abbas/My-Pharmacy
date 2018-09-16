@@ -77,6 +77,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { UserDataModel, pharmacyList } from '../../model/DataModels';
 import firebase from 'firebase';
 import { AlertController} from 'ionic-angular';
+import { HomePage } from '../../pages/home/home';
 @Injectable()
 export class authFirebaseService {
 
@@ -99,8 +100,10 @@ export class authFirebaseService {
       .then(loginUser => {
         const emailVerified = loginUser.user.emailVerified;
         if (emailVerified == true){
+        
     localStorage.setItem('uid', loginUser.user.uid)
         this.setUserInfoLocalStorage(authData)
+      
         }else {
           const email_verify = this.alertCtrl.create({
             title: "تنبيه",
@@ -188,12 +191,14 @@ export class authFirebaseService {
       return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
       .then(user=>{
         firebase.auth().currentUser.sendEmailVerification();
-          const useractiv =user.credential
-          if (useractiv){
-        localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
-        userData.uid = localStorage.getItem('uid')
-      }else {
-      }
+        
+       
+      //     const useractiv =user.credential
+      //     if (useractiv){
+        // localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
+        // userData.uid = localStorage.getItem('uid')
+      // }else {
+      // }
       // ========================================================================
       // ====================== User Profile Details ============================
       // ========================================================================
