@@ -138,8 +138,11 @@
 
                 
 
-                   <ion-icon  ios="ios-camera" md="md-camera" ></ion-icon>
+                   <ion-icon (click)='openCamera()' ios="ios-camera" md="md-camera" ></ion-icon>
                    <ion-label class="b">سيتم اغلاق حسابك اذا كان الترخيص مزيف </ion-label>
+
+                   <img src="{{currentImg}}">
+
                   </div>
 
             <div  *ngSwitchCase="'user'">
@@ -151,7 +154,7 @@
                 </div> 
 
 <form [formGroup]="myForm">
-                <button ion-button block (click)="registerOn()" [disabled]="!myForm.valid">
+                <button ion-button block (click)="onRegister()" [disabled]="!myForm.valid">
 
                     <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; 
 

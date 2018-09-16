@@ -10,6 +10,7 @@ export interface UserDataModel {
 
 export interface pharmacyList {
     uid: String;
+    img: String;
 }
 
 

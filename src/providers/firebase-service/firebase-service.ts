@@ -368,9 +368,7 @@ export class authFirebaseService {
     
     this._Events.subscribe("auth:Success", ()=>{
       if (userData.userType == 'pharmacy'){
-        this.pharmacyList.push({
-          uid : googleData['name'] + '#b#' + localStorage.getItem('uid')
-        })
+        this.pushPharmacyList(googleData['name'], '')
       }
     })
     // ========================================================================
@@ -400,9 +398,7 @@ export class authFirebaseService {
     
     this._Events.subscribe("auth:Success", ()=>{
       if (userData.userType == 'pharmacy'){
-        this.pharmacyList.push({
-          uid : facebookData['name'] + '#b#' + localStorage.getItem('uid')
-        })
+        this.pushPharmacyList(facebookData['name'], '')
       }
     })
     // ========================================================================
@@ -410,5 +406,11 @@ export class authFirebaseService {
     // ========================================================================
   }
 
-
+  pushPharmacyList(userName, imgUrl){
+    this.pharmacyList.push({
+      uid : userName + '#b#' + localStorage.getItem('uid'),
+      img: imgUrl
+    })
+  }
+  
 }
