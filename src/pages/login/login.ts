@@ -33,7 +33,7 @@ export class LoginPage {
 
 
   loader = this.loadingCtrl.create({
-    content: " يرجى الانتظار",
+    content: "جارٍ التسجيل ...",
     spinner: "crescent",
   })
 
@@ -67,23 +67,31 @@ export class LoginPage {
   }
   //--------------------------------------login with faceboook-----------------------------------------------
   logInFacebook(){
+    this.loader.present();
     this._authFirebaseService.loginWithFacebook()
     this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
-      console.log('facebook');
-      this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
+      setTimeout(() => {
+        this.loader.dismiss();
+        this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
+      }, 1000);
     })
     this._Events.subscribe('auth:Success', ()=>{
+      this.loader.dismiss();
       this.navCtrl.setRoot(TabsPage)
     })
   } 
     //--------------------------------------login with Google-----------------------------------------------
   logInGoogle(){
+    this.loader.present();
     this._authFirebaseService.loginWithGoogle()
     this._Events.subscribe('go:Register_Google', (hybridData)=>{
-      console.log('google');
-      this._ModalController.create(HybridLoginPage, {loginType: 'google', hybridData: hybridData}).present()
+      setTimeout(() => {
+        this.loader.dismiss();
+        this._ModalController.create(HybridLoginPage, {loginType: 'google', hybridData: hybridData}).present()
+      }, 1000);
     })
     this._Events.subscribe('auth:Success', ()=>{
+      this.loader.dismiss();
       this.navCtrl.setRoot(TabsPage)
     })
   }

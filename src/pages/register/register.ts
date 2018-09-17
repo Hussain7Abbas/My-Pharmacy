@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TabsPage } from '../tabs/tabs';
 import firebase from 'firebase';
-import { EmailComposer } from '@ionic-native/email-composer'
 import { Camera, CameraOptions } from "@ionic-native/camera";
 
 // import { LoginPage} from '../login/login';
@@ -66,7 +65,6 @@ export class RegisterPage {
               public fb: FormBuilder,
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
-              public _EmailComposer:EmailComposer,
               public _Camera:Camera){
 
   this.myForm = this.fb.group({
@@ -115,7 +113,7 @@ export class RegisterPage {
       this.navCtrl.setRoot(TabsPage)
     })
   }
-   
+
   openCamera(){
     const options: CameraOptions = {
       quality: 100,
