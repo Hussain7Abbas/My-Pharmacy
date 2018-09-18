@@ -9,5 +9,40 @@ page-login {
         color:#339999;
         font-size: 14pt;
        }
-    
+       #emai{
+        animation-delay: 0s;
+        -moz-animation-delay: 0s;
+        -webkit-animation-delay: 0s;
+       
+    }
+    #pass{
+        animation-delay: 0.5s;
+        -moz-animation-delay: 0.5s;
+        -webkit-animation-delay: 0.5s;
+    }
+    #login{
+        animation-delay:1s;
+        -moz-animation-delay:1s;
+        -webkit-animation-delay: 1s;
+        animation-duration: 1s;
+    }
+    #login1{
+        animation-delay:1.5s;
+        -moz-animation-delay:1.5s;
+        -webkit-animation-delay: 1.5s;
+        animation-duration: 1.5s;
+    }
+    #login2{
+        animation-delay:2s;
+        -moz-animation-delay:2s;
+        -webkit-animation-delay: 2s;
+        animation-duration: 2s;
+    }
+    #register{
+        animation-delay:2.5s;
+        -moz-animation-delay:2.5s;
+        -webkit-animation-delay: 2.5s;
+        animation-duration: 2.5s;
+    }
+
 }

@@ -32,9 +32,9 @@
 
 <ion-item class="ion-label"> 
 
-       <ion-label floating >  الاسم</ion-label>
+       <ion-label floating class="animated bounceInRight" id="logi" >  الاسم</ion-label>
 
-       <ion-input placeholder="الاسم" [formControl]="myForm.controls['name']" [(ngModel)]="userInfoData.name"></ion-input>
+       <ion-input placeholder="الاسم" [formControl]="myForm.controls['name']" [(ngModel)]="userInfoData.name" class="animated bounceInRight" id="logi" ></ion-input>
 
   </ion-item>
   <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
@@ -45,9 +45,9 @@
 
   <ion-item class="ion-label" >
 
-      <ion-label floating >البريد الالكتروني</ion-label>
+      <ion-label floating class="animated bounceInRight" id="logi2" >البريد الالكتروني</ion-label>
 
-      <ion-input placeholder="email" [formControl]="myForm.controls['email']" [(ngModel)]="userAuthData.email" >
+      <ion-input placeholder="email" [formControl]="myForm.controls['email']" [(ngModel)]="userAuthData.email" class="animated bounceInRight" id="logi2"  >
 
       </ion-input>
       
@@ -60,11 +60,11 @@
 
   <ion-item class="ion-label" >
 
-          <ion-label floating> كلمة المرور </ion-label>
+          <ion-label floating class="animated bounceInRight" id="logi3"> كلمة المرور </ion-label>
 
         
 
-        <ion-input placeholder="password" type="password" [formControl]="myForm.controls['password']" [(ngModel)]="userAuthData.password"  ></ion-input>
+        <ion-input placeholder="password" type="password" [formControl]="myForm.controls['password']" [(ngModel)]="userAuthData.password" class="animated bounceInRight" id="logi3" ></ion-input>
 
       </ion-item> 
       <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
@@ -154,7 +154,7 @@
                 </div> 
 
 <form [formGroup]="myForm">
-                <button ion-button block (click)="onRegister()" [disabled]="!myForm.valid">
+                <button ion-button block (click)="onRegister()" [disabled]="!myForm.valid"class="animated bounceIn" id="register"  >
 
                     <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; 
 

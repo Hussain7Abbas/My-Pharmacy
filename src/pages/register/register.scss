@@ -17,4 +17,27 @@ page-register {
 color: rgb(202, 11, 11);
 font-size: 10px;
     }
+    #logi{
+        animation-delay: 0s;
+        -moz-animation-delay: 0s;
+        -webkit-animation-delay: 0s;
+       
+    }
+    #logi2{
+        animation-delay: 0.2s;
+        -moz-animation-delay:0.2s;
+        -webkit-animation-delay: 0.2s;
+    }
+    #logi3{
+        animation-delay:0.4s;
+        -moz-animation-delay:0.4s;
+        -webkit-animation-delay: 0.4s;
+       
+    }
+    #register{
+        animation-delay:0s;
+        -moz-animation-delay:0s;
+        -webkit-animation-delay: 0s;
+        animation-direction: 1s;
+}
 }

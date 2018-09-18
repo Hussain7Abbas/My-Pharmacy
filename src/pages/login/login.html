@@ -7,35 +7,35 @@
 
     <h1 >تسجيل دخول   </h1>
   
-    <ion-item class="ion-label">
-       <ion-label floating > البريد الالكتروني  </ion-label>
+    <ion-item class="ion-label" class="animated bounceInRight" id="emai" >
+       <ion-label floating class="animated bounceInRight" id="emai"> البريد الالكتروني  </ion-label>
        <ion-input [(ngModel)]="userAuthData.email" ></ion-input>
    </ion-item>
    
-   <ion-item class="ion-label" >
-       <ion-label floating>كلمة المرور</ion-label>
+   <ion-item class="ion-label" class="animated bounceInRight" id="pass">
+       <ion-label floating class="animated bounceInRight" id="pass">كلمة المرور</ion-label>
        <ion-input [(ngModel)]="userAuthData.password" ></ion-input>
    </ion-item> 
    
    
    <br>
    
-   <button ion-button block (click)="onLogin()"><ion-icon name="ios-person-outline"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
+   <button ion-button block (click)="onLogin()"class="animated bounceIn" id="login" ><ion-icon name="ios-person-outline"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
  <a (click)="forgetPassword()" >هل نسيت كلمة المرور</a> 
   
    <br><br>
-   <button class="infoBotton" ion-button block (click)="logInFacebook()"  >
+   <button class="infoBotton" ion-button block (click)="logInFacebook()" class="animated bounceIn" id="login1">
        <ion-icon name="logo-facebook"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
         تسجيل بواسطة فيس بوك 
      </button>
      <br>
-     <button class="infoBotton"ion-button block (click)="logInGoogle()" >
+     <button class="infoBotton"ion-button block (click)="logInGoogle()" class="animated bounceIn" id="login2" >
        <ion-icon name="logo-google"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
        تسجيل بواسطة جيميل
      </button>
      <br><br>
    
-     <button ion-button block (click)="registerOn()" >
+     <button ion-button block (click)="registerOn()" class="animated bounceIn" id="register" >
        <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; 
        انشاء حساب
      </button>
