@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, Events } from 'ionic-angular';
 
-import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 // ********************************************************************************************************
 // ========================================================================================================
@@ -17,8 +17,7 @@ import { postModel } from '../../model/DataModels';
 @Injectable()
 export class postsFirebaseService {
 
-  private dataList = this.db.list<postModel>('Posts')
-
+  private dataList = this.db.list('Posts')
 
   constructor(public db:AngularFireDatabase) {
     
@@ -27,6 +26,7 @@ export class postsFirebaseService {
  
   addPosts(myList:postModel) {
     return this.dataList.push(myList)
+    
   }
 
   updatePosts($key, myList:postModel) {
@@ -54,7 +54,7 @@ import { contactUs } from '../../model/DataModels';
 @Injectable()
 export class ContactUsFirebaseService {
 
-  private dataList = this.db.list<contactUs>('/contactUs')
+  private dataList = this.db.list('/contactUs')
 
   constructor(public db:AngularFireDatabase) {
     
@@ -74,20 +74,15 @@ export class ContactUsFirebaseService {
 
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { UserDataModel, pharmacyList } from '../../model/DataModels';
+import { UserDataModel } from '../../model/DataModels';
 import firebase from 'firebase';
 import { AlertController} from 'ionic-angular';
 
 @Injectable()
 export class authFirebaseService {
 
-  private usersList = this.db.list<UserDataModel>('userData')
-  private pharmacyList = this.db.list<pharmacyList>('pharmacyList')
-
-  postList:AngularFireObject<any>
-  itemArray = []
-  myObject = []
-  myfilter = []
+  private usersList = this.db.database.ref('userData')
+  private pharmacyList = this.db.database.ref('pharmacyList')
   
   constructor(public afAuth: AngularFireAuth, public _Events:Events, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController) {
 
@@ -188,7 +183,7 @@ export class authFirebaseService {
     }
 
     setScanLocalStorageByUid(authData, uid){
-      this.usersList.query.orderByChild('uid').equalTo(uid).once('value', action => {
+      this.usersList.orderByChild('uid').equalTo(uid).once('value', action => {
         let userData = []
         for (let key in action.val()) {
           userData.push([
@@ -278,7 +273,7 @@ export class authFirebaseService {
      
   
 
-  editUserProfile($key, myList:UserDataModel) {
+  editUserProfile($key, myList) {
     return this.usersList.update($key, myList);
   }
 
@@ -322,7 +317,7 @@ export class authFirebaseService {
 
 
   userDataFind(hybridData, uid, loginType){
-    this.usersList.query.orderByChild('uid').equalTo(uid).once('value', action => {
+    this.usersList.orderByChild('uid').equalTo(uid).once('value', action => {
       let userData = []
       if (action.val() !== null){
         for (let key in action.val()) {

@@ -1,9 +1,11 @@
-import { EmailComposer } from '@ionic-native/email-composer';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Camera } from '@ionic-native/camera';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+
 import { HeroPage } from '../pages/hero/hero';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -15,16 +17,12 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { StartPage } from '../pages/start/start';
 import { HybridLoginPage } from '../pages/hybrid-login/hybrid-login';
-
-
 import { NavBarComponent } from '../components/nav-bar/nav-bar';
 import { NotifiPage } from '../pages/notifi/notifi';
 import { AddPostPage } from '../pages/add-post/add-post';
 import { PreviewPostPage } from '../pages/preview-post/preview-post';
-import { OneSignal } from "@ionic-native/onesignal";
 
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 
 // ==================================== Firebase =====================================
 import { AngularFireModule } from 'angularfire2';
@@ -90,7 +88,6 @@ const firebaseConfig = {
   ],
   providers: [
     StatusBar,
-    SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     // ================ Firebase ==============
     AngularFireAuth,
@@ -98,9 +95,8 @@ const firebaseConfig = {
     authFirebaseService,
     ContactUsFirebaseService,
     // ================ Firebase ==============
-    EmailComposer,
     Camera,
-    OneSignal
+    SplashScreen
   ]
 })
 export class AppModule {}

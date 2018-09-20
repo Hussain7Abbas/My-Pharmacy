@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController, ModalController, Events} from 'ionic-angular';
 import { authFirebaseService, postsFirebaseService } from "../../providers/firebase-service/firebase-service";
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; 
+import { AngularFireDatabase } from "angularfire2/database"; 
 import { AddPostPage } from '../add-post/add-post'
 import { UserDataModel, postModel } from '../../model/DataModels';
-import { TabsPage } from '../tabs/tabs';
 import { PreviewPostPage } from '../preview-post/preview-post';
 
 /**
@@ -43,7 +42,7 @@ export class ProfilePage {
   
   pet="deatils"
 
-  postsRef:AngularFireList<any>
+  postsRef = this.db.database.ref("Posts")
   myObject = []
 
   myUid = localStorage.getItem('uid')
@@ -130,9 +129,9 @@ export class ProfilePage {
       content: 'يرجى الانتظار'
     });
     loading.present();
-    this.postsRef = this.db.list("Posts")
     this.myObject = []
-    this.postsRef.query.orderByChild('uidUser').equalTo(this.myUid).once('value', action => {
+    this.postsRef = this.db.database.ref("Posts")
+    this.postsRef.orderByChild('uidUser').equalTo(this.myUid).once('value', action => {
       for (let key in action.val()) {
         this.myObject.push([
           key,

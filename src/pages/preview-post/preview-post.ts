@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, Events, ViewController, LoadingController, ToastController } from 'ionic-angular';
 import { replyModel, postModel, UserDataModel } from '../../model/DataModels'
 import { postsFirebaseService, authFirebaseService } from '../../providers/firebase-service/firebase-service'
-import { AngularFireList } from "angularfire2/database";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ProfilePage } from '../profile/profile';
 
@@ -42,7 +41,6 @@ export class PreviewPostPage {
   userData = JSON.parse(localStorage["userData"]);
   isCommentAvailable: Boolean = true
   postComments = []
-  listComments: AngularFireList<any>
 
   constructor(public navCtrl: NavController, public db:AngularFireDatabase, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; 
+import { AngularFireDatabase } from "angularfire2/database"; 
 import { UserDataModel } from '../../model/DataModels';
 import { ProfilePage } from "../profile/profile";
 /**
@@ -16,15 +16,16 @@ import { ProfilePage } from "../profile/profile";
   templateUrl: 'hero.html',
 })
 export class HeroPage {
-  counter :number
-  postsRef:AngularFireList<any>
+
+  postsRef = this.db.database.ref("userData")
   myObject = []
   searchList = []
+
   isUser = Boolean(JSON.parse(localStorage["userData"])[1]['userType'] == 'user')
   myPoints = JSON.parse(localStorage["userData"])[1]['pharmacyReplyNo']
+
   constructor(public navCtrl: NavController, public _loadingCtrl:LoadingController, public db:AngularFireDatabase, public navParams: NavParams) {
     this.setData()
-    this.counter=1;
     localStorage.setItem('navTitle', 'اعلى الصيدليات تفاعلاً') // هذا المتغير في مساحة الخزن المحلية يقوم بتغيير عنوان الناف بار
   }
 
@@ -39,9 +40,8 @@ export class HeroPage {
     });
     loading.present()
 
-    this.postsRef = this.db.list("userData")
     this.myObject = []
-    this.postsRef.query.orderByChild('userType').equalTo('pharmacy').once('value', (action) => {
+    this.postsRef.orderByChild('userType').equalTo('pharmacy').once('value', (action) => {
         for (let key in action.val()) {
           this.myObject.push([
             key,

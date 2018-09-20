@@ -3,7 +3,7 @@ import { NavController, ModalController, Events, ToastController, Content, Loadi
 import { AddPostPage } from '../add-post/add-post'
 import { PreviewPostPage } from '../preview-post/preview-post'
 import { postsFirebaseService } from '../../providers/firebase-service/firebase-service'
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; 
+import { AngularFireDatabase } from "angularfire2/database"; 
 import { postModel } from '../../model/DataModels'
 import { TabsPage } from '../tabs/tabs';
 
@@ -26,15 +26,14 @@ export class HomePage {
   isUser: boolean = Boolean(JSON.parse(localStorage["userData"])[1]['userType'] == 'user')
   @ViewChild(Content) content: Content;
   
-  postsRef:AngularFireList<any>
+  postsRef = this.db.database.ref("Posts")
   myObject = []
   myLimit = 0
   myListCount = 0
 
   constructor(public navCtrl: NavController, public _LoadingController:LoadingController, public _ToastController:ToastController, public _Events: Events, public modalCtrl: ModalController, public _postsFirebaseService:postsFirebaseService, public db:AngularFireDatabase) {
     localStorage.setItem('navTitle', 'الرئيسية') // هذا المتغير في مساحة الخزن المحلية يقوم بتغيير عنوان الناف بار
-    this.postsRef = this.db.list("Posts")
-    this.postsRef.query.once('value', action => {this.myListCount = Object.entries(action.val()).length})
+    this.postsRef.once('value', action => {this.myListCount = Object.entries(action.val()).length})
     // Call "Load data" function to set data into "myObject" array
     this.setData()
 
@@ -49,7 +48,9 @@ export class HomePage {
       loading.present();
       this.myObject = []
       this.myLimit += 10
-      this.postsRef.query.orderByChild('postDate').limitToLast(this.myLimit).once('value', action => {
+      
+      this.postsRef = this.db.database.ref("Posts")
+      this.postsRef.orderByChild('postDate').limitToLast(this.myLimit).once('value', action => {
         for (let post in action.val()) {
           this.myObject.push([
             post,

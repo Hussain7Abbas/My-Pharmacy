@@ -5,11 +5,10 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
+    "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "lint": "ionic-app-scripts lint"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
@@ -17,39 +16,29 @@
     "@angular/compiler": "5.2.11",
     "@angular/compiler-cli": "5.2.11",
     "@angular/core": "5.2.11",
+    "@angular/fire": "^5.0.0",
     "@angular/forms": "5.2.11",
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
-    "@ionic-native/camera": "^4.11.0",
-    "@ionic-native/core": "4.8.0",
-    "@ionic-native/email-composer": "^4.11.0",
-    "@ionic-native/firebase": "^4.12.2",
-    "@ionic-native/local-notifications": "^4.12.2",
-    "@ionic-native/onesignal": "^4.12.2",
-    "@ionic-native/splash-screen": "4.8.0",
-    "@ionic-native/status-bar": "4.8.0",
+    "@ionic-native/camera": "^4.14.0",
+    "@ionic-native/core": "~4.12.0",
+    "@ionic-native/splash-screen": "~4.12.0",
+    "@ionic-native/status-bar": "~4.12.0",
     "@ionic/storage": "2.1.3",
-    "angularfire2": "^5.0.0-rc.11",
+    "angularfire2": "^5.0.1",
     "cordova-android": "7.0.0",
-    "cordova-browser": "5.0.3",
-    "cordova-plugin-badge": "^0.8.7",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-email-composer": "^0.8.15",
-    "cordova-plugin-firebase": "^1.1.4",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
-    "cordova-plugin-ionic-webview": "^2.1.3",
-    "cordova-plugin-local-notification": "^0.9.0-beta.2",
+    "cordova-plugin-ionic-webview": "^2.1.4",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-support-google-services": "^1.2.1",
-    "firebase": "^5.2.0",
+    "firebase": "^5.5.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
-    "onesignal-cordova-plugin": "^2.4.3",
-    "rxjs": "^6.0.0",
-    "rxjs-compat": "^6.3.2",
+    "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
   },
@@ -62,18 +51,15 @@
     "plugins": {
       "cordova-plugin-camera": {},
       "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-email-composer": {},
-      "cordova-plugin-firebase": {},
-      "onesignal-cordova-plugin": {},
-      "cordova-plugin-local-notification": {},
-      "cordova-support-google-services": {}
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "browser",
       "android"
     ]
   }

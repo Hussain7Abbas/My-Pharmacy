@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; 
+import { AngularFireDatabase } from "angularfire2/database"; 
 import { postModel, UserDataModel } from '../../model/DataModels';
 import { PreviewPostPage } from '../preview-post/preview-post';
 import { ProfilePage } from "../profile/profile";
@@ -25,7 +25,7 @@ export class SearchPage {
   searchWord = ''
   isResults:Boolean = true
 
-  postsRef:AngularFireList<any>
+  postsRef = this.db.database.ref("Posts")
   myObject = []
   searchList = []
 
@@ -60,13 +60,14 @@ export class SearchPage {
     })
     searchLoading.present()
 
-    this.postsRef = this.db.list("Posts")
     this.myObject = []
 
     this.myLimit += 10
-    this.postsRef.query.once('value', action => {this.myListCount = Object.entries(action.val()).length})
 
-    this.postsRef.query.orderByChild('postBody').limitToLast(this.myLimit).once('value', action => {
+    this.postsRef = this.db.database.ref("Posts")
+    this.postsRef.once('value', action => {this.myListCount = Object.entries(action.val()).length})
+
+    this.postsRef.orderByChild('postBody').limitToLast(this.myLimit).once('value', action => {
       for (let key in action.val()) {
         this.myObject.push([
           key,
@@ -86,13 +87,13 @@ export class SearchPage {
     })
     searchLoading.present()
 
-    this.postsRef = this.db.list("userData")
+    this.postsRef = this.db.database.ref("userData")
     this.myObject = []
 
     this.myLimit += 10
-    this.postsRef.query.once('value', action => {this.myListCount = Object.entries(action.val()).length})
+    this.postsRef.once('value', action => {this.myListCount = Object.entries(action.val()).length})
 
-    this.postsRef.query.orderByChild('userType').equalTo('pharmacy').limitToLast(this.myLimit).once('value', action => {
+    this.postsRef.orderByChild('userType').equalTo('pharmacy').limitToLast(this.myLimit).once('value', action => {
       for (let key in action.val()) {
         this.myObject.push([
           key,
