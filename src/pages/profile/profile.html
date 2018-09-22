@@ -123,7 +123,7 @@
                 <ion-grid>
 
 
-                    <ion-row class="infoDiv">
+                    <ion-row class="infoDiv" id="prov">
                         <ion-col>
                             <h4 class="infoTitle">المحافظة:</h4>
                         </ion-col>
@@ -134,7 +134,7 @@
                     </ion-row>
 
 
-                    <ion-row class="infoDiv">
+                    <ion-row class="infoDiv" id="zon">
                         <ion-col>
                             <h4 class="infoTitle">المنطقة:</h4>
                         </ion-col>
@@ -145,7 +145,7 @@
                     </ion-row>
 
 
-                    <ion-row class="infoDiv" >
+                    <ion-row class="infoDiv" id="addr">
                         <ion-col>
                             <h4 class="infoTitle">العنوان:</h4>
                         </ion-col>
@@ -155,7 +155,7 @@
                         </ion-col>
                     </ion-row>
 
-                    <ion-row class="infoDiv" *ngIf="!visitShow">
+                    <ion-row class="infoDiv" *ngIf="!visitShow" id="emai">
                         <ion-col>
                             <h4 class="infoTitle">البريد الالكتروني:</h4>
                         </ion-col>
@@ -166,7 +166,7 @@
                     </ion-row>
 
 
-                    <ion-row class="infoDiv" *ngIf="!visitShow">
+                    <ion-row class="infoDiv" *ngIf="!visitShow" id="pass">
                         <ion-col>
                             <h4 class="infoTitle">كلمة المرور:</h4>
                         </ion-col>
@@ -176,7 +176,7 @@
                           </ion-col>
                     </ion-row>                     
                   </ion-grid>
-                    <button *ngIf="!visitShow" ion-button full (click)="editPro()" color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
+                    <button id="edit" *ngIf="!visitShow" ion-button full (click)="editPro()" color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
               </ion-list>
           </div>
         <!-- ==============</pharmacyContentDetails>================ -->

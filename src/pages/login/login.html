@@ -3,45 +3,59 @@
 <!-- لا يوجد ناف بار في صفحة تسجيل الدخول يوجد فقط هيدر كبير فيه اسم الصفحة -->
 
 
-<ion-content padding>
+<ion-content>
 
-    <h1 >تسجيل دخول   </h1>
+  <ion-icon (click)="goBack()" class="backBtn animated fadeInDown" name="ios-arrow-forward"></ion-icon>
+
+  <div id="loginSection" padding>
+    <h1 style="color: white; padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">تسجيل دخول</h1>
+
+
+    <ion-item class="animated bounceInRight transparentWhite" id="email" >
+      <ion-icon item-right name="md-at"></ion-icon>
+      <ion-input [(ngModel)]="userAuthData.email" placeholder="البريد الالكتروني" ></ion-input>
+    </ion-item>
+
+    <ion-item class="animated bounceInRight transparentWhite" id="password">
+      <ion-icon item-right name="md-lock"></ion-icon>
+      <ion-input [(ngModel)]="userAuthData.password" placeholder="كلمة المرور" type='password'></ion-input>
+    </ion-item> 
+        
+
+    <button ion-button block (click)="onLogin()"class="myBtn animated bounceIn" id="login" ><ion-icon name="md-key"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
+    <a (click)="forgetPassword()" style="font-weight: bold; font-size: 12pt; width: 100%; text-align: center; color: white;">هل نسيت كلمة المرور؟</a> 
+
+  </div>
+
+  <div id="detRotate"><ion-icon (click)="moreDetails()" id="moreDetBtn" class="animated fadeInDown" name="ios-arrow-dropdown-circle"></ion-icon></div>
   
-    <ion-item class="ion-label" class="animated bounceInRight" id="emai" >
-       <ion-label floating class="animated bounceInRight" id="emai"> البريد الالكتروني  </ion-label>
-       <ion-input [(ngModel)]="userAuthData.email" ></ion-input>
-   </ion-item>
+
+
+  <img id="promo" src="../../assets/imgs/promo.gif">
+
+
+
+
+  <div id="moreDetails" style="display: none;" padding>
+
+    <h3 style="color: black; text-align: center;" class=" animated fadeInDown">تسجيل بواسطة:</h3>
+    <hr style="margin-bottom: 10px; height: 1px; background-color: #00000033;" class=" animated fadeInDown">
+
+    <button ion-button block (click)="logInFacebook()" class="myBtn animated fadeInDown btnMargin" id="facebookLogin">
+      <ion-icon name="logo-facebook"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;حساب فيس بوك 
+    </button>
+
+    <button ion-button block (click)="logInGoogle()" class="myBtn animated fadeInDown btnMargin" id="googleLogin" >
+      <ion-icon name="logo-google"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;حساب جيميل
+    </button>
    
-   <ion-item class="ion-label" class="animated bounceInRight" id="pass">
-       <ion-label floating class="animated bounceInRight" id="pass">كلمة المرور</ion-label>
-       <ion-input [(ngModel)]="userAuthData.password" ></ion-input>
-   </ion-item> 
-   
-   
-   <br>
-   
-   <button ion-button block (click)="onLogin()"class="animated bounceIn" id="login" ><ion-icon name="ios-person-outline"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
- <a (click)="forgetPassword()" >هل نسيت كلمة المرور</a> 
-  
-   <br><br>
-   <button class="infoBotton" ion-button block (click)="logInFacebook()" class="animated bounceIn" id="login1">
-       <ion-icon name="logo-facebook"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-        تسجيل بواسطة فيس بوك 
-     </button>
-     <br>
-     <button class="infoBotton"ion-button block (click)="logInGoogle()" class="animated bounceIn" id="login2" >
-       <ion-icon name="logo-google"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
-       تسجيل بواسطة جيميل
-     </button>
-     <br><br>
-   
-     <button ion-button block (click)="registerOn()" class="animated bounceIn" id="register" >
-       <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; 
-       انشاء حساب
-     </button>
-   <!-- <h2>مستخدم = user@gmail.com</h2>
-   <h2>صيدلية = pharmacy@gmail.com</h2>
-   <h2>كلمة المرور لكلاهما = 123456</h2> -->
-   
+    <h3 style="color: black; text-align: center;" class=" animated fadeInDown">ليس لديك حساب؟</h3>
+    <hr style="margin-bottom: 10px; height: 1px; background-color: #00000033;" class="animated fadeInDown">
+
+    <button ion-button block (click)="registerOn()" class="myBtn animated fadeInDown btnMargin" id="register" >
+      <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب
+    </button>
+
+  </div>
    
 </ion-content>

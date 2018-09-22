@@ -1,14 +1,10 @@
 <!-- لا يوجد ناف بار في صفحة البدء -->
 <ion-content padding>
-<div style="height: 19%; width: 100%;">
-    <img  src="assets/imgs/drawing.svg"/>  
-</div>
 
+<img id="Logo" src="assets/imgs/logo.png"/>
 
-<div>
-<img class="infoLogo" center src="assets/imgs/logo.png"/>
-<button class="infoBotton" ion-button full color="primary" class="animated bounceInRight" id="logi" (click)="goToLogin()"><ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>&nbsp; &nbsp;تسجيل دخول</button>             
-<button class="infoBotton" ion-button full color="primary"  class="animated bounceInRight" id="register" (click)="goToRegister()"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;انشاء حساب</button>             
-<button class="infoBotton" ion-button full color="primary" class="animated bounceInRight" id="about" (click)="goToAbout()"><ion-icon name="information-circle"></ion-icon>&nbsp; &nbsp;حول التطبيق</button>             
-</div>
+<button class="infoButton animated bounceInRight" id="login" ion-button full color="primary" (click)="goToLogin()"><ion-icon name="md-contact"></ion-icon>&nbsp; &nbsp;تسجيل دخول</button>             
+<button class="infoButton animated bounceInRight" id="register" ion-button full color="primary" (click)="goToRegister()"><ion-icon name="md-person-add"></ion-icon>&nbsp; &nbsp;انشاء حساب</button>             
+<button class="infoButton animated bounceInRight" id="about" ion-button full color="primary" (click)="goToAbout()"><ion-icon name="ios-information-circle-outline"></ion-icon>&nbsp; &nbsp;حول التطبيق</button>             
+
 </ion-content>

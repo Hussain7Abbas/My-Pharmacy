@@ -50,17 +50,16 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+
   }
    //--------------------------------------login with Email--------------------------------------------
   // onLogin(AuthData){
     onLogin(){
   
       console.log(this.userAuthData)
-      this.loader.present();
+      
       this._authFirebaseService.loginWithEmail(this.userAuthData)
         this._Events.subscribe("auth:Success", ()=>{
-          this.loader.dismiss();
           this.navCtrl.setRoot(TabsPage)
       })
 
@@ -158,4 +157,28 @@ export class LoginPage {
     });
     prompt.present();
   }
+
+  goBack(){
+    this.navCtrl.pop()
+  }
+
+
+  moreDetails(){
+    let moreDetails = document.getElementById('moreDetails')
+    let moreDetBtn = document.getElementById('detRotate')
+    let promo = document.getElementById('promo')
+
+
+    if (moreDetails.style.display === 'none'){
+      moreDetails.style.display = 'block'
+      moreDetBtn.style.transform = 'rotate(-180deg)'
+      promo.style.display = 'none'
+    }else{
+      moreDetails.style.display = 'none'
+      moreDetBtn.style.transform = 'rotate(0deg)'
+      promo.style.display = 'block'
+    }
+
+  }
+
 }

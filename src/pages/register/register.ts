@@ -40,7 +40,6 @@ export class RegisterPage {
 
   myForm: FormGroup;
 
-  userType="user";
   loader = this.loadingCtrl.create({
     content: "جار انشاء حساب",
     spinner: "crescent",
@@ -85,31 +84,39 @@ export class RegisterPage {
 
   onRegister(){
     this.loader.present(); 
-    if (this.cameraDidOpened) {
-      let date = new Date
-      this.imgName = localStorage.getItem('uid') + date.getDate() + (date.getMonth().valueOf()+1) + date.getMinutes() + date.getSeconds()
-      this.imgUpload()
+    if (this.userInfoData.userType == 'pharmacy'){
+      if (this.cameraDidOpened) {
+        let date = new Date
+        this.imgName = localStorage.getItem('uid') + date.getDate() + (date.getMonth().valueOf()+1) + date.getMinutes() + date.getSeconds()
+        this.imgUpload()
+      }else{
+        this.alertCtrl.create({
+          title: 'لم تقم بارفاق الترخيص',
+          subTitle: 'يرجى التقاط صورة لترخيص وزارة الصحة لصيدليتك.'
+        })
+      }
+    }else{
+      this.registerOn()
     }
-    this.registerOn()
+    
   }
 
 
 
   registerOn(){
-    this.userInfoData.userType=this.userType
     this._authFirebaseService.regesterWithEmail(this.userAuthData,this.userInfoData).then(()=>{
       this.loader.dismiss();
-      firebase.auth().currentUser.sendEmailVerification();
-      this.checkerLoader.present()
-      this.alertCtrl.create({
-        title: " تفحص صندوق بريدك",
-        subTitle:" تم ارسال رابط التحقق الي الايميل الخاص بك  ",
-        buttons: ['OK']
-      })
-      this._authFirebaseService.checkVerified(this.userAuthData)
+      // firebase.auth().currentUser.sendEmailVerification();
+      // this.checkerLoader.present()
+      // this.alertCtrl.create({
+      //   title: "تفحص صندوق بريدك الالكتروني",
+      //   subTitle:"رجائاً ثم بالضغط على الرابط الذي تم ارساله الى بريدك الالكتروني لتأكيد حسابك",
+      //   buttons: ['OK']
+      // })
+      // this._authFirebaseService.checkVerified(this.userAuthData)
     })
     this._Events.subscribe("auth:Success", ()=>{
-      this.checkerLoader.dismiss()
+      // this.checkerLoader.dismiss()
       this.navCtrl.setRoot(TabsPage)
     })
   }
@@ -137,7 +144,31 @@ export class RegisterPage {
       uploadTask.getDownloadURL().then((url)=>{
         this._authFirebaseService.pushPharmacyList(this.userInfoData.name, url)
       })
+    }).then(()=>{
+      this.registerOn()
     })
   }
 
+
+  segment(userType){
+    let userSegment = document.getElementById('user')
+    let pharmacySegment = document.getElementById('pharmacy')
+    let cameraSegment = document.getElementById('camera')
+    if (userType == 'pharmacy'){
+        cameraSegment.style.display = 'block'
+        userSegment.classList.remove('activeSegment')
+        pharmacySegment.classList.add('activeSegment')
+        this.userInfoData.userType = userType
+    }else{
+      pharmacySegment.classList.remove('activeSegment')
+      userSegment.classList.add('activeSegment')
+      cameraSegment.style.display = 'none'
+        this.userInfoData.userType = userType
+    }
+  }
+
+  goBack(){
+    this.navCtrl.pop()
+  }
+  
 }

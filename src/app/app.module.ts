@@ -4,7 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Camera } from '@ionic-native/camera';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { OneSignal } from '@ionic-native/onesignal';
 
 import { HeroPage } from '../pages/hero/hero';
 import { AboutPage } from '../pages/about/about';
@@ -96,7 +96,8 @@ const firebaseConfig = {
     ContactUsFirebaseService,
     // ================ Firebase ==============
     Camera,
-    SplashScreen
+    SplashScreen,
+    OneSignal
   ]
 })
 export class AppModule {}

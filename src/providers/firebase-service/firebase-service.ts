@@ -77,39 +77,47 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { UserDataModel } from '../../model/DataModels';
 import firebase from 'firebase';
 import { AlertController} from 'ionic-angular';
+import { OneSignal } from "@ionic-native/onesignal";
 
 @Injectable()
 export class authFirebaseService {
 
   private usersList = this.db.database.ref('userData')
   private pharmacyList = this.db.database.ref('pharmacyList')
-  
-  constructor(public afAuth: AngularFireAuth, public _Events:Events, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController) {
+
+  constructor(public afAuth: AngularFireAuth, public _Events:Events, public _OneSignal:OneSignal, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController) {
 
   }
 
 
     // ============================ Login Function ===========================
     loginWithEmail(authData){
+      let loginLoader = this.loadingCtrl.create({
+        content: "جارٍ التسجيل ...",
+        spinner: "crescent",
+      })
+      loginLoader.present()
       return this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(loginUser => {
         const emailVerified = loginUser.user.emailVerified.valueOf();
         console.log(emailVerified);
         
-        if (emailVerified){
+        // if (emailVerified){
         localStorage.setItem('uid', loginUser.user.uid)
         this.setScanLocalStorageByUid(authData, localStorage.getItem('uid'))
-        }else {
-          this.alertCtrl.create({
-            title: "تنبيه",
-            subTitle: "يرجى تفعيل حسابك عن طريق الرابط المرسل الى الايميل الخاص بك",
-            buttons: ['حسنا']
-          }).present();
-          this.afAuth.auth.signOut();
-        }
+        loginLoader.dismiss()
+        // }else {
+        //   loginLoader.dismiss()
+        //   this.alertCtrl.create({
+        //     title: "حسابك غير مؤكد",
+        //     subTitle: "يرجى تأكيد حسابك عن طريق الرابط المرسل الى الايميل الخاص بك",
+        //     buttons: ['حسنا']
+        //   }).present();
+        //   loginUser.user.sendEmailVerification()
+        //   this.afAuth.auth.signOut();
+        // }
     
-    }).then(loginUser=>{
-    },error=>{
+    }).then(()=>{}, error=>{
       const invalid_email = this.alertCtrl.create({
         title: "تنبيه",
         subTitle: "الايميل غير صالح ",
@@ -117,7 +125,7 @@ export class authFirebaseService {
       });
       const network_error = this.alertCtrl.create({
         title: "تنبيه",
-        subTitle: "خطأ في الاتصال في الانترنيت",
+        subTitle: "خطأ في اتصال الانترنيت",
         buttons: ['موافق']
       });
       const user_not_found = this.alertCtrl.create({
@@ -131,18 +139,21 @@ export class authFirebaseService {
         buttons: ['موافق']
       });
      
-      if (error.code=="auth/invalid-email") {
-        invalid_email.present();
-      
+    if (error.code=="auth/invalid-email") {
+      loginLoader.dismiss()
+      invalid_email.present()
     }
     if (error.code=="auth/user-not-found") {
-      user_not_found.present();
+      loginLoader.dismiss()
+      user_not_found.present()
     }
     if (error.code=="auth/network-request-failed") {
-      network_error.present();
+      loginLoader.dismiss()
+      network_error.present()
     }
     if (error.code=="auth/wrong-password") {
-      wrong_password.present();
+      loginLoader.dismiss()
+      wrong_password.present()
     }
   
     })
@@ -174,15 +185,24 @@ export class authFirebaseService {
         }
     // ============================ Set user data at the local storage ===========================
     setUserInfoLocalStorage(authData, userData, posta){
-      
-      
       let userInfoData = [authData, userData, (String(posta).split('/'))[4]]
       localStorage.setItem("userData", JSON.stringify(userInfoData))
+      if (userData['userType'] == 'pharmacy'){
+        this._OneSignal.sendTag('userType', 'pharmacy')
+      }
       this._Events.publish("auth:Success")
       localStorage.setItem('isLogin','true')
     }
 
     setScanLocalStorageByUid(authData, uid){
+      this._OneSignal.getIds().then(Ids=>{
+        alert('onSignal user id:   ' + Ids.userId)
+        this.alertCtrl.create({
+          message: Ids.userId
+        })
+        localStorage.setitem('id', Ids.userId)
+      })
+
       this.usersList.orderByChild('uid').equalTo(uid).once('value', action => {
         let userData = []
         for (let key in action.val()) {
@@ -191,12 +211,15 @@ export class authFirebaseService {
             action.val()[key] as UserDataModel
           ])
         }
+        if (userData[0][1]['userType'] == 'pharmacy'){
+          this._OneSignal.sendTag('userType', 'pharmacy')
+        }
         let userInfoData = [authData, userData[0][1], userData[0][0]]
         localStorage.setItem("userData", JSON.stringify(userInfoData))
         this._Events.publish("auth:Success")
         localStorage.setItem('isLogin','true')
       })
-  
+
     }
 
     // ========================== Register Function =============================
@@ -216,7 +239,13 @@ export class authFirebaseService {
           userType: userData.userType,
           pharmacyReplyNo: userData.pharmacyReplyNo,
           pharmacyAdress: userData.pharmacyAdress
-      }).then(()=>{
+      }).then((posta)=>{
+
+
+        //يتم ازالة السطر الاسفل عند كود التحقق
+        this.setUserInfoLocalStorage(authData, userData, posta)
+
+
 
       })
       // ========================================================================
