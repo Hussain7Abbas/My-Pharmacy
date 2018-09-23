@@ -49,12 +49,11 @@ page-search {
         position: absolute;
         top: 2px; right: 43px;
         width: calc(100% - 85px);
-        // border: solid 1px lightgray;
-        // border-radius: 10px;
     }
 
     .searchbar-ios .searchbar-input {
         direction: rtl;
+        border-radius: 15px;
     }
     .searchbar-md {
         padding: 0px;
@@ -63,7 +62,7 @@ page-search {
         width: calc(100% - 85px);
     }
     .searchbar-md  .searchbar-input {
-        border-radius: 2px;
+        border-radius: 15px;
         background-position: right 8px center;
         height: auto;
         font-size: 1.6rem;
@@ -73,8 +72,6 @@ page-search {
         -webkit-box-shadow: 0 0 black;
         box-shadow: 0 0 black;
         direction: rtl;
-        // border: solid 1px lightgray;
-        // border-radius: 10px;
     }
     .searchbar-md .searchbar-search-icon {
         top: 8px;

@@ -37,6 +37,7 @@ export class LoginPage {
     spinner: "crescent",
   })
 
+  bounce = true
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -46,7 +47,7 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public _ModalController: ModalController
     ) {
-     
+
   }
 
   ionViewDidLoad() {
@@ -164,6 +165,7 @@ export class LoginPage {
 
 
   moreDetails(){
+    this.bounce = false
     let moreDetails = document.getElementById('moreDetails')
     let moreDetBtn = document.getElementById('detRotate')
     let promo = document.getElementById('promo')

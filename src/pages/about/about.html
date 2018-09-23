@@ -1,140 +1,106 @@
 <ion-header>
-        <!-- <div class="div1">
-        <button ion-button (click)="goBack()" icon-only color="primary" class="navIonButton">
-        <ion-icon name='arrow-back'></ion-icon>
-        </button>
-        <h1>حول التطبيق</h1>
-        <ion-segment [(ngModel)]="pages" color="primary">
-        <ion-segment-button value="0" (click)="selectedtab(0)">
-                                                الفكرة
-        </ion-segment-button>
-        <ion-segment-button value="1" (click)="selectedtab(1)">
-                                                فريق العمل
-        </ion-segment-button>
-        <ion-segment-button value="2" (click)="selectedtab(2)">
-                                                المبادرة
-        </ion-segment-button>
-        </ion-segment>    
-        </div> -->
-        <ion-navbar color="primary">
-        <ion-title>
-        عن التطبيق
-        </ion-title>
-        </ion-navbar>
-
-        <ion-toolbar color="primary">
-        <ion-segment [(ngModel)]="pages" color="primary">
-        <ion-segment-button value="0" (click)="selectedtab(0)">
-                                                الفكرة
-        </ion-segment-button>
-        <ion-segment-button value="1" (click)="selectedtab(1)">
-                                                فريق العمل
-        </ion-segment-button>
-        <ion-segment-button value="2" (click)="selectedtab(2)">
-                                                المبادرة
-        </ion-segment-button>
-        </ion-segment>    
-        </ion-toolbar>
+        <!-- =============================== Nav Bar Header ============================== -->
+        <div style="height: 40px; background-color: #339999;">
+                <ion-title style="line-height: 40px; text-align: center;color: white;">حول التطبيق</ion-title>
+        </div>
+        <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " name='ios-arrow-forward'></ion-icon>
+        <hr style="height: 1px; background-color: #f2f2f2;">
+        <!-- =============================== Nav Bar Header ============================== -->
 </ion-header>
+
+<ion-header>
+        <div id="segmentCont" class="">
+                <button ion-button block id="ideaBtn" class="segmentBtn activeSegment" (click)="segment('idea')" style="right: 5%; border-bottom-right-radius: 20px; border-top-right-radius: 20px;">الفكرة</button>
+                <button ion-button block id="teamBtn" class="segmentBtn" (click)="segment('team')" style="left: 35%; border-radius: 0px;">المبرمجين</button>
+                <button ion-button block id="companyBtn" class="segmentBtn" (click)="segment('company')" style="left: 5%; border-bottom-left-radius: 20px; border-top-left-radius: 20px;">المبادرة</button>
+        </div>
+</ion-header>
+
 <ion-content>
-<ion-slides    #slider dir="rtl" (ionSlideWillChange)="moveButton($event)" >
-        
-        <ion-slide style="overflow-y:scroll">                      
+
+<!-- **************************************************************************************************** -->
+<!-- ============================================== Idea ================================================ -->
+<!-- ============================================== about =============================================== -->
+<!-- ============================================== Page ================================================ -->
+<!-- **************************************************************************************************** -->
+
+
+
+
+
+<div id="idea" style="display: block;" class="pageMargin">
         <div class="div2">
-        <img class="mpl" src="assets/imgs/logo.png" alt="My Pharmacy Logo">
-        <div class="ed">
-                <div class="animated slideInRight" id="idea">
-        <p class="p1">
-        فكرة عمل المشروع هي تسهيل مهمة المريض للحصول على الدواء وخاصة الادوية النادرة. تتم هذه العملية من خلال انشاء منشور معين يذكر فيه اسم الدواء ومن ثم ترد عليه الصيدلية الاقرب الى منطقته او محافظته ثم الى الابعد.
-        </p>
+                <img class="mpl animated zoomIn" src="assets/imgs/logo.png">
+                <div class="ed animated fadeIn">
+                        <p class="p1">
+                        فكرة عمل المشروع هي تسهيل مهمة المريض للحصول على الدواء وخاصة الادوية النادرة. تتم هذه العملية من خلال انشاء منشور معين يذكر فيه اسم الدواء ومن ثم ترد عليه الصيدلية الاقرب الى منطقته او محافظته ثم الى الابعد.
+                        </p>
 
-        <h6><b>
-                آلية عمل البرنامج:
-        </b></h6>
-        <ol style="padding-right: 15px;">
-        <li><b>المستخدم:</b>
-        <ul>
-        <li>يجب التسجيل كمستخدم.</li>
-        <li>يمكن له النشر في التطبيق مع الانتباه الى ذكر اسم الدواء بشكل صحيح او ارفاق صورة له.</li>
-        </ul> 
-        </li>
-        <li><b>الصيدلية:</b>
-        <ul>
-        <li>يجب التسجيل كصيدلية.</li>
-        <li>يجب ارفاق صورة اجازة مزوالة المهنة او اجازة المحل.</li>
-        <li>يجب الرد على المنشور مع ذكر منشأ وسعر الدواء.</li>
-        <li>لا يمكن له النشر في التطبيق.</li>
-        </ul>       
-        </li>
-        </ol> </div>
-
+                        <h6><b>آلية عمل البرنامج:</b></h6>
+                        <ol style="padding-right: 15px;">
+                                <li><b>المستخدم:</b>
+                                        <ul>
+                                                <li>يجب التسجيل كمستخدم.</li>
+                                                <li>يمكن له النشر في التطبيق مع الانتباه الى ذكر اسم الدواء بشكل صحيح او ارفاق صورة له.</li>
+                                        </ul> 
+                                </li>
+                                <li><b>الصيدلية:</b>
+                                        <ul>
+                                                <li>يجب التسجيل كصيدلية.</li>
+                                                <li>يجب ارفاق صورة اجازة مزوالة المهنة او اجازة المحل.</li>
+                                                <li>يجب الرد على المنشور مع ذكر منشأ وسعر الدواء.</li>
+                                                <li>لا يمكن له النشر في التطبيق.</li>
+                                        </ul>       
+                                </li>
+                        </ol>
+                </div>
         </div>
-        </div>
-        </ion-slide>
-        
-        <ion-slide style="overflow-y:scroll">
-        <div class ="clearfix" style=" margin: 15px 5px 5px 10px">
-                      <div class="animated pulse" id="ilham">
-                <div class="card"  >
-                <img src="assets/imgs/ilham.jpg" alt="Avatar" class="imgprop">
-                <div>
-                <h4><b>إلهام علي</b></h4> 
-                </div>
-                </div>
-                </div>
-                <div class="animated pulse" id="husain" >
-                <div class="card1">
-                <img  src="assets/imgs/hussainabbas.jpg" alt="Avatar" class="imgprop">
-                <div class="container">
-                <h4><b>حسين عباس</b></h4>  
-                </div>
-                </div>
-                </div>
-                <div class="animated pulse" id="husain1">
-                <div class="card2">
-                 <img src="assets/imgs/hussain.jpg" alt="Avatar" class="imgprop">
-                <div>
-                <h4><b>حسين كريم</b></h4> 
-                </div>
-                </div>
-                </div>
-                <div class="animated pulse" id="hala">
-                <div class="card3">
-                <img src="assets/imgs/hala.jpg" alt="Avatar" class="imgprop">
-                <div class="container">
-                <h4><b>حلا حازم</b></h4>  
-                </div>
-                </div>
-                </div>
-                <div class="animated pulse" id="saif">
-                <div class="card2">
-                <img src="assets/imgs/saif.jpg" alt="Avatar" class="imgprop">
-                <div class="container">
-                <h4><b>سيف علي</b></h4>  
-                </div>
-                </div>
-               </div>
-        </div>
-        </ion-slide>
-        
-        <ion-slide style="overflow-y:scroll"  > 
-        <div class="animated slideInRight" id="prog">
-        <div style="margin-top: 15px;"  >
-        <div class="ac">
-                
-
-        <p >وهي مبادرة إنسانية غير ربحية تهدف الى خدمة المجتمع عن طريق البرمجة Programming. تعتبر "Code For IRAQ" مبادرة تعليمية حقيقية ترعى المهتمين بتعلم تصميم وبرمجة تطبيقات الهاتف الجوال ومواقع الانترنت وبرامج الحاسوب والشبكات والاتصالات ونظم تشغيل الحاسوب باستخدام التقنيات مفتوحة المصدر Open Source ، كما توفر لهم جميع الدروس التعليمية اللازمة وبشكل مجاني تماماً.   
-        </p>
-  
-        <br>
-        <img class="cfil" src="assets/imgs/codeforiraq.jpg" alt="Code For Iraq">
-        </div>
-        <h4><b>موقع المبادرة</b></h4>
-        <a class="ion-home color-primary item" href="#" onclick="window.open('http://codeforiraq.herokuapp.com', '_system', 'location=yes'); return false;">http://codeforiraq.herokuapp.com</a>
 </div>
+
+
+
+<!-- **************************************************************************************************** -->
+<!-- ============================================== Team ================================================ -->
+<!-- ============================================== about =============================================== -->
+<!-- ============================================== Page ================================================ -->
+<!-- **************************************************************************************************** -->
+
+
+
+
+<div id="team" style="display: none;" class="pageMargin">
+<div class ="clearfix" style=" margin: 15px 5px 5px 10px" *ngFor="let item of teamList; let i=index">
+        <ion-card class="animated {{item.animate}} teamCard" id="{{item.engName}}">
+                <ion-card-header>
+                        <img src="{{item.imgUrl}}" class="teamPic">
+                </ion-card-header>
+                <ion-card-content>
+                        <h4>{{item.name}}</h4>  
+                </ion-card-content>
+        </ion-card>
 </div>
-        </ion-slide>
+</div> 
 
 
-</ion-slides>
+
+<!-- **************************************************************************************************** -->
+<!-- ============================================= Company ============================================== -->
+<!-- ============================================== about =============================================== -->
+<!-- ============================================== Page ================================================ -->
+<!-- **************************************************************************************************** -->
+
+
+<div id="company" style="display: none;" class="pageMargin">
+        <div style="margin-top: 15px;">
+                <img class="mpl animated zoomIn" src="../../assets/imgs/codeforiraq.jpg" alt="Code For Iraq">
+                <div class="companyCard animated fadeIn">
+                        <p >وهي مبادرة إنسانية غير ربحية تهدف الى خدمة المجتمع عن طريق البرمجة Programming. تعتبر "Code For IRAQ" مبادرة تعليمية حقيقية ترعى المهتمين بتعلم تصميم وبرمجة تطبيقات الهاتف الجوال ومواقع الانترنت وبرامج الحاسوب والشبكات والاتصالات ونظم تشغيل الحاسوب باستخدام التقنيات مفتوحة المصدر Open Source ، كما توفر لهم جميع الدروس التعليمية اللازمة وبشكل مجاني تماماً.</p>
+                        <br>
+                </div>
+                <div class="animated fadeInUp">
+                        <h4 style="text-align: center;"><b>موقع المبادرة</b></h4>
+                        <h6 id="link" onclick="window.open('http://codeforiraq.herokuapp.com', '_system', 'location=yes'); return false;">http://codeforiraq.herokuapp.com</h6>
+                </div>
+        </div>
+</div>
 </ion-content>

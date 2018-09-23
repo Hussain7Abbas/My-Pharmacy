@@ -102,20 +102,20 @@ export class authFirebaseService {
         const emailVerified = loginUser.user.emailVerified.valueOf();
         console.log(emailVerified);
         
-        // if (emailVerified){
+        if (emailVerified){
         localStorage.setItem('uid', loginUser.user.uid)
         this.setScanLocalStorageByUid(authData, localStorage.getItem('uid'))
         loginLoader.dismiss()
-        // }else {
-        //   loginLoader.dismiss()
-        //   this.alertCtrl.create({
-        //     title: "حسابك غير مؤكد",
-        //     subTitle: "يرجى تأكيد حسابك عن طريق الرابط المرسل الى الايميل الخاص بك",
-        //     buttons: ['حسنا']
-        //   }).present();
-        //   loginUser.user.sendEmailVerification()
-        //   this.afAuth.auth.signOut();
-        // }
+        }else {
+          loginLoader.dismiss()
+          this.alertCtrl.create({
+            title: "حسابك غير مؤكد",
+            subTitle: "يرجى تأكيد حسابك عن طريق الرابط المرسل الى الايميل الخاص بك",
+            buttons: ['حسنا']
+          }).present();
+          loginUser.user.sendEmailVerification()
+          this.afAuth.auth.signOut();
+        }
     
     }).then(()=>{}, error=>{
       const invalid_email = this.alertCtrl.create({
@@ -242,8 +242,8 @@ export class authFirebaseService {
       }).then((posta)=>{
 
 
-        //يتم ازالة السطر الاسفل عند كود التحقق
-        this.setUserInfoLocalStorage(authData, userData, posta)
+        // //يتم ازالة السطر الاسفل عند كود التحقق
+        // this.setUserInfoLocalStorage(authData, userData, posta)
 
 
 

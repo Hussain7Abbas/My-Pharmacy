@@ -82,14 +82,14 @@ page-register {
         width: 100%; height: 90px;
     }
 
+    .backBtn{position: absolute; top: 10px; left: 10px; font-size: 3.2rem; padding: 10px; color: black;}
+
+    ion-icon{font-size: 2.2rem;}
+
     #theIcon{
         font-size: 6.2rem;
         margin-right: calc(50% - 3.1rem);
     }
-
-    .backBtn{position: absolute; top: 10px; left: 10px; font-size: 3.2rem; padding: 10px; color: black;}
-
-    ion-icon{font-size: 2.2rem;}
 
     .transparentWhite{
         background-color: #ffffffd4;
@@ -102,7 +102,7 @@ page-register {
 
     #camera{
         display: none;
-        background-color: #ffffffd4;
+        background-color: #ffffff;
         border-radius: 20px;
         margin-bottom: 10px;
     }
