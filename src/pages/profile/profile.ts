@@ -28,7 +28,8 @@ export class ProfilePage {
     zone: '',
     userType: '',
     pharmacyReplyNo: '0',
-    pharmacyAdress: ' '
+    pharmacyAdress: ' ',
+    signalId: ''
   }
 
   postData:postModel = {

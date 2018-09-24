@@ -2,7 +2,6 @@
 // import { Injectable, Type } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { LoadingController, Events } from 'ionic-angular';
-
 import { AngularFireDatabase } from 'angularfire2/database';
 
 // ********************************************************************************************************
@@ -19,13 +18,26 @@ export class postsFirebaseService {
 
   private dataList = this.db.list('Posts')
 
-  constructor(public db:AngularFireDatabase) {
+  constructor(public db:AngularFireDatabase, public _OneSignal:OneSignal) {
     
   }
 
  
   addPosts(myList:postModel) {
     return this.dataList.push(myList)
+    
+    this._OneSignal.postNotification({
+      app_id:"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
+      included_segments: ['pharmacySegment'],
+      contents: {
+        en: "رسالة الى صيدلية"
+      },
+      headings: {
+        en: "تطبيق صيدليتي"
+      }
+    })
+
+    alert('تم اسرسال الى الصيدليات')
     
   }
 
@@ -187,21 +199,18 @@ export class authFirebaseService {
     setUserInfoLocalStorage(authData, userData, posta){
       let userInfoData = [authData, userData, (String(posta).split('/'))[4]]
       localStorage.setItem("userData", JSON.stringify(userInfoData))
-      if (userData['userType'] == 'pharmacy'){
-        this._OneSignal.sendTag('userType', 'pharmacy')
-      }
       this._Events.publish("auth:Success")
       localStorage.setItem('isLogin','true')
+
+      if (userData[0][1]['userType'] == 'pharmacy'){
+        this._OneSignal.sendTag('userType', 'pharmacy')
+      }else if (userData[0][1]['userType'] == 'user'){
+        this._OneSignal.sendTag('userType', 'user')
+      }
+      
     }
 
     setScanLocalStorageByUid(authData, uid){
-      this._OneSignal.getIds().then(Ids=>{
-        alert('onSignal user id:   ' + Ids.userId)
-        this.alertCtrl.create({
-          message: Ids.userId
-        })
-        localStorage.setitem('id', Ids.userId)
-      })
 
       this.usersList.orderByChild('uid').equalTo(uid).once('value', action => {
         let userData = []
@@ -211,13 +220,17 @@ export class authFirebaseService {
             action.val()[key] as UserDataModel
           ])
         }
-        if (userData[0][1]['userType'] == 'pharmacy'){
-          this._OneSignal.sendTag('userType', 'pharmacy')
-        }
         let userInfoData = [authData, userData[0][1], userData[0][0]]
         localStorage.setItem("userData", JSON.stringify(userInfoData))
         this._Events.publish("auth:Success")
         localStorage.setItem('isLogin','true')
+
+        if (userData[0][1]['userType'] == 'pharmacy'){
+          this._OneSignal.sendTag('userType', 'pharmacy')
+        }else if (userData[0][1]['userType'] == 'user'){
+          this._OneSignal.sendTag('userType', 'user')
+        }
+
       })
 
     }
@@ -227,25 +240,25 @@ export class authFirebaseService {
       return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
       .then(user=>{
         localStorage.setItem('uid', user.user.uid)
-        userData.uid = user.user.uid
+        this._OneSignal.getIds().then(Ids=>{
+          this.alertCtrl.create({
+            message: Ids.userId
+          })
+          localStorage.setitem('signalId', Ids.userId)
+        })
       // ========================================================================
       // ====================== User Profile Details ============================
       // ========================================================================
       this.usersList.push({
-          uid: userData.uid,
+          uid: user.user.uid,
           name: userData.name,
           province: userData.province,
           zone: userData.zone,
           userType: userData.userType,
           pharmacyReplyNo: userData.pharmacyReplyNo,
-          pharmacyAdress: userData.pharmacyAdress
-      }).then((posta)=>{
-
-
-        // //يتم ازالة السطر الاسفل عند كود التحقق
-        // this.setUserInfoLocalStorage(authData, userData, posta)
-
-
+          pharmacyAdress: userData.pharmacyAdress,
+          signalId: localStorage.getItem('signalId')
+      }).then(()=>{
 
       })
       // ========================================================================
@@ -377,6 +390,7 @@ export class authFirebaseService {
   registerGoogle(userData, googleData){
     localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
     userData.uid = localStorage.getItem('uid')
+    userData.signalId = localStorage.getItem('signalId')
     // ========================================================================
     // ====================== User Profile Details ============================
     // ========================================================================
@@ -387,7 +401,8 @@ export class authFirebaseService {
       zone: userData.zone,
       userType: userData.userType,
       pharmacyReplyNo: userData.pharmacyReplyNo,
-      pharmacyAdress: userData.pharmacyAdress
+      pharmacyAdress: userData.pharmacyAdress,
+      signalId: userData.signalId
     }
 
     this.usersList.push(userInfoData).then((posta)=>{
@@ -408,6 +423,7 @@ export class authFirebaseService {
   registerFacebook(userData, facebookData){
     localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
     userData.uid = localStorage.getItem('uid')
+    userData.signalId = localStorage.getItem('signalId')
     // ========================================================================
     // ====================== User Profile Details ============================
     // ========================================================================
@@ -418,7 +434,8 @@ export class authFirebaseService {
       zone: userData.zone,
       userType: userData.userType,
       pharmacyReplyNo: userData.pharmacyReplyNo,
-      pharmacyAdress: userData.pharmacyAdress
+      pharmacyAdress: userData.pharmacyAdress,
+      signalId: userData.signalId
     }
     
     this.usersList.push(userInfoData).then((posta)=>{

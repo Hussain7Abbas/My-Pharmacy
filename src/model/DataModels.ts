@@ -6,6 +6,7 @@ export interface UserDataModel {
     userType: String;
     pharmacyReplyNo: String;
     pharmacyAdress: String;
+    signalId: String;
 }
 
 export interface pharmacyList {

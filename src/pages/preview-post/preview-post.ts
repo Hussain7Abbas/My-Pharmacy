@@ -4,6 +4,7 @@ import { replyModel, postModel, UserDataModel } from '../../model/DataModels'
 import { postsFirebaseService, authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ProfilePage } from '../profile/profile';
+import { OneSignal } from '@ionic-native/onesignal';
 
 /**
  * Generated class for the PreviewPostPage page.
@@ -42,7 +43,7 @@ export class PreviewPostPage {
   isCommentAvailable: Boolean = true
   postComments = []
 
-  constructor(public navCtrl: NavController, public db:AngularFireDatabase, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public navCtrl: NavController, public db:AngularFireDatabase, public _OneSignal:OneSignal, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.postData = this.thePost[1]
 
@@ -91,6 +92,21 @@ export class PreviewPostPage {
       this.postData.comments.push(this.replyData)
       this._postsFirebaseService.updatePosts(this.thePost[0], this.postData)
   
+      alert(this.userData[1]['signalId'])
+
+      
+      this._OneSignal.postNotification({
+        app_id:"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
+        include_player_ids: [this.userData[1]['signalId']],
+        contents: {
+          en: "رسالة الى مستخدم معين"
+        },
+        headings: {
+          en: "تطبيق صيدليتي"
+        }
+      })
+
+      
   
       this.userData[1]['pharmacyReplyNo'] = Number(this.userData[1]['pharmacyReplyNo']) + 1
       this._authFirebaseService.editUserProfile(this.userData[2], this.userData[1])

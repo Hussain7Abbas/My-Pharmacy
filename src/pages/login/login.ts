@@ -22,15 +22,6 @@ export class LoginPage {
     email:'',
     password:''
   }
-  userInfoData ={
-    name: '',
-    province: '',
-    zone: '',
-    userType: '',
-    pharmacyReplyNo: '0',
-    pharmacyAdress: 'لا يوجد عنوان بعد!'
-  }
-
 
   loader = this.loadingCtrl.create({
     content: "جارٍ التسجيل ...",
