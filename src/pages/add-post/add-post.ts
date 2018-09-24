@@ -4,6 +4,7 @@ import { replyModel, postModel } from '../../model/DataModels'
 import { postsFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import * as firebase from 'firebase'
+import { OneSignal } from "@ionic-native/onesignal";
 
 @IonicPage()
 @Component({
@@ -41,7 +42,7 @@ export class AddPostPage {
   oldImgURL
   cameraDidOpened:boolean = false
 
-  constructor(public navCtrl: NavController, public _ToastController:ToastController, public _LoadingController:LoadingController, public _Camera:Camera, public _ActionSheetController:ActionSheetController,  public _Events: Events,  public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public navCtrl: NavController, public _OneSignal:OneSignal, public _ToastController:ToastController, public _LoadingController:LoadingController, public _Camera:Camera, public _ActionSheetController:ActionSheetController,  public _Events: Events,  public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.replyData.pharmacyName = ''
     this.replyData.details = 'لا توجد تعليقات بعد'
@@ -120,6 +121,23 @@ export class AddPostPage {
               this._Events.publish("post:Added")
               this.viewCtrl.dismiss();
               this.saveLoading.dismiss();
+
+
+              this._OneSignal.postNotification({
+                app_id:"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
+                included_segments: ['pharmacySegment'],
+                contents: {
+                  en: "رسالة الى صيدلية"
+                },
+                headings: {
+                  en: "تطبيق صيدليتي"
+                }
+              })
+          
+              alert('تم اسرسال الى الصيدليات')
+
+
+
             })
           }
 
@@ -182,6 +200,24 @@ export class AddPostPage {
             this._Events.publish("post:Added")
             this.viewCtrl.dismiss();
             this.saveLoading.dismiss();
+
+
+
+            this._OneSignal.postNotification({
+              app_id:"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
+              included_segments: ['pharmacySegment'],
+              contents: {
+                en: "رسالة الى صيدلية"
+              },
+              headings: {
+                en: "تطبيق صيدليتي"
+              }
+            })
+        
+            alert('تم اسرسال الى الصيدليات')
+
+
+
           })      
         }
       }
