@@ -19,6 +19,7 @@ export class HomePage {
     postBody: '',
     postImg: '',
     postDate: '',
+    signalId: '',
     comments: []
   }
   

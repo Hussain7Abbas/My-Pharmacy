@@ -21,7 +21,7 @@
 
     <ion-item class="animated bounceInRight transparentWhite" id="name" >
         <ion-icon item-left name="md-person"></ion-icon>
-        <ion-input [(ngModel)]="userAuthData.name" placeholder="اسم المستخدم" [formControl]="myForm.controls['name']"></ion-input>
+        <ion-input [(ngModel)]="userInfoData.name" placeholder="اسم المستخدم" [formControl]="myForm.controls['name']"></ion-input>
     </ion-item>
     <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
       <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يكون طول الاسم 3-20 حرف</p>
@@ -31,7 +31,7 @@
 
     <ion-item class="animated bounceInRight transparentWhite" id="email" >
         <ion-icon item-left name="md-at"></ion-icon>
-        <ion-input [(ngModel)]="userInfoData.email" placeholder="البريد الالكتروني" [formControl]="myForm.controls['email']"></ion-input>
+        <ion-input [(ngModel)]="userAuthData.email" placeholder="البريد الالكتروني" [formControl]="myForm.controls['email']"></ion-input>
     </ion-item>
     <ion-item no-lines  class="no-line error" *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
       <p *ngIf="myForm.value.email != ''" class="p">الايميل غير صالح</p> 

@@ -5,6 +5,8 @@ import { postsFirebaseService } from '../../providers/firebase-service/firebase-
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import * as firebase from 'firebase'
 import {Http ,Headers} from '@angular/http'
+import { OneSignal } from "@ionic-native/onesignal";
+
 @IonicPage()
 @Component({
   selector: 'page-add-post',
@@ -26,8 +28,11 @@ export class AddPostPage {
     postBody: '',
     postImg: '',
     postDate: '',
+    signalId: '',
     comments: []
   }
+
+  signalId = ''
 
   editPostData
 
@@ -41,12 +46,16 @@ export class AddPostPage {
   oldImgURL
   cameraDidOpened:boolean = false
 
-  constructor(public http:Http,public navCtrl: NavController, public _ToastController:ToastController, public _LoadingController:LoadingController, public _Camera:Camera, public _ActionSheetController:ActionSheetController,  public _Events: Events,  public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public http:Http,public navCtrl: NavController, public _OneSignal:OneSignal, public _ToastController:ToastController, public _LoadingController:LoadingController, public _Camera:Camera, public _ActionSheetController:ActionSheetController,  public _Events: Events,  public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.replyData.pharmacyName = ''
     this.replyData.details = 'لا توجد تعليقات بعد'
     this.replyData.price = ''
     this.replyData.pharmacyKey = localStorage.getItem('uid')
+
+    this._OneSignal.getPermissionSubscriptionState().then(statusChange=>{
+      this.signalId = statusChange.subscriptionStatus.userId
+    })
 
     if (this.isEdit){
       this.editPostData = JSON.parse(localStorage["thePost"]);
@@ -104,6 +113,7 @@ export class AddPostPage {
             })
           }else{
             this.postData.comments.push(this.replyData)
+            this.postData.signalId = this.signalId
             this.postData.uidUser = localStorage.getItem("uid")
             this.postData.name = this.userData[1]['name']
             let nowDay:String
@@ -120,7 +130,7 @@ export class AddPostPage {
               this._Events.publish("post:Added")
               this.viewCtrl.dismiss();
               this.saveLoading.dismiss();
-           
+              alert('inside Function:' + this.postData.signalId)
               this.postNotification();
            
             })
@@ -159,6 +169,13 @@ export class AddPostPage {
           })
         }
       }else{
+
+
+
+
+
+
+
         this.saveLoading = this._LoadingController.create({
           spinner: "crescent",
           content: 'جارِ النشر'
@@ -169,6 +186,7 @@ export class AddPostPage {
           this.imgUpload()
         }else{
           this.postData.comments.push(this.replyData)
+          this.postData.signalId = this.signalId
           this.postData.uidUser = localStorage.getItem("uid")
           this.postData.name = this.userData[1]['name']
           let nowDay:String
@@ -185,7 +203,8 @@ export class AddPostPage {
             this._Events.publish("post:Added")
             this.viewCtrl.dismiss();
             this.saveLoading.dismiss();
-
+            
+            alert('inside Function:' + this.postData.signalId)
             this.postNotification();
 
 

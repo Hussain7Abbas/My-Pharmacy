@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, Events } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { OneSignal } from "@ionic-native/onesignal";
 
 // ********************************************************************************************************
 // ========================================================================================================
@@ -18,7 +19,7 @@ export class postsFirebaseService {
 
   private dataList = this.db.list('Posts')
 
-  constructor(public db:AngularFireDatabase, public _OneSignal:OneSignal) {
+  constructor(public db:AngularFireDatabase) {
     
   }
 
@@ -75,7 +76,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { UserDataModel } from '../../model/DataModels';
 import firebase from 'firebase';
 import { AlertController} from 'ionic-angular';
-import { OneSignal } from "@ionic-native/onesignal";
 
 @Injectable()
 export class authFirebaseService {
@@ -187,6 +187,7 @@ export class authFirebaseService {
       localStorage.setItem("userData", JSON.stringify(userInfoData))
       this._Events.publish("auth:Success")
       localStorage.setItem('isLogin','true')
+      this._OneSignal.setSubscription(true)
 
       if (userData[0][1]['userType'] == 'pharmacy'){
         this._OneSignal.sendTag('userType', 'pharmacy')
@@ -210,6 +211,7 @@ export class authFirebaseService {
         localStorage.setItem("userData", JSON.stringify(userInfoData))
         this._Events.publish("auth:Success")
         localStorage.setItem('isLogin','true')
+        this._OneSignal.setSubscription(true)
 
         if (userData[0][1]['userType'] == 'pharmacy'){
           this._OneSignal.sendTag('userType', 'pharmacy')
@@ -226,12 +228,6 @@ export class authFirebaseService {
       return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
       .then(user=>{
         localStorage.setItem('uid', user.user.uid)
-        this._OneSignal.getIds().then(Ids=>{
-          this.alertCtrl.create({
-            message: Ids.userId
-          })
-          localStorage.setitem('signalId', Ids.userId)
-        })
       // ========================================================================
       // ====================== User Profile Details ============================
       // ========================================================================
@@ -243,7 +239,6 @@ export class authFirebaseService {
           userType: userData.userType,
           pharmacyReplyNo: userData.pharmacyReplyNo,
           pharmacyAdress: userData.pharmacyAdress,
-          signalId: localStorage.getItem('signalId')
       }).then(()=>{
 
       })
@@ -388,7 +383,6 @@ export class authFirebaseService {
       userType: userData.userType,
       pharmacyReplyNo: userData.pharmacyReplyNo,
       pharmacyAdress: userData.pharmacyAdress,
-      signalId: userData.signalId
     }
 
     this.usersList.push(userInfoData).then((posta)=>{
@@ -421,7 +415,6 @@ export class authFirebaseService {
       userType: userData.userType,
       pharmacyReplyNo: userData.pharmacyReplyNo,
       pharmacyAdress: userData.pharmacyAdress,
-      signalId: userData.signalId
     }
     
     this.usersList.push(userInfoData).then((posta)=>{

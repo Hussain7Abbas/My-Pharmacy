@@ -6,7 +6,6 @@ export interface UserDataModel {
     userType: String;
     pharmacyReplyNo: String;
     pharmacyAdress: String;
-    signalId: String;
 }
 
 export interface pharmacyList {
@@ -33,6 +32,7 @@ export interface postModel {
     postBody: String;
     postImg: String;
     postDate: String;
+    signalId: String;
     comments: Array<replyModel>;
 }
 

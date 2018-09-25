@@ -28,8 +28,7 @@ export class ProfilePage {
     zone: '',
     userType: '',
     pharmacyReplyNo: '0',
-    pharmacyAdress: ' ',
-    signalId: ''
+    pharmacyAdress: ' '
   }
 
   postData:postModel = {
@@ -38,6 +37,7 @@ export class ProfilePage {
     postBody: '',
     postImg: '',
     postDate: '',
+    signalId: '',
     comments: []
   }
   

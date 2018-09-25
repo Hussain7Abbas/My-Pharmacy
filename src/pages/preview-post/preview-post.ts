@@ -34,6 +34,7 @@ export class PreviewPostPage {
     postBody: '',
     postImg: '',
     postDate: '',
+    signalId: '',
     comments: []
   }
 
@@ -92,7 +93,7 @@ export class PreviewPostPage {
       this.postData.comments.push(this.replyData)
       this._postsFirebaseService.updatePosts(this.thePost[0], this.postData)
   
-      alert(this.userData[1]['signalId'])
+      alert(this.postData.signalId)
 
       this.previewNotification();
 
@@ -140,7 +141,7 @@ export class PreviewPostPage {
     headers.append('Authorization','Basic ZGEwYzJiMjktZWEwNy00M2Q3LWIyMzItNzhjNjczNjRlNjQw');
    let body={
     "app_id":"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
-    "include_player_ids": [this.userData[1]['signalId']],
+    "include_player_ids": [this.postData.signalId],
     "data":{'foo':'bar'},
     "contents": {
       ar: this.userData[1]['name']
