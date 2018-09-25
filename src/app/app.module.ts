@@ -29,7 +29,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { postsFirebaseService, authFirebaseService, ContactUsFirebaseService } from '../providers/firebase-service/firebase-service';
-
+import {HttpModule} from '@angular/http';
 const firebaseConfig = {
   apiKey: "AIzaSyCrRhWVyR7IljNxfqOyM1olbuCKV0FF7Aw",
   authDomain: "my-pharmacy-test.firebaseapp.com",
@@ -63,6 +63,7 @@ const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
     // ================ Firebase ==============
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule

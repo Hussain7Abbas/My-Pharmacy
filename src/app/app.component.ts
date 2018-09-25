@@ -27,7 +27,7 @@ export class MyApp {
       this.rootPage = StartPage
     }
 
-
+  
     this._OneSignal.startInit('e2304606-4ab1-4f9d-a0ea-1c83518b62af', '40681149794');
 
     this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -38,6 +38,8 @@ export class MyApp {
     alert( JSON.stringify(data.payload.title+data.payload.body)  );
 
     });
+
+
 
     this._OneSignal.handleNotificationOpened().subscribe((res) => {
       // do something when a notification is opened

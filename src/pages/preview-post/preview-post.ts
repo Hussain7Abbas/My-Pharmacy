@@ -5,6 +5,7 @@ import { postsFirebaseService, authFirebaseService } from '../../providers/fireb
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ProfilePage } from '../profile/profile';
 import { OneSignal } from '@ionic-native/onesignal';
+import {Http ,Headers} from '@angular/http'
 
 /**
  * Generated class for the PreviewPostPage page.
@@ -43,7 +44,7 @@ export class PreviewPostPage {
   isCommentAvailable: Boolean = true
   postComments = []
 
-  constructor(public navCtrl: NavController, public db:AngularFireDatabase, public _OneSignal:OneSignal, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public http:Http,public navCtrl: NavController, public db:AngularFireDatabase, public _OneSignal:OneSignal, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.postData = this.thePost[1]
 
@@ -94,18 +95,9 @@ export class PreviewPostPage {
   
       alert(this.userData[1]['signalId'])
 
-      
-      this._OneSignal.postNotification({
-        app_id:"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
-        include_player_ids: [this.userData[1]['signalId']],
-        contents: {
-          en: "رسالة الى مستخدم معين"
-        },
-        headings: {
-          en: "تطبيق صيدليتي"
-        }
-      })
+      this.previewNotification();
 
+    
       
   
       this.userData[1]['pharmacyReplyNo'] = Number(this.userData[1]['pharmacyReplyNo']) + 1
@@ -140,4 +132,24 @@ export class PreviewPostPage {
 
     
    }
+   previewNotification(){
+    let  headers = new Headers();
+    headers.append('Content-Type','application/json;');
+    headers.append('Authorization','Basic ZGEwYzJiMjktZWEwNy00M2Q3LWIyMzItNzhjNjczNjRlNjQw');
+   let body={
+    "app_id":"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
+    "include_player_ids": [this.userData[1]['signalId']],
+    "data":{'foo':'bar'},
+    "contents": {
+      en: "رسالة الى مستخدم"
+    },
+    headings: {
+      en: "تطبيق صيدليتي"
+    }
+  };
+  this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
+  ).subscribe(data=>{
+    console.log(data)
+  })
+  }
 }
