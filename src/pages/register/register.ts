@@ -33,7 +33,7 @@ export class RegisterPage {
     name: '',
     province: '',
     zone: '',
-    userType: '',
+    userType: 'user',
     pharmacyReplyNo: '0',
     pharmacyAdress: ''
   }
