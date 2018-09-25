@@ -25,19 +25,6 @@ export class postsFirebaseService {
  
   addPosts(myList:postModel) {
     return this.dataList.push(myList) 
-    // this._OneSignal.postNotification({
-    //   app_id:"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
-    //   included_segments: ['pharmacySegment'],
-    //   contents: {
-    //     en: "رسالة الى صيدلية"
-    //   },
-    //   headings: {
-    //     en: "تطبيق صيدليتي"
-    //   }
-    // })
-
-    // alert('تم اسرسال الى الصيدليات')
-    
   }
 
   updatePosts($key, myList:postModel) {

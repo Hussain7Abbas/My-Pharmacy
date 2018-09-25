@@ -86,8 +86,7 @@ export class RegisterPage {
     this.loader.present(); 
     if (this.userInfoData.userType == 'pharmacy'){
       if (this.cameraDidOpened) {
-        let date = new Date
-        this.imgName = localStorage.getItem('uid') + date.getDate() + (date.getMonth().valueOf()+1) + date.getMinutes() + date.getSeconds()
+        this.imgName = localStorage.getItem('uid')
         this.imgUpload()
       }else{
         this.alertCtrl.create({

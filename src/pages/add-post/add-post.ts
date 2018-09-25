@@ -4,7 +4,6 @@ import { replyModel, postModel } from '../../model/DataModels'
 import { postsFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import * as firebase from 'firebase'
-import { OneSignal } from "@ionic-native/onesignal";
 import {Http ,Headers} from '@angular/http'
 @IonicPage()
 @Component({
@@ -42,7 +41,7 @@ export class AddPostPage {
   oldImgURL
   cameraDidOpened:boolean = false
 
-  constructor(public http:Http,public navCtrl: NavController, public _OneSignal:OneSignal, public _ToastController:ToastController, public _LoadingController:LoadingController, public _Camera:Camera, public _ActionSheetController:ActionSheetController,  public _Events: Events,  public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public http:Http,public navCtrl: NavController, public _ToastController:ToastController, public _LoadingController:LoadingController, public _Camera:Camera, public _ActionSheetController:ActionSheetController,  public _Events: Events,  public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.replyData.pharmacyName = ''
     this.replyData.details = 'لا توجد تعليقات بعد'
@@ -122,8 +121,7 @@ export class AddPostPage {
               this.viewCtrl.dismiss();
               this.saveLoading.dismiss();
            
-this.postNotification();
-alert('تم ارسال الى الصيدليات')
+              this.postNotification();
            
             })
           }
@@ -190,10 +188,6 @@ alert('تم ارسال الى الصيدليات')
 
             this.postNotification();
 
-        
-            alert('تم ارسال الى الصيدليات')
-
-
 
           })      
         }
@@ -201,19 +195,21 @@ alert('تم ارسال الى الصيدليات')
     }
 
   }
+
+
   postNotification(){
     let  headers = new Headers();
     headers.append('Content-Type','application/json;');
     headers.append('Authorization','Basic ZGEwYzJiMjktZWEwNy00M2Q3LWIyMzItNzhjNjczNjRlNjQw');
-   let body={
-    "app_id":"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
-    "included_segments": ['pharmacySegment'],
-    "data":{'foo':'bar'},
-    "contents": {
-      en: "رسالة الى صيدلية"
+    let body={
+      "app_id":"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
+      "included_segments": ['pharmacySegment'],
+      "data":{'foo':'bar'},
+      "contents": {
+        ar: this.postData.postBody
     },
     headings: {
-      en: "تطبيق صيدليتي"
+      ar: "صيدليتي: طلب دواء"
     }
   };
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()

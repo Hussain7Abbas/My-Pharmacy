@@ -45,7 +45,7 @@ this._ViewCtrl.dismiss();
 facebookRegister(){
     if (this.cameraDidOpened) {
         let date = new Date
-        this.imgName = localStorage.getItem('uid') + date.getDate() + (date.getMonth().valueOf()+1) + date.getMinutes() + date.getSeconds()
+        this.imgName = localStorage.getItem('uid')
         this.imgUpload()
     }
     this._authFirebaseService.registerFacebook(this.userInfoData, this.hybridData)
@@ -58,7 +58,7 @@ facebookRegister(){
 googleRegister(){
     if (this.cameraDidOpened) {
         let date = new Date
-        this.imgName = localStorage.getItem('uid') + date.getDate() + (date.getMonth().valueOf()+1) + date.getMinutes() + date.getSeconds()
+        this.imgName = localStorage.getItem('uid')
         this.imgUpload()
     }
     this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)

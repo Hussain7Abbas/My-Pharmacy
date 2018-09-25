@@ -12,13 +12,18 @@ page-home {
         text-align: center;
         font-weight: bold;
     }
-// =============== Make style  to the default button  ===============
+// =============== Make style to the default button  ===============
     .button-md,
     .button-ios {
         height: 5.6rem;
         font-size: 2.6rem;
         font-weight: bold;
         margin-bottom: 11px;
+
+    }
+// =============== The style of Ask button  ===============
+    #askButton{
+        border-radius: 30px;
     }
 // =============== The style of the My Question Section ===============
     #myQues{

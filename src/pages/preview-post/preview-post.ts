@@ -4,7 +4,6 @@ import { replyModel, postModel, UserDataModel } from '../../model/DataModels'
 import { postsFirebaseService, authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ProfilePage } from '../profile/profile';
-import { OneSignal } from '@ionic-native/onesignal';
 import {Http ,Headers} from '@angular/http'
 
 /**
@@ -44,7 +43,7 @@ export class PreviewPostPage {
   isCommentAvailable: Boolean = true
   postComments = []
 
-  constructor(public http:Http,public navCtrl: NavController, public db:AngularFireDatabase, public _OneSignal:OneSignal, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
+  constructor(public http:Http,public navCtrl: NavController, public db:AngularFireDatabase, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public _LoadingController:LoadingController, public _Events:Events, public viewCtrl:ViewController, public _postsFirebaseService:postsFirebaseService) {
 
     this.postData = this.thePost[1]
 
@@ -70,7 +69,7 @@ export class PreviewPostPage {
         duration: 2000
       }).present()
     }else{
-      var date = new Date
+      let date = new Date
       this.replyData.pharmacyName = this.userData[1]['name']
       this.replyData.pharmacyKey = this.userData[2]
       let nowDay:String
@@ -97,7 +96,10 @@ export class PreviewPostPage {
 
       this.previewNotification();
 
-    
+      this._ToastController.create({
+        message: 'تم نشر تعليقك',
+        duration: 2000
+      }).present()
       
   
       this.userData[1]['pharmacyReplyNo'] = Number(this.userData[1]['pharmacyReplyNo']) + 1
@@ -141,10 +143,10 @@ export class PreviewPostPage {
     "include_player_ids": [this.userData[1]['signalId']],
     "data":{'foo':'bar'},
     "contents": {
-      en: "رسالة الى مستخدم"
+      ar: this.userData[1]['name']
     },
     headings: {
-      en: "تطبيق صيدليتي"
+      ar: 'تم التعليق على منشور علاجك من قبل:' + this.userData[1]['name']
     }
   };
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
