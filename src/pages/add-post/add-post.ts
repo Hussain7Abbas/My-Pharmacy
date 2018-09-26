@@ -225,15 +225,16 @@ export class AddPostPage {
       "included_segments": ['pharmacySegment'],
       "data":{'foo':'bar'},
       "contents": {
-        ar: this.postData.postBody
+        en: this.postData.postBody
     },
     headings: {
-      ar: "صيدليتي: طلب دواء"
+      en: "صيدليتي: طلب دواء"
     }
   };
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
   ).subscribe(data=>{
     console.log(data)
+    alert(data)
   })
   }
 

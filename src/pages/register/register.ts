@@ -83,9 +83,9 @@ export class RegisterPage {
 
 
   onRegister(){
-    this.loader.present(); 
     if (this.userInfoData.userType == 'pharmacy'){
       if (this.cameraDidOpened) {
+        this.loader.present(); 
         this.imgName = localStorage.getItem('uid')
         this.imgUpload()
       }else{
@@ -95,6 +95,7 @@ export class RegisterPage {
         })
       }
     }else{
+      this.loader.present(); 
       this.registerOn()
     }
     

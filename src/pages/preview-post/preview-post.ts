@@ -144,10 +144,10 @@ export class PreviewPostPage {
     "include_player_ids": [this.postData.signalId],
     "data":{'foo':'bar'},
     "contents": {
-      ar: this.userData[1]['name']
+      en: this.userData[1]['name']
     },
     headings: {
-      ar: 'تم التعليق على منشور علاجك من قبل:' + this.userData[1]['name']
+      en: 'تم التعليق على منشور علاجك من قبل:' + this.userData[1]['name']
     }
   };
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
