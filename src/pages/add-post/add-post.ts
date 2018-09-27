@@ -126,12 +126,12 @@ export class AddPostPage {
             }else{nowMonth = String(((date.getMonth().valueOf()+1)))}
             this.postData.postDate = nowDay + "/" + nowMonth + "/" + date.getFullYear()
             this.postData.postImg = this.imgURl
-            this._postsFirebaseService.addPosts(this.postData).then(()=>{
+            this._postsFirebaseService.addPosts(this.postData).then((posta)=>{
               this._Events.publish("post:Added")
               this.viewCtrl.dismiss();
               this.saveLoading.dismiss();
               alert('inside Function:' + this.postData.signalId)
-              this.postNotification();
+              this.postNotification(posta);
            
             })
           }
@@ -199,13 +199,13 @@ export class AddPostPage {
           }else{nowMonth = String(((date.getMonth().valueOf()+1)))}
           this.postData.postDate = nowDay + "/" + nowMonth + "/" + date.getFullYear()
           this.postData.postImg = this.imgURl
-          this._postsFirebaseService.addPosts(this.postData).then(()=>{
+          this._postsFirebaseService.addPosts(this.postData).then((posta)=>{
             this._Events.publish("post:Added")
             this.viewCtrl.dismiss();
             this.saveLoading.dismiss();
             
             alert('inside Function:' + this.postData.signalId)
-            this.postNotification();
+            this.postNotification(posta);
 
 
           })      
@@ -216,19 +216,19 @@ export class AddPostPage {
   }
 
 
-  postNotification(){
+  postNotification(posta){
     let  headers = new Headers();
     headers.append('Content-Type','application/json;');
     headers.append('Authorization','Basic ZGEwYzJiMjktZWEwNy00M2Q3LWIyMzItNzhjNjczNjRlNjQw');
     let body={
       "app_id":"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
       "included_segments": ['pharmacySegment'],
-      "data":{'foo':'bar'},
+      "data":{'postKey': (String(posta).split('/'))[4], 'postData': this.postData},
       "contents": {
         en: this.postData.postBody
     },
     headings: {
-      en: "صيدليتي: طلب دواء"
+      en: "صيدليتي: قام " + this.userData[1]['name'] + ' بنشر سؤال'
     }
   };
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()

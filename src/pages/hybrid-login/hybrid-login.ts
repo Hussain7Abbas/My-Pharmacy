@@ -44,7 +44,6 @@ this._ViewCtrl.dismiss();
 
 facebookRegister(){
     if (this.cameraDidOpened) {
-        let date = new Date
         this.imgName = localStorage.getItem('uid')
         this.imgUpload()
     }
@@ -57,7 +56,6 @@ facebookRegister(){
 
 googleRegister(){
     if (this.cameraDidOpened) {
-        let date = new Date
         this.imgName = localStorage.getItem('uid')
         this.imgUpload()
     }

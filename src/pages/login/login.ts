@@ -52,7 +52,9 @@ export class LoginPage {
       
       this._authFirebaseService.loginWithEmail(this.userAuthData)
         this._Events.subscribe("auth:Success", ()=>{
-          this.navCtrl.setRoot(TabsPage)
+          setTimeout(() => {
+            this.navCtrl.setRoot(TabsPage)
+          }, 1000);
       })
 
   }

@@ -91,11 +91,9 @@ export class PreviewPostPage {
       }else{nowMinuts = String(date.getMinutes())}
       this.replyData.date = nowDay + "/" + nowMonth + "/" + date.getFullYear() + '/' + nowHours + ':' + nowMinuts
       this.postData.comments.push(this.replyData)
-      this._postsFirebaseService.updatePosts(this.thePost[0], this.postData)
-  
-      alert(this.postData.signalId)
-
-      this.previewNotification();
+      this._postsFirebaseService.updatePosts(this.thePost[0], this.postData).then((posta)=>{
+        this.commentNotification(posta);
+      })
 
       this._ToastController.create({
         message: 'تم نشر تعليقك',
@@ -135,19 +133,20 @@ export class PreviewPostPage {
 
     
    }
-   previewNotification(){
+   
+   commentNotification(posta){
     let  headers = new Headers();
     headers.append('Content-Type','application/json;');
     headers.append('Authorization','Basic ZGEwYzJiMjktZWEwNy00M2Q3LWIyMzItNzhjNjczNjRlNjQw');
    let body={
     "app_id":"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
     "include_player_ids": [this.postData.signalId],
-    "data":{'foo':'bar'},
+    "data":{'postKey': (String(posta).split('/'))[4], 'postData': this.postData},
     "contents": {
-      en: this.userData[1]['name']
+      en: 'السعر: ' + this.replyData.price + ' / ' + this.replyData.details
     },
     headings: {
-      en: 'تم التعليق على منشور علاجك من قبل:' + this.userData[1]['name']
+      en: 'صيدليتي: قامت ' + this.userData[1]['name'] + ' بالرد عليك'
     }
   };
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
