@@ -1,5 +1,4 @@
 page-about {
-<<<<<<< HEAD
     .swiper-container{
         height: initial;
     }
@@ -10,62 +9,6 @@ page-about {
         background-color: #339999;
     }
     .navIonButton{height: 34px; box-shadow: 0 0px 0px 0 #339999; }
-=======
-
-
-    .pageMargin{
-        margin-top: 60px;
-    }
-
-    .segmentBtn{
-        margin-top: 50px;
-        position: absolute;
-        top: 0px;
-        width: 30%; height: 6.16vh;
-        color: #6e6e6e;
-        background-color: #e9e9e9;
-        font-size: 4.7vw;
-    }
-
-    .activeSegment{
-        color: white;
-        background-color: #339999;
-        font-weight: bold;
-    }
-
-    #segmentCont{
-        border-radius: 20px;
-        animation-delay: .5s;
-        -moz-animation-delay: .5s;
-        -webkit-animation-delay: .5s;
-    }
-
-    .backBtn{position: absolute; top: 10px; left: 10px; font-size: 3.2rem; padding: 10px; color: black;}
-
-    ion-icon{font-size: 2.2rem;}
-
-    .navIonButton{height: 34px; box-shadow: 0 0px 0px 0 #339999; }
-    
-
-    .teamCard{
-        border-radius: 30px;
-        float: right;
-        width: 43%;
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        text-align: center;
-        margin-right: 5%;
-    }
-
-
-    .card-md h4,
-    .card-ios h4,{
-        margin: 2px 0;
-        font-size: 1.8rem;
-        text-align: center;
-        font-weight: bold;
-    }
-
->>>>>>> 52dcb4f451f7f500da9db1288402938ad1f35692
     h1{
         font-weight: bolder;
         font-size: 200%;
@@ -73,7 +16,6 @@ page-about {
         text-align: center;
         color: white;
     }
-<<<<<<< HEAD
     .div1{
         height: 12%;
         background-color: #339999;
@@ -124,16 +66,12 @@ page-about {
         font-weight: bolder;
     }
   
-=======
-
->>>>>>> 52dcb4f451f7f500da9db1288402938ad1f35692
     .maindiv{
         background-color: cornflowerblue;
         margin: 5px;
         height: 100%;
         width: 100%;
     }
-<<<<<<< HEAD
     #card {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
@@ -223,38 +161,11 @@ page-about {
     .mpl{
         width: 35%;
         height:35% ;
-=======
-    
-    .teamPic{
-        width: 75px;
-        height: 75px;
-        margin-right: auto;
-        margin-left: auto;
-        border-radius: 50%;
-    }
-
-    .companyCard{
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      margin: 5%  10% 5% 10%;
-      padding: 20px;
-      text-align: justify;
-      line-height: 1.7;
-      border-radius: 5px;
-    }
-
-    p{
-        font-size: 100%;
-    }
-
-    .mpl{
-        width: 35%;
->>>>>>> 52dcb4f451f7f500da9db1288402938ad1f35692
         display: block;
         margin-left: auto;
         margin-right: auto;
         margin-top: auto;
     }
-<<<<<<< HEAD
     .ed{
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         margin: 5%  10% 5% 10%;
@@ -277,46 +188,6 @@ page-about {
         color:blue;
         font-weight: bolder;
     }
-=======
-
-    .ed{
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin: 5%  10% 5% 10%;
-        padding: 20px;
-        text-align: justify;
-        text-justify: inter-word;
-        line-height: 1.7;
-        border-radius: 5px;
-    }
-
-    .p1{
-        font-size: 100%;
-    }
-
-    ul,li,ol{
-        font-size: 100%; 
-    }
-
-    h6{
-        font-size: 90%
-    }
-
-    #link:active { 
-        color:#2cc2c2;
-        font-weight: bolder;
-    }
-
-    #link{
-        width: 100%;
-        text-align: center;
-        text-decoration: underline;
-        color: #339999;
-        font-size: 10pt;
-    }
-
-
-
->>>>>>> 52dcb4f451f7f500da9db1288402938ad1f35692
     .div2{
         margin-top: 10px;
         height: -moz-calc(100% - 50px);
@@ -324,7 +195,6 @@ page-about {
         height: -o-calc(100% - 50px);
         height: calc(100% - 50px);
     }
-<<<<<<< HEAD
     .toolbar-ios-primary .segment-ios .segment-button.segment-activated {
         color: white;
     }
@@ -359,50 +229,3 @@ page-about {
   }
   }
   
-=======
-
-    #idea{
-        animation-delay: 0s;
-        -moz-animation-delay: 0s;
-        -webkit-animation-delay: 0s;
-    }
-
-
-
-
-    
-    #hussain{
-        animation-delay: 0s;
-        -moz-animation-delay: 0s;
-        -webkit-animation-delay: 0s;
-    }
-
-    #hussain1{
-        animation-delay: 0s;
-        -moz-animation-delay: 0s;
-        -webkit-animation-delay: 0s;
-    }
-
-    #hala{
-        animation-delay: .3s;
-        -moz-animation-delay: .3s;
-        -webkit-animation-delay: .3s;
-    }
-
-    #ilham{
-        animation-delay: .3s;
-        -moz-animation-delay: .3s;
-        -webkit-animation-delay: .3s;
-    }
-
-
-    #saif{
-        margin-right: 29.5%;
-        animation-delay: .7s;
-        -moz-animation-delay: .7s;
-        -webkit-animation-delay: .7s;
-    }
-
-
-}
->>>>>>> 52dcb4f451f7f500da9db1288402938ad1f35692
