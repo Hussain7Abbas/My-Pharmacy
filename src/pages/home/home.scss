@@ -1,0 +1,140 @@
+page-home {
+//==============================================================================================
+//===================================== Home Page CSS Style ====================================
+//==============================================================================================
+
+// =============== The style of the title at the top of the page ===============
+    [padding] h1:first-child{
+        margin: 15px 0px;
+        margin-bottom: 25px;
+    }
+    h1{
+        text-align: center;
+        font-weight: bold;
+    }
+// =============== Make style to the default button  ===============
+    .button-md,
+    .button-ios {
+        height: 5.6rem;
+        font-size: 2.6rem;
+        font-weight: bold;
+        margin-bottom: 11px;
+
+    }
+// =============== The style of Ask button  ===============
+    #askButton{
+        border-radius: 30px;
+    }
+// =============== The style of the My Question Section ===============
+    #myQues{
+        font-weight: bold;
+        background-color: #339999;
+        flex-flow: row;
+    }
+    #myQuesTitle{
+        color: white;
+        margin: 0px;
+        padding: 10px 0px;
+    }
+// // =============== The style the side buttons in the post ===============
+//     .slideButton{
+//         font-size: 2.2rem;
+//     }
+// // =============== Reply count number style ===============
+//     .replyNo{
+//         width: 100%;
+//         text-align: center; 
+//         font-weight: bold;
+//         font-size: 1.8rem;
+//         margin-top: -18px;
+//         padding-left: 10px;
+//     }
+// // =============== The style of the div which contain postHeaderTitle and Date in the user Home ===============
+//     .textDiv{
+//         position: absolute;
+//         right: 65px;
+//         top: 10px;
+//         width: calc(100% - 80px);
+//     }
+//==============================================================================================
+//==================================== Home Page CSS Style =====================================
+//==============================================================================================
+
+//==============================================================================================
+//====================================== Common CSS Style ======================================
+//==============================================================================================
+
+// =============== The ion-item style ===============
+#ionItem{
+    height: 70px;
+    margin-top: 1px;
+    border-bottom: solid 1px #c8c7cc;
+}
+
+// =============== set the default border of ion-item in ion-list to zero ===============
+.list-ios > .item-block:first-child {
+    border-top: 0px solid #c8c7cc;
+}
+.list-ios .item-block .item-inner,
+.list-md .item-block .item-inner {
+    border-bottom: 0px solid #c8c7cc;
+}
+// =============== The post header title = (userName for Pharmacy Home, replyStatus for user Home) ===============
+.postHeaderTitle{
+    float: right;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+// =============== The Date of the post ===============
+.postDate{
+    float: left;
+}
+// =============== The Name of the medicine ===============
+.postTitle{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: calc(1.7rem + 13px); left: 0px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+//==============================================================================================
+//====================================== Common CSS Style ======================================
+//==============================================================================================
+
+//==============================================================================================
+//==================================== Doctors Home Style ======================================
+//==============================================================================================
+
+// =============== The style of the div which contain postHeaderTitle and Date in the Pharmacy Home ===============
+    .p-textDiv{
+        position: absolute;
+        right: 65px;
+        top: 10px;
+        width: calc(100% - 125px);
+    }
+    // =============== Make style to the button in ion-list ===============
+    #ionItem .button-ios,
+    #ionItem .button-md{
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    .previewQuesBtn{
+        position: absolute;
+        top: 0px; left: 0px;
+        width: 50px; height: 100%;
+    }
+    // =============== Make style to the icon in preview question button ===============
+    .previewQuesBtn ion-icon {
+        font-size: 2.8em;
+    }
+//==============================================================================================
+//==================================== Doctors Home Style ======================================
+//==============================================================================================
+
+}

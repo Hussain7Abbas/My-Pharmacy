@@ -1,0 +1,118 @@
+page-login {
+
+
+    #loginSection{
+        background-image: url('../../assets/imgs/loginBackground.jpg');
+        // background-position: center;
+        background-size: cover;
+        padding-bottom: 40px;
+    }
+
+    #moreDetails{
+        display: none;
+        margin-top: 30px;
+    }
+
+    #moreDetBtn{
+        font-size: 4rem;
+        width: 100%;
+        text-align: center;
+        margin-top: 3px;
+    }
+
+    #detRotate{
+        transform: rotate(0deg);
+        position: absolute;
+        right: calc(50% - 24px);
+        transition: transform 1s ease-in-out;
+        margin-top: -30px;
+        height: 48px; width: 48px;
+
+        background-color: white;
+        border-radius: 90px;
+        border: solid black 3px;
+        box-shadow: 4px 4px 20px 2px #a5a5a5;
+    }
+
+    .btnMargin{
+        margin-bottom: 20px;
+    }
+
+    .myBtn{
+        height: 50px;
+        border-radius: 30px;
+        font-weight: bold;
+    }
+
+    .backBtn{position: absolute; top: 10px; left: 10px; font-size: 3.2rem; padding: 10px; color: black;}
+
+    ion-icon{font-size: 2.2rem;}
+
+    h1{
+        text-align: center;
+        font-weight: bold;
+        color:#339999;
+    }
+
+    #email{
+        animation-delay: 0s;
+        -moz-animation-delay: 0s;
+        -webkit-animation-delay: 0s;
+    }
+
+    .transparentWhite{
+        background-color: #ffffffd4;
+        border-radius: 20px;
+        margin-bottom: 10px;
+    }
+
+    ::-webkit-input-placeholder {text-align: center;}
+    ::placeholder{text-align: center;}
+
+    #password{
+        animation-delay: 0.5s;
+        -moz-animation-delay: 0.5s;
+        -webkit-animation-delay: 0.5s;
+    }
+
+    #login{
+        margin-top: 15px;
+        margin-bottom: 10px;
+        animation-delay:1s;
+        -moz-animation-delay:1s;
+        -webkit-animation-delay: 1s;
+        animation-duration: 1s;
+    }
+
+    #facebookLogin{
+        background-color: #3C5A99;
+        animation-delay:0.5s;
+        -moz-animation-delay:0.5s;
+        -webkit-animation-delay:0.5s;
+        animation-duration: 1s;
+    }
+
+    #googleLogin{
+        background-color: #DB4437;
+        animation-delay:1s;
+        -moz-animation-delay:1s;
+        -webkit-animation-delay:1s;
+        animation-duration: 1s;
+    }
+
+    #register{
+        animation-delay:1.5s;
+        -moz-animation-delay:1.5s;
+        -webkit-animation-delay: 1.5s;
+        animation-duration: 1s;
+    }
+
+    #promo{
+        width: 46%;
+        margin-right: calc(50% - 23%);
+        margin-top: 40px;
+        box-shadow: 5px 7px 20px 2px #a5a5a5;
+        animation-duration: 1s;
+    }
+
+}

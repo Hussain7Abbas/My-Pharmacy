@@ -1,0 +1,39 @@
+
+<ion-header style="margin-top: -1px;">
+  <!-- =============================== Nav Bar Header ============================== -->
+  <div style="height: 40px; background-color: #339999;">
+    <ion-icon (click)="goBack()" class="navBarCloseIcon" name='close'></ion-icon>
+    <hr style="height: 1px; background-color: #f2f2f2;">
+  </div>
+  <!-- =============================== Nav Bar Header ============================== -->
+</ion-header>
+
+
+<ion-content style="margin-top: -2px; text-align: center;">
+
+  <div id="headerDiv">
+    <h1>اضافة منشور</h1>
+  </div>
+
+  <div padding>
+    <h2>اسم الدواء</h2>
+    <input class="medicineInput" placeholder="اكتب اسم الدواء هنا..." [(ngModel)]="postData.postBody">
+  </div>
+
+  <div id="cameraContainer" *ngIf="isEdit">
+    <h2>المرفقات</h2>
+    <img src="{{postData.postImg}}" (click)="openCamera()" style="height: 200px;;">
+  </div>
+
+  <div id="cameraContainer_add" *ngIf="!isEdit">
+    <h2>التقاط صورة للعلاج او الوصفة</h2>
+    <ion-icon (click)="openCamera()" name='camera'></ion-icon>
+    <img src="{{currentImg}}" style="border-radius: 30px; width: 50%; margin-right: 25%;">
+  </div>
+
+  <div padding>
+    <button ion-button block (click)="onAddPost()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp;&nbsp; نشر</button>
+    <p>يرجى كتابة اسم الدواء بشكل صحيح و التقاط الصورة بشكل واضح</p>
+  </div>
+
+</ion-content>

@@ -1,0 +1,39 @@
+page-start {
+
+#Logo{
+    width: 60%;
+    margin-right: 20% ;
+    margin-bottom: 12%;
+    margin-top: 12%;
+}
+
+.infoButton{
+    height: 50px;
+    margin-bottom: 7%;
+    border-radius: 30px;
+}
+
+button ion-icon{
+    font-size: 2.2rem;
+}
+
+#login{
+    animation-delay: 0s;
+    -moz-animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+}
+
+#register{
+    animation-delay: 0.2s;
+    -moz-animation-delay:0.2s;
+    -webkit-animation-delay:0.2s;
+}
+
+#about{
+
+  animation-delay:0.4s;
+    -moz-animation-delay:0.4s;
+    -webkit-animation-delay: 0.4s;
+}
+
+}

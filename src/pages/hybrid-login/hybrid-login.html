@@ -1,0 +1,56 @@
+    <!-- =============================== Nav Bar Header ============================== -->
+    <ion-header>
+      <div style="height: 40px; background-color: #50A7A7;">
+          <ion-title style="line-height: 40px; text-align: center;color: white;">اكمال عملية التسجيل</ion-title>
+      </div>
+      <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " name='arrow-down'></ion-icon>
+      <hr style="height: 1px; background-color: #f2f2f2;">
+    </ion-header>
+        <!-- =============================== Nav Bar Header ============================== -->
+<ion-content padding>       
+
+
+    <div id="segmentCont">
+        <h1 style="width: 100%; text-align: center; font-size: 16pt;">الرجاء تحديد نوع المستخدم:</h1>
+        <button ion-button block id="user" class="segmentBtn activeSegment" (click)="segment('user')" style="right: 0px;">مستخدم</button>
+        <button ion-button block id="pharmacy" class="segmentBtn" (click)="segment('pharmacy')" style="left: 0px;">صيدلية</button>
+    </div>
+
+
+    <form [formGroup]="myForm">
+
+  <ion-list style="color: #339999;">
+        <ion-item>
+            <ion-label style="color: #339999;" >المحافظة  :</ion-label>
+            <ion-select [(ngModel)]="userInfoData.province" [formControl]="myForm.controls['province']" >
+                <ion-option value="الانبار">الانبار</ion-option>
+                <ion-option value="القادسية ">القادسية</ion-option>
+                <ion-option value="البصرة">البصرة</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    
+    <ion-list>
+        <ion-item >
+            <ion-label style="color: #339999;"> المنطقة :</ion-label>
+            <ion-select [(ngModel)]="userInfoData.zone" [formControl]="myForm.controls['zone']" >
+                <ion-option value="الديوانية">الديوانية</ion-option>
+                <ion-option value="الرمادي">الرمادي</ion-option>
+                <ion-option value="الفلوجة">الفلوجة</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    </form>
+    <br>
+
+              
+    <div id="camera" class="hiddenCam">
+        <h1 style="width: 100%; text-align: center; font-size: 16pt; margin-bottom: 10px;">التقاط صورة لترخيص وزارة الصحة </h1>
+        <ion-icon id="theIcon" ios="ios-camera" md="md-camera" ></ion-icon>
+        <ion-label style="font-size: 12pt; font-weight: bold; color: #800000">سيتم اغلاق حسابك اذا كان الترخيص مزيف</ion-label>
+    </div>
+    <form [formGroup]="myForm">
+  <button *ngIf="isFacebook" ion-button block (click)="facebookRegister()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+  <button *ngIf="!isFacebook" ion-button block (click)="googleRegister()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+    </form>
+</ion-content> 
