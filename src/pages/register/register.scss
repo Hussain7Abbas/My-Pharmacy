@@ -4,7 +4,7 @@ page-register {
         font-weight: bold;
         color:#339999;
        }
-       
+
     .b{
         color:black;;
         text-align: center;
@@ -21,46 +21,6 @@ page-register {
     .p{
         color: rgb(202, 11, 11);
         font-size: 10px;
-    }
-
-    #name{
-        animation-delay: 0s;
-        -moz-animation-delay: 0s;
-        -webkit-animation-delay: 0s;
-    }
-
-    #email{
-        animation-delay: 0.2s;
-        -moz-animation-delay:0.2s;
-        -webkit-animation-delay: 0.2s;
-    }
-
-    #password{
-        animation-delay:0.4s;
-        -moz-animation-delay:0.4s;
-        -webkit-animation-delay: 0.4s;
-    }
-
-    #province{
-        animation-delay:0.6s;
-        -moz-animation-delay:0.6s;
-        -webkit-animation-delay: 0.6s;
-        animation-direction: 1s;
-    }
-
-    #zone{
-        animation-delay:0.8s;
-        -moz-animation-delay:0.8s;
-        -webkit-animation-delay: 0.8s;
-        animation-direction: 1s;
-    }
-
-    #register{
-        margin-top: 20px;
-        animation-delay:1.5s;
-        -moz-animation-delay:1.5s;
-        -webkit-animation-delay: 1.5s;
-        animation-direction: 1s;
     }
 
     .segmentBtn{
@@ -94,7 +54,6 @@ page-register {
 
     .transparentWhite{
         background-color: #ffffffd4;
-        border-radius: 20px;
         margin-bottom: 10px;
     }
 
@@ -104,20 +63,17 @@ page-register {
     #camera{
         display: none;
         background-color: #ffffff;
-        border-radius: 20px;
         margin-bottom: 10px;
     }
 
     .myBtn{
         height: 50px;
-        border-radius: 30px;
         font-weight: bold;
     }
 
     .selectAlert{
         margin-bottom: 10px;
         background-color: #ffffffd4;
-        border-radius: 20px;
     }
 
     .ng-touched {
@@ -126,10 +82,5 @@ page-register {
         width: 100%;
         padding-right: -129px;
         font-weight: bold;
-    }
-
-    ion-content{
-        background-image: url(../../assets/imgs/registerBackground.jpg);
-        background-size: cover;
     }
 }

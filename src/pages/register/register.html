@@ -4,22 +4,20 @@
 
 <ion-content padding>
 
-  
 
-  <ion-icon (click)="goBack()" class="backBtn animated fadeInDown" name="ios-arrow-forward"></ion-icon>
-  
+  <ion-icon (click)="goBack()" class="backBtn" name="ios-arrow-forward"></ion-icon>
   <h1 style="color: black; padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">انشاء حساب</h1>
-      
 
+<div>
   <div id="segmentCont">
-      <h1 style="width: 100%; text-align: center; font-size: 16pt; color: #339999;" class="animated fadeInDown">الرجاء تحديد نوع المستخدم:</h1>
-      <button ion-button block id="user" class="segmentBtn activeSegment animated fadeInDown" (click)="segment('user')" style="right: 5%; border-bottom-right-radius: 20px; border-top-right-radius: 20px;">مستخدم</button>
-      <button ion-button block id="pharmacy" class="segmentBtn animated fadeInDown" (click)="segment('pharmacy')" style="left: 5%; border-bottom-left-radius: 20px; border-top-left-radius: 20px;">صيدلية</button>
+      <h1 style="width: 100%; text-align: center; font-size: 16pt; color: #339999;">الرجاء تحديد نوع المستخدم:</h1>
+      <button ion-button block id="user" class="segmentBtn activeSegment" (click)="segment('user')" style="right: 5%;">مستخدم</button>
+      <button ion-button block id="pharmacy" class="segmentBtn" (click)="segment('pharmacy')" style="left: 5%;">صيدلية</button>
   </div>
 
   <form [formGroup]="myForm">
 
-    <ion-item class="animated bounceInRight transparentWhite" id="name" >
+    <ion-item class="transparentWhite" >
         <ion-icon item-left name="md-person"></ion-icon>
         <ion-input [(ngModel)]="userInfoData.name" placeholder="اسم المستخدم" [formControl]="myForm.controls['name']"></ion-input>
     </ion-item>
@@ -27,39 +25,39 @@
       <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يكون طول الاسم 3-20 حرف ولا يحتوي على رموز</p>
       <p *ngIf="myForm.value.name == ''" class="p">يرجى ادخال الاسم</p>
     </ion-item>
-    
 
-    <ion-item class="animated bounceInRight transparentWhite" id="email" >
+
+    <ion-item class="transparentWhite" id="email" >
         <ion-icon item-left name="md-at"></ion-icon>
         <ion-input [(ngModel)]="userAuthData.email" placeholder="البريد الالكتروني" [formControl]="myForm.controls['email']"></ion-input>
     </ion-item>
-    <ion-item no-lines  class="no-line error" *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
-      <p *ngIf="myForm.value.email != ''" class="p">الايميل غير صالح</p> 
+    <ion-item no-lines  *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
+      <p *ngIf="myForm.value.email != ''" class="p">الايميل غير صالح</p>
       <p *ngIf="myForm.value.email == ''" class="p" >يرجى ادخال الايميل</p>
     </ion-item>
 
 
 
-    <ion-item class="animated bounceInRight transparentWhite" id="password">
+    <ion-item class="transparentWhite" id="password">
         <ion-icon item-left name="md-lock"></ion-icon>
         <ion-input [(ngModel)]="userAuthData.password" placeholder="كلمة المرور" [formControl]="myForm.controls['password']" type='password'></ion-input>
-    </ion-item> 
-    <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
+    </ion-item>
+    <ion-item no-lines *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
       <p *ngIf="myForm.value.password != ''" class="p">كلمة المرور غير صالحة</p>
       <p *ngIf="myForm.value.password == ''" class="p">يرجى ادخال كلمة المرور</p>
     </ion-item>
 
 
-    <ion-item class="selectAlert animated bounceInRight" id="province">
+    <ion-item class="selectAlert" id="province">
       <ion-label style="color: #339999;" >المحافظة  :</ion-label>
       <ion-select [(ngModel)]="userInfoData.province" [formControl]="myForm.controls['province']" >
         <ion-option value="الانبار">الانبار</ion-option>
         <ion-option value="القادسية ">القادسية</ion-option>
         <ion-option value="البصرة">البصرة</ion-option>
       </ion-select>
-    </ion-item> 
+    </ion-item>
 
-    <ion-item class="selectAlert animated bounceInRight" id="zone">
+    <ion-item class="selectAlert" id="zone">
       <ion-label style="color: #339999;"> المنطقة :</ion-label>
       <ion-select [(ngModel)]="userInfoData.zone" [formControl]="myForm.controls['zone']" >
         <ion-option value="الديوانية">الديوانية</ion-option>
@@ -67,19 +65,19 @@
         <ion-option value="الفلوجة">الفلوجة</ion-option>
       </ion-select>
     </ion-item>
- 
+
   </form>
 
-  <div id="camera" class="animated fadeInDown">
+  <div id="camera">
     <ion-label class="b" style="padding-top: 15px;">التقاط صورة لترخيص وزارة الصحة </ion-label>
     <ion-icon id="theIcon" (click)='openCamera()' ios="ios-camera" md="md-camera" ></ion-icon>
     <ion-label class="b" style="color: #800000">سيتم اغلاق حسابك اذا كان الترخيص مزيف </ion-label>
     <img src="{{currentImg}}">
-  </div> 
+  </div>
 
   <form [formGroup]="myForm">
-    <button ion-button block (click)="onRegister()" [disabled]="!myForm.valid" class="animated fadeInDown myBtn" id="register">
+    <button ion-button block (click)="onRegister()" [disabled]="!myForm.valid" class="myBtn" id="register">
     <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
   </form>
-               
+</div>
 </ion-content>
