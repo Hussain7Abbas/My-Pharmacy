@@ -10,6 +10,8 @@ import { StartPage } from '../pages/start/start';
 import { authFirebaseService } from "../providers/firebase-service/firebase-service";
 import { OneSignal } from '@ionic-native/onesignal';
 import { PreviewPostPage } from '../pages/preview-post/preview-post';
+// import { Notification } from '../../node_modules/rxjs';
+// import { NotifiPageModule } from '../pages/notifi/notifi.module';
 
 @Component({
  templateUrl: 'app.html'
@@ -39,6 +41,7 @@ export class MyApp {
 
 
     platform.ready().then(() => {
+      // this.rootPage = NotifiPageModule;
 
       this._OneSignal.startInit('e2304606-4ab1-4f9d-a0ea-1c83518b62af', '40681149794');
       this._OneSignal.inFocusDisplaying(this._OneSignal.OSInFocusDisplayOption.Notification);

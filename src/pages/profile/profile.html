@@ -28,38 +28,38 @@
                 <ion-grid>
                     <ion-row class="infoDiv">
                         <ion-col>
-                            <h4 class="infoTitle" class="animated bounceInRight" id="prov">المحافظة:</h4>
+                            <h4 class="infoTitle" >المحافظة:</h4>
                           </ion-col>
                         <ion-col>
-                            <h4 class="infoText" class="animated bounceInRight" id="prov">{{userData[1].province}}</h4>
-                          </ion-col>
-                      </ion-row>
-                    <ion-row class="infoDiv">
-                        <ion-col>
-                            <h4 class="infoTitle" class="animated bounceInRight" id="zon" >المنطقة:</h4>
-                          </ion-col>
-                        <ion-col>
-                            <h4 class="infoText" class="animated bounceInRight" id="zon" >{{userData[1].zone}}</h4>
+                            <h4 class="infoText">{{userData[1].province}}</h4>
                           </ion-col>
                       </ion-row>
                     <ion-row class="infoDiv">
                         <ion-col>
-                            <h4 class="infoTitle" class="animated bounceInRight" id="emai">البريد الالكتروني:</h4>
+                            <h4 class="infoTitle" >المنطقة:</h4>
                           </ion-col>
                         <ion-col>
-                            <h4 class="infoText" class="animated bounceInRight" id="emai" >{{userData[0].email}}</h4>
+                            <h4 class="infoText"  >{{userData[1].zone}}</h4>
                           </ion-col>
                       </ion-row>
                     <ion-row class="infoDiv">
                         <ion-col>
-                            <h4 class="infoTitle"class="animated bounceInRight" id="pass">كلمة المرور:</h4>
+                            <h4 class="infoTitle" >البريد الالكتروني:</h4>
                           </ion-col>
                         <ion-col>
-                            <h4 class="infoText" class="animated bounceInRight" id="pass">{{userData[0].password}}</h4>
+                            <h4 class="infoText" >{{userData[0].email}}</h4>
+                          </ion-col>
+                      </ion-row>
+                    <ion-row class="infoDiv">
+                        <ion-col>
+                            <h4 class="infoTitle">كلمة المرور:</h4>
+                          </ion-col>
+                        <ion-col>
+                            <h4 class="infoText" >{{userData[0].password}}</h4>
                           </ion-col>
                       </ion-row>
                   </ion-grid>
-                  <button ion-button full (click)="editPro()" color="primary" class="animated bounceIn" id="edit" ><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
+                  <button ion-button full (click)="editPro()" color="primary"  ><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
               </ion-list>
           </div>
         <!-- ==================</contentDetails>==================== -->
@@ -77,7 +77,7 @@
                             <div class="textDiv"> <!-- ===== The div which contain all the texts ===== -->
                                 <div> <!-- ===== the div which contain all the texts ===== -->
                                     <h2 class="postHeaderTitle" *ngIf="item[1]['comments'].length > 1">تمت الاجابة</h2> <!-- ===== The status of post ===== -->
-                                    <h2 class="postHeaderTitle" *ngIf="item[1]['comments'].length < 2">لم تتم الاجابة بعد</h2> <!-- ===== The status of post ===== -->
+                                    <h2 class="postHeaderTitle" *ngIf="item[1]['comments'].length > 2">لم تتم الاجابة بعد</h2> <!-- ===== The status of post ===== -->
                                     <p class="postDate">{{item[1]['postDate']}}</p> <!-- ===== The date of post ===== -->
                                   </div>
                                 <h2 class="postTitle">{{item[1]['postBody']}}</h2> <!-- ===== The title of post ===== -->
@@ -123,7 +123,7 @@
                 <ion-grid>
 
 
-                    <ion-row class="infoDiv" id="prov">
+                    <ion-row class="infoDiv" >
                         <ion-col>
                             <h4 class="infoTitle">المحافظة:</h4>
                         </ion-col>
@@ -134,7 +134,7 @@
                     </ion-row>
 
 
-                    <ion-row class="infoDiv" id="zon">
+                    <ion-row class="infoDiv" >
                         <ion-col>
                             <h4 class="infoTitle">المنطقة:</h4>
                         </ion-col>
@@ -145,7 +145,7 @@
                     </ion-row>
 
 
-                    <ion-row class="infoDiv" id="addr">
+                    <ion-row class="infoDiv" >
                         <ion-col>
                             <h4 class="infoTitle">العنوان:</h4>
                         </ion-col>
@@ -155,7 +155,7 @@
                         </ion-col>
                     </ion-row>
 
-                    <ion-row class="infoDiv" *ngIf="!visitShow" id="emai">
+                    <ion-row class="infoDiv" *ngIf="!visitShow" >
                         <ion-col>
                             <h4 class="infoTitle">البريد الالكتروني:</h4>
                         </ion-col>

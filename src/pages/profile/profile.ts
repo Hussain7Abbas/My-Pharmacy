@@ -101,17 +101,21 @@ export class ProfilePage {
         {
           text: 'حفظ',
           handler: data => {
-            this.userDataModel.name=data.name
-            this.userDataModel.province=data.province
-            this.userDataModel.zone=data.zone
-            this.userData[1] = this.userDataModel
+            this.userDataModel.name=data.name,
+            this.userDataModel.province=data.province,
+            this.userDataModel.zone=data.zone,
+            this.userData[1] = this.userDataModel,
             this._authFirebaseService.editUserProfile(this.userData[2], this.userData[1]).then(()=>{
               localStorage.setItem("userData", JSON.stringify(this.userData))
+              this._Events.subscribe("details:Edit", ()=>{
+
               const toast = this._ToastController.create({
                 message: 'تم حفظ التعديلات',
                 duration: 2000
               });
               toast.present();
+              this.navCtrl.setRoot(ProfilePage)
+            })
             })
           }
         }

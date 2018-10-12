@@ -14,8 +14,12 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'notifi.html',
 })
 export class NotifiPage {
+ 
+  isUser: boolean = Boolean(JSON.parse(localStorage["userData"])[1]['userType'] == 'user')
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController) {
+
+    
   }
 
   ionViewDidLoad() {
@@ -25,4 +29,5 @@ export class NotifiPage {
   goBack(){
     this.viewCtrl.dismiss();
    }
+  
 }
