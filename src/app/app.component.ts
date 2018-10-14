@@ -39,7 +39,7 @@ export class MyApp {
 
 
 
-
+    if (platform.is('cordova')){
     platform.ready().then(() => {
       // this.rootPage = NotifiPageModule;
 
@@ -64,6 +64,7 @@ export class MyApp {
 
     });
   }
+}
   // goProfile(){
   //   this.nav.push(ProfilePage)
   // }
