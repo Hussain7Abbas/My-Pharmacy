@@ -156,24 +156,4 @@ export class LoginPage {
     this.navCtrl.pop()
   }
 
-
-  moreDetails(){
-    this.bounce = false
-    let moreDetails = document.getElementById('moreDetails')
-    let moreDetBtn = document.getElementById('detRotate')
-    let promo = document.getElementById('promo')
-
-
-    if (moreDetails.style.display === 'none'){
-      moreDetails.style.display = 'block'
-      moreDetBtn.style.transform = 'rotate(-180deg)'
-      promo.style.display = 'none'
-    }else{
-      moreDetails.style.display = 'none'
-      moreDetBtn.style.transform = 'rotate(0deg)'
-      promo.style.display = 'block'
-    }
-
-  }
-
 }

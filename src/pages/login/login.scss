@@ -7,26 +7,6 @@ page-login {
         margin-top: 30px;
     }
 
-    #moreDetBtn{
-        font-size: 4rem;
-        width: 100%;
-        text-align: center;
-        margin-top: 3px;
-    }
-
-    #detRotate{
-        transform: rotate(0deg);
-        position: absolute;
-        right: calc(50% - 24px);
-        transition: transform 1s ease-in-out;
-        margin-top: -30px;
-        height: 48px; width: 48px;
-
-        background-color: white;
-        border: solid black 3px;
-        box-shadow: 4px 4px 20px 2px #a5a5a5;
-    }
-
     .btnMargin{
         margin-bottom: 20px;
     }
@@ -69,11 +49,5 @@ page-login {
     }
 
 
-    #promo{
-        width: 46%;
-        margin-right: calc(50% - 23%);
-        margin-top: 40px;
-        box-shadow: 5px 7px 20px 2px #a5a5a5;
-    }
 
 }
