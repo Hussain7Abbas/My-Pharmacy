@@ -76,14 +76,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { UserDataModel } from '../../model/DataModels';
 import firebase from 'firebase';
 import { AlertController} from 'ionic-angular';
-
+import { Facebook} from '@ionic-native/facebook';
 @Injectable()
 export class authFirebaseService {
 
   private usersList = this.db.database.ref('userData')
   private pharmacyList = this.db.database.ref('pharmacyList')
 
-  constructor(public afAuth: AngularFireAuth, public _Events:Events, public _OneSignal:OneSignal, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController) {
+  constructor(public facebook: Facebook,public afAuth: AngularFireAuth, public _Events:Events, public _OneSignal:OneSignal, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController) {
 
   }
 
@@ -309,19 +309,32 @@ export class authFirebaseService {
 
 
 
+  // loginWithFacebook(){
+  //   this.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider())
+  //   .then(()=> {
+  //     firebase.auth().getRedirectResult().then(res=>{
+  //       let facebookData = res.additionalUserInfo.profile
+  //       let uid = this.afAuth.auth.currentUser.uid
+  //       this.userDataFind(facebookData, uid, 'facebook')
+  //     })
+  //     }).catch(err=>{
+  //       console.log(err);
+  //   })
+  // }
   loginWithFacebook(){
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider())
-    .then(()=> {
-      firebase.auth().getRedirectResult().then(res=>{
-        let facebookData = res.additionalUserInfo.profile
-        let uid = this.afAuth.auth.currentUser.uid
-        this.userDataFind(facebookData, uid, 'facebook')
-      })
+    this.facebook.login(['email']).then(res=>{
+      const fc=firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
+      firebase.auth().signInWithCredential(fc).then(fs=>{
+        alert("firebase good job")
       }).catch(err=>{
-        console.log(err);
+        alert("firebase error :(")
+      })
+    }).catch(err=>{
+    alert(JSON.stringify(err))
     })
-  }
-
+    
+    
+      }
 
 
   loginWithGoogle(){

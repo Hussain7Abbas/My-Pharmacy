@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 import { Camera } from '@ionic-native/camera';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OneSignal } from '@ionic-native/onesignal';
-
+import { Facebook} from '@ionic-native/facebook';
 import { HeroPage } from '../pages/hero/hero';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -98,7 +98,8 @@ const firebaseConfig = {
     // ================ Firebase ==============
     Camera,
     SplashScreen,
-    OneSignal
+    OneSignal,
+    Facebook
   ]
 })
 export class AppModule {}
