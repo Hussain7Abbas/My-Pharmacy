@@ -1,0 +1,110 @@
+<ion-header>
+        <ion-navbar color="primary">
+        <ion-title>
+        عن التطبيق
+        </ion-title>
+        </ion-navbar>
+      
+        <ion-toolbar color="primary">
+        <ion-segment [(ngModel)]="pages" color="primary">
+        <ion-segment-button value="0" (click)="selectedtab(0)">
+                                                الفكرة
+        </ion-segment-button>
+        <ion-segment-button value="1" (click)="selectedtab(1)">
+                                                فريق العمل
+        </ion-segment-button>
+        <ion-segment-button value="2" (click)="selectedtab(2)">
+                                                المبادرة
+        </ion-segment-button>
+        </ion-segment>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+      <ion-slides    #slider dir="rtl" (ionSlideWillChange)="moveButton($event)" >
+      
+        <ion-slide style="overflow-y:scroll">
+        <div class="div2">
+        <img class="mpl" src="assets/imgs/logo.png" alt="My Pharmacy Logo">
+        <div class="ed">
+        <p class="p1">
+        فكرة عمل المشروع هي تسهيل مهمة المريض للحصول على الدواء وخاصة الادوية النادرة. تتم هذه العملية من خلال انشاء منشور معين يذكر فيه اسم الدواء ومن ثم ترد عليه الصيدلية الاقرب الى منطقته او محاظته ثم الى الابعد.
+        </p>
+        <h6><b>
+                آلية عمل البرنامج:
+        </b></h6>
+        <ol style="padding-right: 15px;">
+        <li><b>المستخدم:</b>
+        <ul>
+        <li>يجب التسجيل كمستخدم.</li>
+        <li>يمكن له النشر في التطبيق مع الانتباه الى ذكر اسم الدواء بشكل صحيح او ارفاق صورة له.</li>
+        </ul>
+        </li>
+        <li><b>الصيدلية:</b>
+        <ul>
+        <li>يجب التسجيل كصيدلية.</li>
+        <li>يجب ارفاق صورة اجازة مزوالة المهنة او اجازة المحل.</li>
+        <li>يجب الرد على المنشور مع ذكر منشأ وسعر الدواء.</li>
+        <li>لا يمكن له النشر في التطبيق.</li>
+        </ul>
+        </li>
+        </ol>
+        </div>
+        </div>
+        </ion-slide>
+        <ion-slide style="overflow-y:scroll">
+        <div class ="clearfix" style=" margin: 15px 5px 5px 5px">
+                <div id="card">
+                <img src="assets/imgs/hussain.jpg" alt="Avatar" class="imgprop">
+                <div>
+                <h4><b>حسين كريم</b></h4>
+                </div>
+                </div>
+                <div id="card1">
+                <img  src="assets/imgs/hussainabbas.jpg" alt="Avatar" class="imgprop">
+                <div class="container">
+                <h4><b>حسين عباس</b></h4>
+                </div>
+                </div>
+                <div id="card2">
+                 <img src="assets/imgs/hala.jpg" alt="Avatar" class="imgprop">
+                <div>
+                <h4><b>حلا حازم</b></h4>
+                </div>
+                </div>
+                <div id="card3">
+                <img src="assets/imgs/ilham.jpg" alt="Avatar" class="imgprop">
+                <div class="container">
+                <h4><b>الهام حسن</b></h4>
+                </div>
+                </div>
+                <div id="card4">
+                <img src="assets/imgs/saif.jpg" alt="Avatar" class="imgprop">
+                <div class="container">
+                <h4><b>سيف علي</b></h4>
+                </div>
+                </div>
+                <div id="card5">
+                  <img src="assets/imgs/hala.jpg" alt="Avatar" class="imgprop">
+                  <div class="container">
+                  <h4><b>هبة ستار</b></h4>
+                  </div>
+                  </div>
+        </div>
+        </ion-slide>
+      
+        <ion-slide style="overflow-y:scroll">
+        <div style="margin-top: 15px;">
+        <div class="ac">
+        <p>البرمجة من اجل العراق: وهي مبادرة إنسانية غير ربحية تهدف الى خدمة المجتمع عن طريق البرمجة Programming. تعتبر "Code For IRAQ" مبادرة تعليمية حقيقية ترعى المهتمين بتعلم تصميم وبرمجة تطبيقات الهاتف الجوال ومواقع الانترنت وبرامج الحاسوب والشبكات والاتصالات ونظم تشغيل الحاسوب باستخدام التقنيات مفتوحة المصدر Open Source ، كما توفر لهم جميع الدروس التعليمية اللازمة وبشكل مجاني تماماً.
+        </p>
+        <br>
+        <img class="cfil" src="assets/imgs/codeforiraq.jpg" alt="Code For Iraq">
+        </div>
+        <h4><b>موقع المبادرة</b></h4>
+        <a class="ion-home color-primary item" href="#" onclick="window.open('http://codeforiraq.herokuapp.com', '_system', 'location=yes'); return false;">http://codeforiraq.herokuapp.com</a>
+      </div>
+        </ion-slide>
+      
+      </ion-slides>
+      </ion-content>
+      
