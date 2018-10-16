@@ -1,0 +1,142 @@
+page-profile {
+    // ================================ Info Details Header  =========================
+    .prof{
+        background-color: #339999;
+        width: 100%;
+        height:170px ;
+        text-align: center;
+        flex-flow: row;
+    }
+
+    .backButton{color: white; font-size: 2.2rem; background-color: transparent; height: 20px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14);}
+
+    .prof ion-icon{
+        font-size: 2.2rem;
+    }
+    // ================================ Info Details Image User ======================
+    .userimg{
+        max-width: 22%;
+        padding-top: 13px;
+    }
+    // ================================ Info Details UserNmae ========================
+    h2{
+        margin-top: 7px;
+        color:white;
+        font-size: 26pt;
+        font-weight: bold;
+    }
+    // ================================ Info Details Grid Row ========================
+    .infoDiv{
+        margin: 5px 0px;
+    }
+    .text-input-ios,.text-input-md {
+        margin: 0px 0 0px 0px;
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: center;
+
+    }
+    // ================================ Info Details Grid Col ========================
+    .infoText{
+        width: 100%;
+        text-align: center;
+        font-size: 14pt;
+    }
+    // ================================ Info Details Segment Activated ===============
+    .segment-ios .segment-button.segment-activated{
+        background-color: white;
+        color:#339999;
+        border-width:0px; 
+        border-bottom-width: 2px;
+        border-bottom-color: #339999;
+    } 
+    // ================================ Info Details Seqment Button ===================~
+    .segment-ios .segment-button {     
+          border-left-width: 0;
+        height: 35px;
+        border-width:0px;
+        color:#339999;
+        background-color:white;
+        border-style:solid;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    #qesitionList{
+        margin-top: -32px;
+    }
+//==============================================================================================
+//===================================== Home Page CSS Style ====================================
+//==============================================================================================
+
+// =============== The style the side buttons in the post ===============
+.slideButton{
+    font-size: 2.2rem;
+}
+// =============== Reply count number style ===============
+.replyNo{
+    width: 100%;
+    text-align: center; 
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-top: -18px;
+    padding-left: 10px;
+}
+// =============== The style of the div which contain postHeaderTitle and Date in the user Home ===============
+.textDiv{
+    position: absolute;
+    right: 65px;
+    top: 10px;
+    width: calc(100% - 80px);
+}
+.textDiv h2{
+    color:#053636;
+
+}
+//==============================================================================================
+//==================================== Home Page CSS Style =====================================
+//==============================================================================================
+
+//==============================================================================================
+//====================================== Common CSS Style ======================================
+//==============================================================================================
+
+// =============== The ion-item style ===============
+#ionItem{
+height: 70px;
+margin-top: 1px;
+border-bottom: solid 1px #c8c7cc;
+}
+
+// =============== set the default border of ion-item in ion-list to zero ===============
+.list-ios > .item-block:first-child {
+border-top: 0px solid #c8c7cc;
+}
+.list-ios .item-block .item-inner,
+.list-md .item-block .item-inner {
+border-bottom: 0px solid #c8c7cc;
+}
+// =============== The post header title = (userName for Pharmacy Home, replyStatus for user Home) ===============
+.postHeaderTitle{
+float: right;
+font-weight: bold;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+// =============== The Date of the post ===============
+.postDate{
+float: left;
+}
+// =============== The Name of the medicine ===============
+.postTitle{
+width: 100%;
+text-align: center;
+position: absolute;
+top: calc(1.7rem + 13px); left: 0px;
+font-weight: bold;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+}

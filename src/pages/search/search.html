@@ -1,0 +1,95 @@
+<ion-content>
+    <!-- =============================== Nav Bar Header ============================== -->
+    <!-- ====== Nav Bar Component ================= -->
+    <!-- ==--> <nav-bar></nav-bar>  <!-- ===========-->
+    <!-- ====== Nav Bar Component ================= -->
+        <ion-searchbar #q (keyup.enter)='onSearch(q.value)' id="navBarSearch" type="text" placeholder="بحث..."></ion-searchbar>
+    <!-- =============================== Nav Bar Header ============================== -->
+    
+    
+    
+    
+     <!-- =================<segmentsPart>======================= -->
+    <ion-segment [(ngModel)]="searchType" class="segment-ios ">
+        <ion-segment-button (click) = 'onSwitch()' value="post" class="segment-ios">منشورات</ion-segment-button>
+        <ion-segment-button (click) = 'onSwitch()' value="pharmacy" class="segment-ios">صيدليات</ion-segment-button>
+    </ion-segment>
+    <!-- ==================</segmentsPart>==================== -->
+    <!-- ==================<محتوى البحث عن صيدليه>=================== -->
+<ion-content>
+    <div *ngIf="isResults">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingText="اسحب للتحديث"
+          refreshingSpinner="crescent"
+          refreshingText="جارِ التحديث...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+    
+
+
+    <div [ngSwitch]="searchType">
+        <ion-list *ngSwitchCase="'pharmacy'">
+            <ion-item id="ionItem" *ngFor="let item of searchList.slice().reverse()">
+                <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">
+                    <img src="../../assets/imgs/userBlack.png" style="width: 50px; height: 50px;"> <!-- ===== The status Picture of post ===== -->
+                </ion-avatar>
+                <div class="p-textDiv"> <!-- ===== The div which contain all the texts ===== -->
+                    <div> <!-- ===== the div which contain all the texts ===== -->
+                        <h2 class="postHeaderTitle">{{item[1]['name']}}</h2> <!-- ===== The status of post ===== -->
+                        <p class="postDate">{{item[1]['pharmacyReplyNo']}}</p> <!-- ===== The date of post ===== -->
+                    </div>
+                    <h2 class="postTitle">{{item[1]['province']}} / {{item[1]['zone']}}</h2> <!-- ===== The title of post ===== -->
+                </div>
+                <button ion-button icon-only class="previewQuesBtn" (click)="openProfile(item[0])"><ion-icon name="ios-arrow-forward"></ion-icon></button>
+            </ion-item>
+        </ion-list>
+    </div>
+    
+        
+    
+       
+       <!-- ==================<محتوى البحث عن صيدليه>=================== -->
+           <!-- ==================<محتوى المنشور>=================== -->
+    <div [ngSwitch]="searchType">
+        <ion-list *ngSwitchCase="'post'" >
+            <ion-item id="ionItem" *ngFor="let item of searchList.slice().reverse()"> <!-- ===== ion-item ===== -->
+                <ion-avatar style="width: 50px; position: absolute; right: 8px; top: 10px;">
+                    <img src="../../assets/imgs/userBlack.png" style="width: 50px; height: 50px;"> <!-- ===== The status Picture of post ===== -->
+                </ion-avatar>
+                <div class="p-textDiv"> <!-- ===== The div which contain all the texts ===== -->
+                    <div> <!-- ===== the div which contain all the texts ===== -->
+                        <h2 class="postHeaderTitle">{{item[1]['name']}}</h2> <!-- ===== The status of post ===== -->
+                        <p class="postDate">{{item[1]['postDate']}}</p> <!-- ===== The date of post ===== -->
+                    </div>
+                    <h2 class="postTitle">{{item[1]['postBody']}}</h2> <!-- ===== The title of post ===== -->
+                </div>
+                <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
+            </ion-item>       
+        </ion-list>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content
+            loadingSpinner="crescent"
+            loadingText="تحميل المزيد">
+          </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+
+    </div>
+
+
+    <div *ngIf="!isResults">
+        <img id="noResultsImg" src="../../assets/imgs/noSearchResults.png">
+        <h1 id="noResultsTxt"> لا توجد نتائج متوفرة</h1>
+    </div>
+    </ion-content>
+
+
+    
+
+
+</ion-content>
