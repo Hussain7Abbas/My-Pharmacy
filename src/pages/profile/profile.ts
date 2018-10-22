@@ -48,12 +48,14 @@ export class ProfilePage {
 
   myUid = localStorage.getItem('uid')
   visitShow:boolean = true
+  visitProfile:Boolean = false
   isUser: boolean
   userData = []
 
   constructor(public navCtrl: NavController, public _Events:Events, public modalCtrl: ModalController, public _postsFirebaseService:postsFirebaseService, public db:AngularFireDatabase, public _LoadingController:LoadingController, public _ToastController:ToastController, public _authFirebaseService:authFirebaseService, public alertCtrl:AlertController, public _NavParams: NavParams) {
 
     if (localStorage.getItem("visitProfile") == "true"){
+      this.visitProfile = true
       this.isUser = false
       this.userData = _NavParams.get("userProfile")
       localStorage.setItem("visitProfile", "false")

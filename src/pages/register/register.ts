@@ -47,7 +47,7 @@ export class RegisterPage {
   })
 
   checkerLoader = this.loadingCtrl.create({
-    content: "سيتم تسجيل دخولك بعد الضغط على الرابط",
+    content: "ارسلنا رابط تأكيد للايميل الخاص بك، سيتم تسجيل دخولك بعد الضغط عليه",
     spinner: "crescent",
   })
 
@@ -110,11 +110,6 @@ export class RegisterPage {
       this.loader.dismiss();
       firebase.auth().currentUser.sendEmailVerification();
       this.checkerLoader.present()
-      this.alertCtrl.create({
-        title: "تفحص صندوق بريدك الالكتروني",
-        subTitle:"رجائاً ثم بالضغط على الرابط الذي تم ارساله الى بريدك الالكتروني لتأكيد حسابك",
-        buttons: ['OK']
-      })
       this._authFirebaseService.checkVerified(this.userAuthData)
     })
     this._Events.subscribe("auth:Success", ()=>{

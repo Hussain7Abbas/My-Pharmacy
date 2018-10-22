@@ -94,7 +94,6 @@ export class PreviewPostPage {
       this._postsFirebaseService.updatePosts(this.thePost[0], this.postData).then((posta)=>{
         this.commentNotification(posta);
       })
-
       this._ToastController.create({
         message: 'تم نشر تعليقك',
         duration: 2000

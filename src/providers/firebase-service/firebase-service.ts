@@ -297,7 +297,7 @@ export class authFirebaseService {
   
 
   editUserProfile($key, myList) {
-    return this.usersList.update($key, myList);
+    return this.db.list('userData').update($key, myList);
   }
 
   logOut(){
@@ -326,6 +326,10 @@ export class authFirebaseService {
       const fc=firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
       firebase.auth().signInWithCredential(fc).then(fs=>{
         alert("firebase good job")
+        alert(fs.providerData['name'])
+        fs.providerData.forEach(ele => {
+          alert(ele)
+        });
       }).catch(err=>{
         alert("firebase error :(")
       })
