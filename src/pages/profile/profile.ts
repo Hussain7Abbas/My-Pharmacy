@@ -5,6 +5,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { AddPostPage } from '../add-post/add-post'
 import { UserDataModel, postModel } from '../../model/DataModels';
 import { PreviewPostPage } from '../preview-post/preview-post';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 /**
  * Generated class for the ProfilePage page.
@@ -72,58 +73,11 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
-  editPro() {
-    let prompt = this.alertCtrl.create({
-      title: 'تعديل',
-      // message: "Enter a name for this new album you're so keen on adding",
-      inputs: [
-        {
-          value: this.userData[1]['name'],
-          name: 'name',
-          placeholder: 'الاسم'
-        },
-        {
-          value: this.userData[1]['province'],
-          name: 'province',
-          placeholder: 'المحافظة'
-        },
-        {
-          value: this.userData[1]['zone'],
-          name: 'zone',
-          placeholder: 'المنطقة'
-        }
-      ],
-      buttons: [
-        {
-          text: 'اغلاق',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'حفظ',
-          handler: data => {
-            this.userDataModel.name=data.name,
-            this.userDataModel.province=data.province,
-            this.userDataModel.zone=data.zone,
-            this.userData[1] = this.userDataModel,
-            this._authFirebaseService.editUserProfile(this.userData[2], this.userData[1]).then(()=>{
-              localStorage.setItem("userData", JSON.stringify(this.userData))
-              this._Events.subscribe("details:Edit", ()=>{
-
-              const toast = this._ToastController.create({
-                message: 'تم حفظ التعديلات',
-                duration: 2000
-              });
-              toast.present();
-              this.navCtrl.setRoot(ProfilePage)
-            })
-            })
-          }
-        }
-      ]
-    });
-    prompt.present();
+  editProfile() {
+    this.modalCtrl.create(EditProfilePage).present()
+    this._Events.subscribe('profile:Edit', ()=>{
+      this.userData = JSON.parse(localStorage["userData"]);
+    })
   }
   
   goBack(){

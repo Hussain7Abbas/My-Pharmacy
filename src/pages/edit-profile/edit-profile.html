@@ -1,0 +1,60 @@
+<!-- =============================== Nav Bar Header ============================== -->
+<ion-header>
+  <div style="height: 40px; background-color: #50A7A7;">
+    <ion-title style="line-height: 40px; text-align: center;color: white;">تعديل الصفحة الشخصية</ion-title>
+  </div>
+  <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " name='ios-arrow-forward'></ion-icon>
+  <hr style="height: 1px; background-color: #f2f2f2;">
+</ion-header>
+<!-- =============================== Nav Bar Header ============================== -->
+
+
+<ion-content padding>       
+
+  <form [formGroup]="myForm">
+
+
+    <ion-item>
+        <ion-label style="color: #339999;" >الاسم  :</ion-label>
+        <ion-input [(ngModel)]="userInfoData.name" placeholder="اسم المستخدم" [formControl]="myForm.controls['name']"></ion-input>
+    </ion-item>
+    <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
+        <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يكون طول الاسم 3-20 حرف ولا يحتوي على رموز</p>
+        <p *ngIf="myForm.value.name == ''" class="p">يرجى ادخال الاسم</p>
+    </ion-item>
+
+
+    <ion-list style="color: #339999; margin: 0px;">
+          <ion-item>
+              <ion-label style="color: #339999;" >المحافظة  :</ion-label>
+              <ion-select [(ngModel)]="userInfoData.province" [formControl]="myForm.controls['province']" >
+                  <ion-option value="الانبار">الانبار</ion-option>
+                  <ion-option value="القادسية ">القادسية</ion-option>
+                  <ion-option value="البصرة">البصرة</ion-option>
+              </ion-select>
+          </ion-item>
+    </ion-list>
+      
+    <ion-list>
+      <ion-item >
+          <ion-label style="color: #339999; margin: 0px;"> المنطقة :</ion-label>
+          <ion-select [(ngModel)]="userInfoData.zone" [formControl]="myForm.controls['zone']" >
+              <ion-option value="الديوانية">الديوانية</ion-option>
+              <ion-option value="الرمادي">الرمادي</ion-option>
+              <ion-option value="الفلوجة">الفلوجة</ion-option>
+          </ion-select>
+      </ion-item>
+    </ion-list>
+  </form>
+
+    <ion-item style="margin-top: -30px;">
+        <h2 style="color: #339999;"> العنوان :</h2>
+        <textarea id="pharmacyAdress" [(ngModel)]="userInfoData.pharmacyAdress" placeholder="عنوان الصيدلية و التفاصيل"></textarea>
+    </ion-item>
+
+    
+  <form [formGroup]="myForm">
+    <button ion-button block (click)="saveEdit()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>
+      &nbsp; &nbsp; حفظ التعديلات</button>
+  </form>
+</ion-content> 

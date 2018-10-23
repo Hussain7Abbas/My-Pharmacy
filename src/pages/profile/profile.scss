@@ -42,6 +42,11 @@ page-profile {
         text-align: center;
         font-size: 14pt;
     }
+
+    .infoTitle{
+        color: black;
+        font-weight: bold;
+    }
     // ================================ Info Details Segment Activated ===============
     .segment-ios .segment-button.segment-activated{
         background-color: white;
@@ -91,7 +96,6 @@ page-profile {
 }
 .textDiv h2{
     color:#053636;
-
 }
 //==============================================================================================
 //==================================== Home Page CSS Style =====================================

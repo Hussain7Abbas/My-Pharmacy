@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events, ViewController } from 'ionic-angular';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service'
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 
@@ -29,12 +29,11 @@ export class HybridLoginPage {
     oldImgURL
     cameraDidOpened:boolean = false
 
-constructor(public navCtrl: NavController, public params: NavParams, public _Camera:Camera, public _ViewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService,public fb: FormBuilder,) {
-    console.log(this.hybridData);
+constructor(public navCtrl: NavController, public params: NavParams, public _Camera:Camera, public _ViewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService, public fb: FormBuilder) {
     this.myForm = this.fb.group({
-    province: new FormControl(null,Validators.required),
-    zone: new FormControl(null,Validators.required)
-})
+        province: new FormControl(null,Validators.required),
+        zone: new FormControl(null,Validators.required)
+    })
 }
 
 
