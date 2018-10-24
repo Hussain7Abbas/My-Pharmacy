@@ -51,7 +51,7 @@ export class HomePage {
       this.myLimit += 10
       
       this.postsRef = this.db.database.ref("Posts")
-      this.postsRef.orderByChild('postDate').limitToLast(this.myLimit).once('value', action => {
+      this.postsRef.limitToLast(this.myLimit).once('value', action => {
         for (let post in action.val()) {
           this.myObject.push([
             post,

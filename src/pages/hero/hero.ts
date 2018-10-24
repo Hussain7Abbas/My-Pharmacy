@@ -23,6 +23,7 @@ export class HeroPage {
 
   isUser = Boolean(JSON.parse(localStorage["userData"])[1]['userType'] == 'user')
   myPoints = JSON.parse(localStorage["userData"])[1]['pharmacyReplyNo']
+  uid = JSON.parse(localStorage["userData"])[1]['uid']
 
   constructor(public navCtrl: NavController, public _loadingCtrl:LoadingController, public db:AngularFireDatabase, public navParams: NavParams) {
     this.setData()
@@ -31,8 +32,18 @@ export class HeroPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HeroPage');
+    if (!this.isUser){
+      this.checkReplyNo()
+    }
   }
   
+  checkReplyNo(){
+    setTimeout(() => {
+      this.myPoints = JSON.parse(localStorage["userData"])[1]['pharmacyReplyNo']
+      this.checkReplyNo()
+    }, 2000);   
+  }
+
   setData(){
     let loading = this._loadingCtrl.create({
       spinner: "crescent",
@@ -50,16 +61,13 @@ export class HeroPage {
         }
     }).then(()=>{
       this.myObject.sort((a, b) => {return b[1]['pharmacyReplyNo'] - a[1]['pharmacyReplyNo']})
-      console.log(this.myObject);
       for (let i = 0 ; i < this.myObject.length ; i++){
         this.searchList.push([
           this.myObject[i][0],
           this.myObject[i][1],
           i+1
         ])
-      }
-      console.log(this.searchList);
-      
+      }      
       loading.dismiss()
     })
   }
@@ -71,19 +79,26 @@ export class HeroPage {
     });
     loading.present()
     
-    console.log(profileKey);
-
     this.db.object("userData/" + profileKey).snapshotChanges().subscribe(action=>{
       let profileData = action.payload.val() as UserDataModel
       let userProfile = [
         [{}],
         profileData
       ]
-      console.log(userProfile);
       localStorage.setItem("visitProfile", "true")
       this.navCtrl.push(ProfilePage, {userProfile})
 
       loading.dismiss() 
     });
   }
+
+
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.navCtrl.setRoot(HeroPage)
+      refresher.complete();
+    }, 2000);
+  }
+
 }

@@ -64,9 +64,9 @@ export class PreviewPostPage {
    }
 
    onComment(){
-    if (this.replyData.price.length < 1){
+    if (this.replyData.price.length < 3 || this.replyData.price.length > 6){
       this._ToastController.create({
-        message: 'لا يمكنك ترك السعر فارغ',
+        message: 'يجب ان يكون السعر بين 3-6 ارقام',
         duration: 2000
       }).present()
     }else{
@@ -99,12 +99,20 @@ export class PreviewPostPage {
         duration: 2000
       }).present()
       
-  
+      this.postData.comments.length += 1
+
       this.userData[1]['pharmacyReplyNo'] = Number(this.userData[1]['pharmacyReplyNo']) + 1
       this._authFirebaseService.editUserProfile(this.userData[2], this.userData[1])
       localStorage.setItem("userData", JSON.stringify(this.userData))
       
-      this.viewCtrl.dismiss();
+      this.replyData = {
+        pharmacyName: '',
+        pharmacyKey: '',
+        date: '',
+        price: '',
+        details: ''
+      }
+      
     }
 
    }

@@ -59,6 +59,11 @@ page-hero {
     .list-md .item-block .item-inner {
         border-bottom: 0px solid #c8c7cc;
     }
+
+    .item-ios,
+    .item-md{
+        padding-right: 0px;
+    }
     // =============== The post header title = (userName for Pharmacy Home, replyStatus for user Home) ===============
     .postHeaderTitle{
         float: right;

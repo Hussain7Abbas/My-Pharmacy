@@ -34,8 +34,8 @@
   <div id="replies" >
     <div *ngIf="!isUser" padding>
       <h3>اضافة رد</h3>
-      <input class="Input" placeholder="السعر ..." [(ngModel)]="replyData.price">
-      <input class="Input" placeholder="التفاصيل ..." [(ngModel)]="replyData.details">
+      <input type="number" class="Input" placeholder="السعر" [(ngModel)]="replyData.price">
+      <textarea placeholder="التفاصيل" [(ngModel)]="replyData.details"></textarea>
       <button ion-button block (click)="onComment()">موافق</button>
     </div>
   </div>
