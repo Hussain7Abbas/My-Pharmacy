@@ -3,7 +3,10 @@ import { IonicPage, NavController, NavParams, Events, AlertController, LoadingCo
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
-import { HybridLoginPage } from "../hybrid-login/hybrid-login";
+import { Facebook,FacebookLoginResponse} from '@ionic-native/facebook';
+import firebase from 'firebase';
+import { HybridLoginPage } from '../hybrid-login/hybrid-login';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -36,7 +39,8 @@ export class LoginPage {
     public _Events:Events,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public _ModalController: ModalController
+    public _ModalController: ModalController,
+    private fb: Facebook
     ) {
 
   }
@@ -60,7 +64,8 @@ export class LoginPage {
   }
   //--------------------------------------login with faceboook-----------------------------------------------
   logInFacebook(){
-    this.loader.present();
+    // this.loader.present();
+    
     this._authFirebaseService.loginWithFacebook()
     this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
       setTimeout(() => {
@@ -69,27 +74,47 @@ export class LoginPage {
       }, 1000);
     })
     this._Events.subscribe('auth:Success', ()=>{
-      this.loader.dismiss();
-      this.navCtrl.setRoot(TabsPage)
+      // this.loader.dismiss();
+      // this.navCtrl.setRoot(TabsPage)
+      this.navCtrl.setRoot(HybridLoginPage)
+      this.navCtrl.goToRoot;
+      
     })
   } 
     //--------------------------------------login with Google-----------------------------------------------
-  logInGoogle(){
-    this.loader.present();
-    this._authFirebaseService.loginWithGoogle()
-    this._Events.subscribe('go:Register_Google', (hybridData)=>{
-      setTimeout(() => {
-        this.loader.dismiss();
-        this._ModalController.create(HybridLoginPage, {loginType: 'google', hybridData: hybridData}).present()
-      }, 1000);
-    })
-    this._Events.subscribe('auth:Success', ()=>{
-      this.loader.dismiss();
-      this.navCtrl.setRoot(TabsPage)
-    })
-  }
+  // logInGoogle(){
+  //   this.loader.present();
+  //   this._authFirebaseService.loginWithGoogle()
+  //   this._Events.subscribe('go:Register_Google', (hybridData)=>{
+  //     setTimeout(() => {
+  //       this.loader.dismiss();
+  //       this._ModalController.create(HybridLoginPage, {loginType: 'google', hybridData: hybridData}).present()
+  //     }, 1000);
+  //   })
+  //   this._Events.subscribe('auth:Success', ()=>{
+  //     this.loader.dismiss();
+  //     this.navCtrl.setRoot(TabsPage)
+  //   })
+  // }
  
-
+  // logInFacebook(){
+  //   this.fb.login(['email']).then(res=>{
+  //     const fc=firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
+  //     firebase.auth().signInWithCredential(fc).then(fs=>{
+  //       alert("firebase good job")
+  //       alert(fs.providerData['name'])
+  //       fs.providerData.forEach(ele => {
+  //         alert(ele)
+  //       });
+  //     }).catch(err=>{
+  //       alert("firebase error :(")
+  //     })
+  //   }).catch(err=>{
+  //   alert(JSON.stringify(err))
+  //   })
+    
+    
+  //     }
   registerOn(){
     this.navCtrl.setRoot(RegisterPage)
   }

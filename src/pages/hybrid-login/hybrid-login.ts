@@ -4,7 +4,7 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from "@ionic-native/camera";
-
+import { TabsPage } from '../tabs/tabs';
 @Component({
   selector: 'page-hybrid-login',
   templateUrl: 'hybrid-login.html',
@@ -49,21 +49,22 @@ facebookRegister(){
     this._authFirebaseService.registerFacebook(this.userInfoData, this.hybridData)
     this._Events.subscribe("auth:Success", ()=>{
         this._ViewCtrl.dismiss();
-        // this.navCtrl.setRoot(TabsPage)
+        this.navCtrl.setRoot(TabsPage)
+        this.navCtrl.goToRoot;
     })
 }
 
-googleRegister(){
-    if (this.cameraDidOpened) {
-        this.imgName = localStorage.getItem('uid')
-        this.imgUpload()
-    }
-    this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
-    this._Events.subscribe("auth:Success", ()=>{
-        this._ViewCtrl.dismiss();
-        // this.navCtrl.setRoot(TabsPage)
-    })
-}
+// googleRegister(){
+//     if (this.cameraDidOpened) {
+//         this.imgName = localStorage.getItem('uid')
+//         this.imgUpload()
+//     }
+//     this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
+//     this._Events.subscribe("auth:Success", ()=>{
+//         this._ViewCtrl.dismiss();
+//         // this.navCtrl.setRoot(TabsPage)
+//     })
+// }
 
 segment(userType){
     let userSegment = document.getElementById('user')

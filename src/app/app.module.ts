@@ -92,6 +92,7 @@ const firebaseConfig = {
   ],
   providers: [
     StatusBar,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     // ================ Firebase ==============
     AngularFireAuth,
@@ -102,7 +103,7 @@ const firebaseConfig = {
     Camera,
     SplashScreen,
     OneSignal,
-    Facebook
+    
   ]
 })
 export class AppModule {}
