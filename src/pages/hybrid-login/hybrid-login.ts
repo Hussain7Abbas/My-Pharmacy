@@ -54,17 +54,17 @@ facebookRegister(){
     })
 }
 
-// googleRegister(){
-//     if (this.cameraDidOpened) {
-//         this.imgName = localStorage.getItem('uid')
-//         this.imgUpload()
-//     }
-//     this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
-//     this._Events.subscribe("auth:Success", ()=>{
-//         this._ViewCtrl.dismiss();
-//         // this.navCtrl.setRoot(TabsPage)
-//     })
-// }
+googleRegister(){
+    if (this.cameraDidOpened) {
+        this.imgName = localStorage.getItem('uid')
+        this.imgUpload()
+    }
+    this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
+    this._Events.subscribe("auth:Success", ()=>{
+        this._ViewCtrl.dismiss();
+        this.navCtrl.setRoot(TabsPage)
+    })
+}
 
 segment(userType){
     let userSegment = document.getElementById('user')

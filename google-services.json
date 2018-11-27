@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "40681149794-st00ei6n28t6b6irh7i5hrpha12ho3kp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.My_Pharmacy",
+            "certificate_hash": "aa699992229de5cfbcddc732081849d1f793f7c1"
+          }
+        },
+        {
           "client_id": "40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
