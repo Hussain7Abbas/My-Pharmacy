@@ -76,14 +76,15 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { UserDataModel } from '../../model/DataModels';
 import firebase, { auth } from 'firebase';
 import { AlertController} from 'ionic-angular';
-import { Facebook} from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook,FacebookLoginResponse} from '@ionic-native/facebook';
 @Injectable()
 export class authFirebaseService {
 
   private usersList = this.db.database.ref('userData')
   private pharmacyList = this.db.database.ref('pharmacyList')
 
-  constructor(public fb: Facebook,public afAuth: AngularFireAuth, public _Events:Events, public _OneSignal:OneSignal, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController) {
+  constructor(public fb: Facebook,public afAuth: AngularFireAuth, public _Events:Events, public _OneSignal:OneSignal, public db:AngularFireDatabase, public loadingCtrl: LoadingController,public alertCtrl: AlertController,private googlePlus: GooglePlus) {
 
   }
 
@@ -305,11 +306,12 @@ export class authFirebaseService {
     localStorage.setItem('isLogin','false')
   }
 
-
+  
   loginWithFacebook(){
-    this.fb.login(['email']).then(res=>{
+    this.fb.login(['email','public_profile']).then(res=>{
       const fc=firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
       firebase.auth().signInWithCredential(fc).then(fs=>{
+       
         firebase.auth().getRedirectResult().then(res=>{
                 let facebookData = res.additionalUserInfo.profile
                 let uid = this.afAuth.auth.currentUser.uid
@@ -321,20 +323,39 @@ export class authFirebaseService {
       })
   
     }
+    loginWithGoogle(): void {
+      this.googlePlus.login({
+        'webClientId': '40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com',
+        'offline': true
+      }).then( res => {
+              const googleCredential = firebase.auth.GoogleAuthProvider
+                  .credential(res.idToken);
+     
+              firebase.auth().signInWithCredential(googleCredential)
+            .then( response => {
+              let googleData = res.additionalUserInfo.profile
+                    let uid = this.afAuth.auth.currentUser.uid
+                    this.userDataFind(googleData, uid, 'google')
+             
+            });
+      }, err => {
+          console.error("Error: ", err)
+          alert(console.error)
+      });
+    }
 
-
-  loginWithGoogle(){
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
-    .then(()=> {
-      firebase.auth().getRedirectResult().then(res=>{
-        let googleData = res.additionalUserInfo.profile
-        let uid = this.afAuth.auth.currentUser.uid
-        this.userDataFind(googleData, uid, 'google')
-      })
-    }).catch(err=>{
-      console.log(err);
-    })
-  }
+  // loginWithGoogle(){
+  //   this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+  //   .then(()=> {
+  //     firebase.auth().getRedirectResult().then(res=>{
+  //       let googleData = res.additionalUserInfo.profile
+  //       let uid = this.afAuth.auth.currentUser.uid
+  //       this.userDataFind(googleData, uid, 'google')
+  //     })
+  //   }).catch(err=>{
+  //     console.log(err);
+  //   })
+  // }
 
 
 

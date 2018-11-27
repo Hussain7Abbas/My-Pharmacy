@@ -21,7 +21,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { NavBarComponent } from '../components/nav-bar/nav-bar';
 import { AddPostPage } from '../pages/add-post/add-post';
 import { PreviewPostPage } from '../pages/preview-post/preview-post';
-
+import { GooglePlus } from '@ionic-native/google-plus';
 import { StatusBar } from '@ionic-native/status-bar';
 
 // ==================================== Firebase =====================================
@@ -90,6 +90,7 @@ const firebaseConfig = {
   providers: [
     StatusBar,
     Facebook,
+    GooglePlus,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     // ================ Firebase ==============
     AngularFireAuth,

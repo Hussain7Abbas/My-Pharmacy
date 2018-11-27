@@ -24,6 +24,7 @@
     "@ionic-native/camera": "^4.14.0",
     "@ionic-native/core": "~4.12.0",
     "@ionic-native/facebook": "^4.16.0",
+    "@ionic-native/google-plus": "^4.17.0",
     "@ionic-native/onesignal": "^4.14.0",
     "@ionic-native/splash-screen": "~4.12.0",
     "@ionic-native/status-bar": "~4.12.0",
@@ -33,6 +34,7 @@
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-facebook4": "^3.1.0",
+    "cordova-plugin-googleplus": "^5.3.2",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^2.2.3",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -69,6 +71,10 @@
         "APP_ID": "162473584682352",
         "APP_NAME": "pharmacy",
         "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0"
+      },
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "11.8.0"
       }
     },
     "platforms": [
