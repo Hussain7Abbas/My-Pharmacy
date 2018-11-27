@@ -95,5 +95,5 @@
         <variable name="APP_NAME" value="pharmacy" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.37.0" />
     </plugin>
-    <engine name="android" spec="~7.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>

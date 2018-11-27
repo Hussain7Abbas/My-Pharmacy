@@ -59,7 +59,7 @@
                           </ion-col>
                       </ion-row>
                   </ion-grid>
-                  <button ion-button full (click)="editPro()" color="primary"  ><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
+                  <button ion-button full (click)="editProfile()" color="primary"  ><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
               </ion-list>
           </div>
         <!-- ==================</contentDetails>==================== -->
@@ -87,7 +87,7 @@
                             <button ion-button color="danger" (click)="onDelete(item[0])" class="slideButton"><ion-icon name="md-trash"></ion-icon>حذف</button>
                           </ion-item-options>
                         <ion-item-options side="left"> <!-- ===== The Edit button on the left side ===== -->
-                            <button ion-button color="primary" (click)="onEdit(item)" class="slideButton"><ion-icon name="md-create"></ion-icon>تعديل</button>
+                            <button ion-button color="primary" (click)="onEdit(thePost)" class="slideButton"><ion-icon name="md-create"></ion-icon>تعديل</button>
                         </ion-item-options>
                     </ion-item-sliding>
                 </ion-list>

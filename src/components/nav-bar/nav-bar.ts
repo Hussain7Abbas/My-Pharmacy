@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
-import { NotifiPage } from '../../pages/notifi/notifi'
 
 // import { MyApp } from '../../app/app.component';
 
@@ -23,8 +22,8 @@ export class NavBarComponent {
 
   }
 
-  goNotifi(){
-    let notifiModal = this.modalCtrl.create(NotifiPage);
-    notifiModal.present();
-  }
+  // goNotifi(){
+  //   let notifiModal = this.modalCtrl.create(NotifiPage);
+  //   notifiModal.present();
+  // }
 }

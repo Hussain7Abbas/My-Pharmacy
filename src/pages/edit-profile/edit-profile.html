@@ -9,7 +9,7 @@
 <!-- =============================== Nav Bar Header ============================== -->
 
 
-<ion-content padding>       
+<ion-content padding *ngIf="!isUser">       
 
   <form [formGroup]="myForm">
 
@@ -58,3 +58,52 @@
       &nbsp; &nbsp; حفظ التعديلات</button>
   </form>
 </ion-content> 
+
+
+
+
+
+<ion-content padding *ngIf="isUser">       
+
+    <form [formGroup]="myForm">
+  
+  
+      <ion-item>
+          <ion-label style="color: #339999;" >الاسم  :</ion-label>
+          <ion-input [(ngModel)]="userInfoData.name" placeholder="اسم المستخدم" [formControl]="myForm.controls['name']"></ion-input>
+      </ion-item>
+      <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
+          <p *ngIf="myForm.value.name != ''" class="p"> يجب ان يكون طول الاسم 3-20 حرف ولا يحتوي على رموز</p>
+          <p *ngIf="myForm.value.name == ''" class="p">يرجى ادخال الاسم</p>
+      </ion-item>
+  
+  
+      <ion-list style="color: #339999; margin: 0px;">
+            <ion-item>
+                <ion-label style="color: #339999;" >المحافظة  :</ion-label>
+                <ion-select [(ngModel)]="userInfoData.province" [formControl]="myForm.controls['province']" >
+                    <ion-option value="الانبار">الانبار</ion-option>
+                    <ion-option value="القادسية ">القادسية</ion-option>
+                    <ion-option value="البصرة">البصرة</ion-option>
+                </ion-select>
+            </ion-item>
+      </ion-list>
+        
+      <ion-list>
+        <ion-item >
+            <ion-label style="color: #339999; margin: 0px;"> المنطقة :</ion-label>
+            <ion-select [(ngModel)]="userInfoData.zone" [formControl]="myForm.controls['zone']" >
+                <ion-option value="الديوانية">الديوانية</ion-option>
+                <ion-option value="الرمادي">الرمادي</ion-option>
+                <ion-option value="الفلوجة">الفلوجة</ion-option>
+            </ion-select>
+        </ion-item>
+      </ion-list>
+    </form>
+  
+      
+    <form [formGroup]="myForm">
+      <button ion-button block (click)="saveEdit()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>
+        &nbsp; &nbsp; حفظ التعديلات</button>
+    </form>
+  </ion-content> 

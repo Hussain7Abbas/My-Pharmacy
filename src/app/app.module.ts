@@ -19,7 +19,6 @@ import { StartPage } from '../pages/start/start';
 import { HybridLoginPage } from '../pages/hybrid-login/hybrid-login';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { NavBarComponent } from '../components/nav-bar/nav-bar';
-import { NotifiPage } from '../pages/notifi/notifi';
 import { AddPostPage } from '../pages/add-post/add-post';
 import { PreviewPostPage } from '../pages/preview-post/preview-post';
 
@@ -56,7 +55,6 @@ const firebaseConfig = {
     LoginPage,
     RegisterPage,
     StartPage,
-    NotifiPage,
     AddPostPage,
     PreviewPostPage,
     HybridLoginPage,
@@ -84,7 +82,6 @@ const firebaseConfig = {
     LoginPage,
     RegisterPage,
     StartPage,
-    NotifiPage,
     AddPostPage,
     PreviewPostPage,
     HybridLoginPage,
