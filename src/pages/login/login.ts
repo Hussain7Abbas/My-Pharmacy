@@ -71,6 +71,7 @@ export class LoginPage {
     this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
       setTimeout(() => {
         this.loader.dismiss();
+
         this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
       }, 1000);
     })

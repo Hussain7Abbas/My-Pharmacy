@@ -5,8 +5,6 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { TabsPage } from '../tabs/tabs';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from "@ionic-native/camera";
-import {Http ,Headers} from '@angular/http'
-import { OneSignal } from "@ionic-native/onesignal";
 // import { LoginPage} from '../login/login';
 /**
  * Generated class for the RegisterPage page.
@@ -58,7 +56,7 @@ export class RegisterPage {
   oldImgURL
   cameraDidOpened:boolean = false
 
-  constructor(public http:Http,
+  constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
               public _authFirebaseService:authFirebaseService,
@@ -114,7 +112,6 @@ export class RegisterPage {
     })
     this._Events.subscribe("auth:Success", ()=>{
       this.checkerLoader.dismiss()
-      this.welNotification()
       this.navCtrl.setRoot(TabsPage)
     })
   }
@@ -168,26 +165,6 @@ export class RegisterPage {
   goBack(){
     this.navCtrl.pop()
   }
-  welNotification(){
-    let  headers = new Headers();
-    headers.append('Content-Type','application/json;');
-    headers.append('Authorization','Basic ZGEwYzJiMjktZWEwNy00M2Q3LWIyMzItNzhjNjczNjRlNjQw');
-    let body={
-      "app_id":"e2304606-4ab1-4f9d-a0ea-1c83518b62af",
-      "included_segments": ['All'],
-      "data":{"foo":"bar"},
-      "contents": {
-        en: "شكرا لتسجيلك في تطبيق صيدليتي"
-    },
-    headings: {
-      en: " نطبيق صيدليتي "
-    } 
-  };
-  this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
-  ).subscribe(data=>{
-    console.log(data)
-    // alert(data)
-  })
-  }
+ 
 
 }

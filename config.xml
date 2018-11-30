@@ -95,9 +95,13 @@
         <variable name="APP_NAME" value="pharmacy" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.37.0" />
     </plugin>
+<<<<<<< HEAD
+    <engine name="android" spec="7.0.0" />
+=======
     <engine name="android" spec="~7.0.0" />
     <plugin name="cordova-plugin-googleplus" spec="^5.3.2">
         <variable name="REVERSED_CLIENT_ID" value="40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com" />
         <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
     </plugin>
+>>>>>>> refs/remotes/origin/master
 </widget>
