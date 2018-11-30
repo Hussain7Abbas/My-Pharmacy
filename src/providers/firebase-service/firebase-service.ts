@@ -309,17 +309,17 @@ export class authFirebaseService {
   
   loginWithFacebook(){
     this.fb.login(['email','public_profile']).then(res=>{
-      const fc=firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
-      firebase.auth().signInWithCredential(fc).then(fs=>{
-       
-        firebase.auth().getRedirectResult().then(res=>{
-                let facebookData = res.additionalUserInfo.profile
+      const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+      firebase.auth().signInWithCredential(fc).then( Response =>{
+        // let displayName = Response.displayName
+        // alert( Response.displayName);
+                let facebookData = res
                 let uid = this.afAuth.auth.currentUser.uid
                 this.userDataFind(facebookData, uid, 'facebook')
-              })
+              
         });
-      }).catch(err=>{
-        alert("firebase error :(")
+      },err =>{
+        console.error("Error:",err)
       })
   
     }
@@ -328,19 +328,23 @@ export class authFirebaseService {
         'webClientId': '40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com',
         'offline': true
       }).then( res => {
+        
               const googleCredential = firebase.auth.GoogleAuthProvider
                   .credential(res.idToken);
      
               firebase.auth().signInWithCredential(googleCredential)
+              
             .then( response => {
-              let googleData = res.additionalUserInfo.profile
+            
+              let googleData = res
                     let uid = this.afAuth.auth.currentUser.uid
                     this.userDataFind(googleData, uid, 'google')
-             
+                    // let displayName = googleData.displayName;
+                    // alert(googleData.displayName)
             });
       }, err => {
           console.error("Error: ", err)
-          alert(console.error)
+          // alert(console.error)
       });
     }
 
@@ -375,9 +379,10 @@ export class authFirebaseService {
           this._Events.publish("auth:Success")
           localStorage.setItem('isLogin','true')
       }else{
+        
         if (loginType == 'google'){
           this._Events.publish('go:Register_Google', hybridData)
-        }else if (loginType == 'google'){
+        }else if (loginType == 'facebook'){
           this._Events.publish('go:Register_Facebook', hybridData)
         }
       }
@@ -397,7 +402,7 @@ export class authFirebaseService {
     // ========================================================================
     let userInfoData:UserDataModel = {
       uid: userData.uid,
-      name: googleData['name'],
+      name:googleData.displayName,
       province: userData.province,
       zone: userData.zone,
       userType: userData.userType,
@@ -406,12 +411,12 @@ export class authFirebaseService {
     }
 
     this.usersList.push(userInfoData).then((posta)=>{
-      this.setUserInfoLocalStorage({email: googleData['email'], password: ''}, userInfoData, posta)
+      this.setUserInfoLocalStorage({email:'', password: ''}, userInfoData, posta)
     })
     
     this._Events.subscribe("auth:Success", ()=>{
       if (userData.userType == 'pharmacy'){
-        this.pushPharmacyList(googleData['name'], '')
+        this.pushPharmacyList(googleData.displayName, '')
       }
     })
     // ========================================================================
@@ -429,7 +434,7 @@ export class authFirebaseService {
     // ========================================================================
     let userInfoData:UserDataModel = {
       uid: userData.uid,
-      name: facebookData['name'],
+      name: facebookData.displayName,
       province: userData.province,
       zone: userData.zone,
       userType: userData.userType,
@@ -438,12 +443,12 @@ export class authFirebaseService {
     }
     
     this.usersList.push(userInfoData).then((posta)=>{
-      this.setUserInfoLocalStorage({email: facebookData['email'], password: ''}, userInfoData, posta)
+      this.setUserInfoLocalStorage({email:'', password: ''}, userInfoData, posta)
     })
     
     this._Events.subscribe("auth:Success", ()=>{
       if (userData.userType == 'pharmacy'){
-        this.pushPharmacyList(facebookData['name'], '')
+        this.pushPharmacyList(facebookData.displayName, '')
       }
     })
     // ========================================================================

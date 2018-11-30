@@ -50,7 +50,7 @@ facebookRegister(){
     this._Events.subscribe("auth:Success", ()=>{
         this._ViewCtrl.dismiss();
         this.navCtrl.setRoot(TabsPage)
-        this.navCtrl.goToRoot;
+        // this.navCtrl.goToRoot;
     })
 }
 

@@ -46,7 +46,7 @@
               
     <div id="camera" class="hiddenCam">
         <h1 style="width: 100%; text-align: center; font-size: 16pt; margin-bottom: 10px;">التقاط صورة لترخيص وزارة الصحة </h1>
-        <ion-icon id="theIcon" ios="ios-camera" md="md-camera" ></ion-icon>
+        <ion-icon id="theIcon" (click)='openCamera()' ios="ios-camera" md="md-camera" ></ion-icon>
         <ion-label style="font-size: 12pt; font-weight: bold; color: #800000">سيتم اغلاق حسابك اذا كان الترخيص مزيف</ion-label>
     </div>
     <form [formGroup]="myForm">

@@ -20,7 +20,8 @@ import { HybridLoginPage } from '../hybrid-login/hybrid-login';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
+  displayName:any;
+  name:any;
   userAuthData ={
     email:'',
     password:''
@@ -73,8 +74,8 @@ export class LoginPage {
         this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
       }, 1000);
     })
-    this._Events.subscribe('auth:Success', ()=>{
-      this.loader.dismiss();
+    this._Events.subscribe('auth:Success', (res)=>{
+      // this.loader.dismiss();
       this.navCtrl.setRoot(TabsPage)
       // this.navCtrl.setRoot(HybridLoginPage)
       // this.navCtrl.goToRoot;
@@ -83,18 +84,22 @@ export class LoginPage {
   } 
     //--------------------------------------login with Google-----------------------------------------------
   logInGoogle(){
-    this.loader.present();
+    // this.loader.present();
     this._authFirebaseService.loginWithGoogle()
     this._Events.subscribe('go:Register_Google', (hybridData)=>{
       setTimeout(() => {
-        this.loader.dismiss();
+        // this.loader.dismiss();
         this._ModalController.create(HybridLoginPage, {loginType: 'google', hybridData: hybridData}).present()
-      }, 1000);
+        // alert(console.error)
+       }, 1000);
     })
-    this._Events.subscribe('auth:Success', ()=>{
-      this.loader.dismiss();
-      this.navCtrl.setRoot(TabsPage)
+    this._Events.subscribe('auth:Success', (res)=>{
+     
+      // this.loader.dismiss();
+      this.navCtrl.setRoot(TabsPage  )
+      alert(console.error)
     })
+    // alert(console.error)
   }
  
   // logInFacebook(){
