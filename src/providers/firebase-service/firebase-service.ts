@@ -307,22 +307,7 @@ export class authFirebaseService {
   }
 
   
-  loginWithFacebook(){
-    this.fb.login(['email','public_profile']).then(res=>{
-      const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-      firebase.auth().signInWithCredential(fc).then( Response =>{
-        // let displayName = Response.displayName
-        // alert( Response.displayName);
-                let facebookData = res
-                let uid = this.afAuth.auth.currentUser.uid
-                this.userDataFind(facebookData, uid, 'facebook')
-              
-        });
-      },err =>{
-        console.error("Error:",err)
-      })
-  
-    }
+
     loginWithGoogle(): void {
       this.googlePlus.login({
         'webClientId': '40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com',
@@ -347,22 +332,7 @@ export class authFirebaseService {
           // alert(console.error)
       });
     }
-
-  // loginWithGoogle(){
-  //   this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
-  //   .then(()=> {
-  //     firebase.auth().getRedirectResult().then(res=>{
-  //       let googleData = res.additionalUserInfo.profile
-  //       let uid = this.afAuth.auth.currentUser.uid
-  //       this.userDataFind(googleData, uid, 'google')
-  //     })
-  //   }).catch(err=>{
-  //     console.log(err);
-  //   })
-  // }
-
-
-
+//-------------------------------------------------------------------------//
   userDataFind(hybridData, uid, loginType){
     this.usersList.orderByChild('uid').equalTo(uid).once('value', action => {
       let userData = []
@@ -378,21 +348,19 @@ export class authFirebaseService {
           localStorage.setItem("userData", JSON.stringify(userInfoData))
           this._Events.publish("auth:Success")
           localStorage.setItem('isLogin','true')
+     
       }else{
         
         if (loginType == 'google'){
           this._Events.publish('go:Register_Google', hybridData)
         }else if (loginType == 'facebook'){
+          
           this._Events.publish('go:Register_Facebook', hybridData)
         }
       }
     })
   }
 
-
-
-
-  
   registerGoogle(userData, googleData){
     localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
     userData.uid = localStorage.getItem('uid')
@@ -409,9 +377,10 @@ export class authFirebaseService {
       pharmacyReplyNo: userData.pharmacyReplyNo,
       pharmacyAdress: userData.pharmacyAdress,
     }
-
     this.usersList.push(userInfoData).then((posta)=>{
+      
       this.setUserInfoLocalStorage({email:'', password: ''}, userInfoData, posta)
+      
     })
     
     this._Events.subscribe("auth:Success", ()=>{
@@ -423,38 +392,11 @@ export class authFirebaseService {
     // ====================== User Profile Details ============================
     // ========================================================================
   }
-  
 
-  registerFacebook(userData, facebookData){
-    localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
-    userData.uid = localStorage.getItem('uid')
-    userData.signalId = localStorage.getItem('signalId')
     // ========================================================================
     // ====================== User Profile Details ============================
     // ========================================================================
-    let userInfoData:UserDataModel = {
-      uid: userData.uid,
-      name: facebookData.displayName,
-      province: userData.province,
-      zone: userData.zone,
-      userType: userData.userType,
-      pharmacyReplyNo: userData.pharmacyReplyNo,
-      pharmacyAdress: userData.pharmacyAdress,
-    }
-    
-    this.usersList.push(userInfoData).then((posta)=>{
-      this.setUserInfoLocalStorage({email:'', password: ''}, userInfoData, posta)
-    })
-    
-    this._Events.subscribe("auth:Success", ()=>{
-      if (userData.userType == 'pharmacy'){
-        this.pushPharmacyList(facebookData.displayName, '')
-      }
-    })
-    // ========================================================================
-    // ====================== User Profile Details ============================
-    // ========================================================================
-  }
+
 
   pushPharmacyList(userName, imgUrl){
     this.pharmacyList.push({

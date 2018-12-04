@@ -20,8 +20,7 @@ import { HybridLoginPage } from '../hybrid-login/hybrid-login';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  displayName:any;
-  name:any;
+  
   userAuthData ={
     email:'',
     password:''
@@ -64,25 +63,7 @@ export class LoginPage {
 
   }
   //--------------------------------------login with faceboook-----------------------------------------------
-  logInFacebook(){
-    // this.loader.present();
-    
-    this._authFirebaseService.loginWithFacebook()
-    this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
-      setTimeout(() => {
-        this.loader.dismiss();
-
-        this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
-      }, 1000);
-    })
-    this._Events.subscribe('auth:Success', (res)=>{
-      // this.loader.dismiss();
-      this.navCtrl.setRoot(TabsPage)
-      // this.navCtrl.setRoot(HybridLoginPage)
-      // this.navCtrl.goToRoot;
-      
-    })
-  } 
+  
     //--------------------------------------login with Google-----------------------------------------------
   logInGoogle(){
     // this.loader.present();
@@ -97,30 +78,13 @@ export class LoginPage {
     this._Events.subscribe('auth:Success', (res)=>{
      
       // this.loader.dismiss();
-      this.navCtrl.setRoot(TabsPage  )
+      this.navCtrl.setRoot(TabsPage)
       alert(console.error)
     })
     // alert(console.error)
   }
  
-  // logInFacebook(){
-  //   this.fb.login(['email']).then(res=>{
-  //     const fc=firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
-  //     firebase.auth().signInWithCredential(fc).then(fs=>{
-  //       alert("firebase good job")
-  //       alert(fs.providerData['name'])
-  //       fs.providerData.forEach(ele => {
-  //         alert(ele)
-  //       });
-  //     }).catch(err=>{
-  //       alert("firebase error :(")
-  //     })
-  //   }).catch(err=>{
-  //   alert(JSON.stringify(err))
-  //   })
-    
-    
-  //     }
+
   registerOn(){
     this.navCtrl.setRoot(RegisterPage)
   }
