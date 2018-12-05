@@ -63,25 +63,46 @@ export class LoginPage {
 
   }
   //--------------------------------------login with faceboook-----------------------------------------------
-  
+  logInFacebook(){
+    this.loader.present();
+    
+    this._authFirebaseService.loginWithFacebook()
+    this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
+      setTimeout(() => {
+        this.loader.dismiss();
+
+        this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
+      }, 1000);
+      
+    })
+    
+    this._Events.subscribe('auth:Success', (res)=>{
+      this.loader.dismiss();
+     
+      this.navCtrl.setRoot(TabsPage)
+     
+      // this.navCtrl.goToRoot;
+      
+    })
+  } 
     //--------------------------------------login with Google-----------------------------------------------
   logInGoogle(){
-    // this.loader.present();
+    this.loader.present();
     this._authFirebaseService.loginWithGoogle()
     this._Events.subscribe('go:Register_Google', (hybridData)=>{
       setTimeout(() => {
-        // this.loader.dismiss();
+        this.loader.dismiss();
         this._ModalController.create(HybridLoginPage, {loginType: 'google', hybridData: hybridData}).present()
-        // alert(console.error)
+       
        }, 1000);
     })
     this._Events.subscribe('auth:Success', (res)=>{
      
-      // this.loader.dismiss();
+      this.loader.dismiss();
       this.navCtrl.setRoot(TabsPage)
-      alert(console.error)
+   
     })
-    // alert(console.error)
+    
   }
  
 

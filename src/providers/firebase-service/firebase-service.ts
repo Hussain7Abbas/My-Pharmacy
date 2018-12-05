@@ -307,7 +307,21 @@ export class authFirebaseService {
   }
 
   
-
+  loginWithFacebook(){
+    this.fb.login(['email','public_profile']).then(res=>{
+      const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+      firebase.auth().signInWithCredential(fc).then( Response =>{
+       
+                let facebookData = Response
+                let uid = this.afAuth.auth.currentUser.uid
+                this.userDataFind(facebookData, uid, 'facebook')
+              
+        });
+      },err =>{
+        console.error("Error:",err)
+      })
+  
+    }
     loginWithGoogle(): void {
       this.googlePlus.login({
         'webClientId': '40681149794-nd7i3nas56o342hsdal3p0urjmsup5e5.apps.googleusercontent.com',
@@ -392,11 +406,38 @@ export class authFirebaseService {
     // ====================== User Profile Details ============================
     // ========================================================================
   }
-
+  registerFacebook(userData, facebookData){
+    localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
+    userData.uid = localStorage.getItem('uid')
+    userData.signalId = localStorage.getItem('signalId')
     // ========================================================================
     // ====================== User Profile Details ============================
     // ========================================================================
-
+    let userInfoData:UserDataModel = {
+      uid: userData.uid,
+      name: facebookData.displayName,
+      province: userData.province,
+      zone: userData.zone,
+      userType: userData.userType,
+      pharmacyReplyNo: userData.pharmacyReplyNo,
+      pharmacyAdress: userData.pharmacyAdress,
+    }
+    
+    this.usersList.push(userInfoData).then((posta)=>{
+     
+      this.setUserInfoLocalStorage({email:'', password: ''}, userInfoData, posta)
+      
+    })
+   
+    this._Events.subscribe("auth:Success", ()=>{
+      if (userData.userType == 'pharmacy'){
+        this.pushPharmacyList(facebookData.displayName, '')
+      }
+    })
+    // ========================================================================
+    // ====================== User Profile Details ============================
+    // ========================================================================
+  }
 
   pushPharmacyList(userName, imgUrl){
     this.pharmacyList.push({

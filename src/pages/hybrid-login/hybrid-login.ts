@@ -35,6 +35,7 @@ constructor(public navCtrl: NavController, public params: NavParams, public _Cam
         province: new FormControl(null,Validators.required),
         zone: new FormControl(null,Validators.required)
     })
+    
 }
 
 
@@ -42,7 +43,19 @@ goBack(){
 this._ViewCtrl.dismiss();
 }
 
-
+facebookRegister(){
+    if (this.cameraDidOpened) {
+        this.imgName = localStorage.getItem('uid')
+        this.imgUpload()
+    }
+    this._authFirebaseService.registerFacebook(this.userInfoData, this.hybridData)
+    this._Events.subscribe("auth:Success", ()=>{
+        this._ViewCtrl.dismiss();
+        this.navCtrl.setRoot(TabsPage)
+        
+        // this.navCtrl.goToRoot;
+    })
+}
 
 googleRegister(){
     if (this.cameraDidOpened) {
