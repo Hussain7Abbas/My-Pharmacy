@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events, ViewController } from 'ionic-angular';
+import { NavController, NavParams, Events, ViewController, Alert } from 'ionic-angular';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import firebase from 'firebase';
@@ -14,7 +14,7 @@ export class HybridLoginPage {
     userInfoData ={
         province: '',
         zone: '',
-        userType: '',
+        userType: 'user',
         pharmacyReplyNo: '0',
         pharmacyAdress: 'لا يوجد عنوان بعد!'
     }
@@ -44,6 +44,8 @@ this._ViewCtrl.dismiss();
 }
 
 facebookRegister(){
+    
+    
     if (this.cameraDidOpened) {
         this.imgName = localStorage.getItem('uid')
         this.imgUpload()
@@ -58,6 +60,7 @@ facebookRegister(){
 }
 
 googleRegister(){
+   
     if (this.cameraDidOpened) {
         this.imgName = localStorage.getItem('uid')
         this.imgUpload()
@@ -69,7 +72,9 @@ googleRegister(){
     })
 }
 
+
 segment(userType){
+    alert(userType)
     let userSegment = document.getElementById('user')
     let pharmacySegment = document.getElementById('pharmacy')
     let cameraSegment = document.getElementById('camera')

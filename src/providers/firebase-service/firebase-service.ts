@@ -226,6 +226,7 @@ export class authFirebaseService {
 
     // ========================== Register Function =============================
     regesterWithEmail(authData, userData){
+      
       return this.afAuth.auth.createUserWithEmailAndPassword(authData.email,authData.password)
       .then(user=>{
         localStorage.setItem('uid', user.user.uid)
@@ -343,7 +344,7 @@ export class authFirebaseService {
             });
       }, err => {
           console.error("Error: ", err)
-          // alert(console.error)
+         
       });
     }
 //-------------------------------------------------------------------------//
@@ -365,13 +366,17 @@ export class authFirebaseService {
      
       }else{
         
+        
         if (loginType == 'google'){
           this._Events.publish('go:Register_Google', hybridData)
+          
         }else if (loginType == 'facebook'){
           
           this._Events.publish('go:Register_Facebook', hybridData)
         }
+        
       }
+      
     })
   }
 
@@ -400,6 +405,7 @@ export class authFirebaseService {
     this._Events.subscribe("auth:Success", ()=>{
       if (userData.userType == 'pharmacy'){
         this.pushPharmacyList(googleData.displayName, '')
+        
       }
     })
     // ========================================================================
@@ -407,9 +413,11 @@ export class authFirebaseService {
     // ========================================================================
   }
   registerFacebook(userData, facebookData){
+    
     localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)
     userData.uid = localStorage.getItem('uid')
     userData.signalId = localStorage.getItem('signalId')
+    
     // ========================================================================
     // ====================== User Profile Details ============================
     // ========================================================================
@@ -430,6 +438,7 @@ export class authFirebaseService {
     })
    
     this._Events.subscribe("auth:Success", ()=>{
+      
       if (userData.userType == 'pharmacy'){
         this.pushPharmacyList(facebookData.displayName, '')
       }
