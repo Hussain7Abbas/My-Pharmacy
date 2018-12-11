@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams, Events, AlertController, LoadingCo
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
-import { Facebook,FacebookLoginResponse} from '@ionic-native/facebook';
-import firebase from 'firebase';
+
+import { Facebook} from '@ionic-native/facebook';
 import { HybridLoginPage } from '../hybrid-login/hybrid-login';
 
 /**

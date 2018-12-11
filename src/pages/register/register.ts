@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TabsPage } from '../tabs/tabs';
 import firebase from 'firebase';
+import {StartPage} from '../start/start';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 // import { LoginPage} from '../login/login';
 /**
@@ -111,7 +112,7 @@ export class RegisterPage {
       this._authFirebaseService.checkVerified(this.userAuthData)
     })
     this._Events.subscribe("auth:Success", ()=>{
-      this.checkerLoader.dismiss()
+      this.checkerLoader.dismiss();
       this.navCtrl.setRoot(TabsPage)
     })
   }
@@ -163,7 +164,7 @@ export class RegisterPage {
   }
 
   goBack(){
-    this.navCtrl.pop()
+    this.navCtrl.push(StartPage)
   }
  
 

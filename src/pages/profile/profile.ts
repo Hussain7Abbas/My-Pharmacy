@@ -21,6 +21,7 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 })
 
 export class ProfilePage {
+  pet="deatils"
 
   userDataModel: UserDataModel={
     uid: '',
@@ -42,7 +43,6 @@ export class ProfilePage {
     comments: []
   }
   
-  pet="deatils"
 
   postsRef = this.db.database.ref("Posts")
   myObject = []
