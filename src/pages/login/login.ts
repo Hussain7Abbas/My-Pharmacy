@@ -64,24 +64,24 @@ export class LoginPage {
   }
   //--------------------------------------login with faceboook-----------------------------------------------
   logInFacebook(){
-    this.loader.present();
-    
+    // this.loader.present();
+    alert("1")
     this._authFirebaseService.loginWithFacebook()
     this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
       setTimeout(() => {
         this.loader.dismiss();
-
+alert("2")
         this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
       }, 1000);
       
     })
     
     this._Events.subscribe('auth:Success', (res)=>{
-      this.loader.dismiss();
-     
+      // this.loader.dismiss();
+     alert("3")
       this.navCtrl.setRoot(TabsPage)
      
-      // this.navCtrl.goToRoot;
+     
       
     })
   } 

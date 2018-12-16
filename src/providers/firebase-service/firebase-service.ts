@@ -310,9 +310,11 @@ export class authFirebaseService {
   
   loginWithFacebook(){
     this.fb.login(['email','public_profile']).then(res=>{
+      alert("A")
       const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+
       firebase.auth().signInWithCredential(fc).then( Response =>{
-       
+       alert(console.error)
                 let facebookData = Response
                 let uid = this.afAuth.auth.currentUser.uid
                 this.userDataFind(facebookData, uid, 'facebook')

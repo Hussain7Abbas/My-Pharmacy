@@ -8,39 +8,39 @@
   <ion-icon (click)="goBack()" class="backBtn" name="ios-arrow-forward"></ion-icon>
 
   <div padding>
-    <h1 style="color: black; padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">تسجيل دخول</h1>
+    <h1 style="color: #6e6e6e; padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">تسجيل دخول</h1>
 
 
     <ion-item class="transparentWhite">
-      <ion-icon item-left name="md-at"></ion-icon>
+      <ion-icon item-left name="md-at" style=" color:#339999"></ion-icon>
       <ion-input [(ngModel)]="userAuthData.email" placeholder="البريد الالكتروني" ></ion-input>
     </ion-item>
 
     <ion-item class="transparentWhite">
-      <ion-icon item-left name="md-lock"></ion-icon>
+      <ion-icon item-left name="md-lock" style=" color:#339999"></ion-icon>
       <ion-input [(ngModel)]="userAuthData.password" placeholder="كلمة المرور" type='password'></ion-input>
     </ion-item>
 
 
-    <button ion-button block (click)="onLogin()"class="myBtn" id="login" ><ion-icon name="md-key"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
-    <a (click)="forgetPassword()" style="font-weight: bold; font-size: 12pt; width: 100%; text-align: center; color: black;">هل نسيت كلمة المرور؟</a>
+    <button ion-button block (click)="onLogin()"class="myBtn" id="login" ><ion-icon name="md-contact"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
+    <a (click)="forgetPassword()" style="font-weight: bold; font-size: 12pt; width: 100%; text-align: center;color: #6e6e6e;">هل نسيت كلمة المرور؟</a>
 
   </div>
 
   <div padding>
 
-    <h3 style="color: black; text-align: center;" >تسجيل بواسطة:</h3>
+    <h3 style="color: #6e6e6e; text-align: center;" >تسجيل بواسطة:</h3>
     <hr style="margin-bottom: 10px; height: 1px; background-color: #00000033;">
 
     <button ion-button block (click)="logInFacebook()" class="myBtn btnMargin" id="facebookLogin">
-      <ion-icon name="logo-facebook"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;حساب فيس بوك
+      <ion-icon name="logo-facebook" class="icon"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;حساب فيس بوك
     </button>
 
     <button ion-button block (click)="logInGoogle()" class="myBtn btnMargin" id="googleLogin" >
-      <ion-icon name="logo-google"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;حساب جيميل
+      <ion-icon name="logo-google" class="icon"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;حساب جيميل
     </button>
 
-    <h3 style="color: black; text-align: center;">ليس لديك حساب؟</h3>
+    <h3 style="color: #6e6e6e; text-align: center;">ليس لديك حساب؟</h3>
     <hr style="margin-bottom: 10px; height: 1px; background-color: #00000033;">
 
     <button ion-button block (click)="registerOn()" class="myBtn btnMargin" >

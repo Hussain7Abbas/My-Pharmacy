@@ -6,7 +6,7 @@
 
 
   <ion-icon (click)="goBack()" class="backBtn" name="ios-arrow-forward"></ion-icon>
-  <h1 style="color: black; padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">انشاء حساب</h1>
+  <h1 style="color: #6e6e6e;  padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">انشاء حساب</h1>
 
 <div>
   <div id="segmentCont">
@@ -18,7 +18,7 @@
   <form [formGroup]="myForm">
 
     <ion-item class="transparentWhite" >
-        <ion-icon item-left name="md-person"></ion-icon>
+        <ion-icon item-left name="md-person" style="color: #339999;" ></ion-icon>
         <ion-input [(ngModel)]="userInfoData.name" placeholder="اسم المستخدم" [formControl]="myForm.controls['name']"></ion-input>
     </ion-item>
     <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
@@ -28,7 +28,7 @@
 
 
     <ion-item class="transparentWhite" id="email" >
-        <ion-icon item-left name="md-at"></ion-icon>
+        <ion-icon item-left name="md-at" style="color: #339999;"></ion-icon>
         <ion-input [(ngModel)]="userAuthData.email" placeholder="البريد الالكتروني" [formControl]="myForm.controls['email']"></ion-input>
     </ion-item>
     <ion-item no-lines  *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
@@ -39,7 +39,7 @@
 
 
     <ion-item class="transparentWhite" id="password">
-        <ion-icon item-left name="md-lock"></ion-icon>
+        <ion-icon item-left name="md-lock" style="color: #339999;" ></ion-icon>
         <ion-input [(ngModel)]="userAuthData.password" placeholder="كلمة المرور" [formControl]="myForm.controls['password']" type='password'></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
@@ -128,7 +128,7 @@
   <div id="camera">
     <ion-label class="b" style="padding-top: 15px;">التقاط صورة لترخيص وزارة الصحة </ion-label>
     <ion-icon id="theIcon" (click)='openCamera()' ios="ios-camera" md="md-camera" ></ion-icon>
-    <ion-label class="b" style="color: #800000">سيتم اغلاق حسابك اذا كان الترخيص مزيف </ion-label>
+    <ion-label class="b" style="color:rgba(202,11, 11)">سيتم اغلاق حسابك اذا كان الترخيص مزيف </ion-label>
     <img src="{{currentImg}}">
   </div>
 
