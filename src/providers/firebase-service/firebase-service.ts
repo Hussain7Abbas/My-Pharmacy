@@ -212,13 +212,7 @@ export class authFirebaseService {
         localStorage.setItem("userData", JSON.stringify(userInfoData))
         this._Events.publish("auth:Success")
         localStorage.setItem('isLogin','true')
-        this._OneSignal.setSubscription(true)
-
-        if (userData[0][1]['userType'] == 'pharmacy'){
-          this._OneSignal.sendTag('userType', 'pharmacy')
-        }else if (userData[0][1]['userType'] == 'user'){
-          this._OneSignal.sendTag('userType', 'user')
-        }
+        
 
       })
 
@@ -247,57 +241,11 @@ export class authFirebaseService {
       // ========================================================================
       // ====================== User Profile Details ============================
       // ========================================================================
-      }).catch(error=>{
-        const email_already_in_use = this.alertCtrl.create({
-          title: "تنبيه",
-          subTitle: "الايميل مسجل به مسبقا",
-          buttons: ['موافق']
-        });
-          
-        
-        const weak_password = this.alertCtrl.create({
-          title: "تنبيه",
-          subTitle: "كلمة المرور ضعيفة",
-          buttons: ['موافق']
-        });
-        const invalid_email = this.alertCtrl.create({
-          title: "تنبيه",
-          subTitle: "الايميل غير صالح ",
-          buttons: ['موافق']
-        });
-        const network_error = this.alertCtrl.create({
-          title: "تنبيه",
-          subTitle: "خطأ في الاتصال في الانترنيت",
-          buttons: ['موافق']
-        });
-        const user_not_found = this.alertCtrl.create({
-          title: "تنبيه",
-          subTitle: "لا يوجد حساب",
-          buttons: ['موافق']
-        });
-        if (error.code=="auth/email-already-in-use") {
-          email_already_in_use.present();
-        }
-        if (error.code=="auth/weak-password") {
-          weak_password.present();
-        }
-        if (error.code=="auth/invalid-email") {
-          invalid_email.present();
-        
-      }
-      if (error.code=="auth/user-not-found") {
-        user_not_found.present();
-      }
-      if (error.code=="auth/network-request-failed") {
-        network_error.present();
-      }
-    
+     
         })
     }
       
-     
-  
-
+   
   editUserProfile($key, myList) {
     return this.db.list('userData').update($key, myList);
   }
@@ -310,11 +258,11 @@ export class authFirebaseService {
   
   loginWithFacebook(){
     this.fb.login(['email','public_profile']).then(res=>{
-      alert("A")
+      
       const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
 
       firebase.auth().signInWithCredential(fc).then( Response =>{
-       alert(console.error)
+       
                 let facebookData = Response
                 let uid = this.afAuth.auth.currentUser.uid
                 this.userDataFind(facebookData, uid, 'facebook')
@@ -350,7 +298,8 @@ export class authFirebaseService {
       });
     }
 //-------------------------------------------------------------------------//
-  userDataFind(hybridData, uid, loginType){
+  
+userDataFind(hybridData, uid, loginType){
     this.usersList.orderByChild('uid').equalTo(uid).once('value', action => {
       let userData = []
       if (action.val() !== null){
@@ -365,7 +314,13 @@ export class authFirebaseService {
           localStorage.setItem("userData", JSON.stringify(userInfoData))
           this._Events.publish("auth:Success")
           localStorage.setItem('isLogin','true')
-     
+          this._OneSignal.setSubscription(true)
+
+          if (userData[0][1]['userType'] == 'pharmacy'){
+            this._OneSignal.sendTag('userType', 'pharmacy')
+          }else if (userData[0][1]['userType'] == 'user'){
+            this._OneSignal.sendTag('userType', 'user')
+          }
       }else{
         
         
@@ -381,6 +336,8 @@ export class authFirebaseService {
       
     })
   }
+
+
 
   registerGoogle(userData, googleData){
     localStorage.setItem('uid', this.afAuth.auth.currentUser.uid)

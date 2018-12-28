@@ -64,25 +64,19 @@ export class LoginPage {
   }
   //--------------------------------------login with faceboook-----------------------------------------------
   logInFacebook(){
-    // this.loader.present();
-    alert("1")
+    this.loader.present();
     this._authFirebaseService.loginWithFacebook()
     this._Events.subscribe('go:Register_Facebook', (hybridData)=>{
       setTimeout(() => {
         this.loader.dismiss();
-alert("2")
         this._ModalController.create(HybridLoginPage, {loginType: 'facebook', hybridData: hybridData}).present()
       }, 1000);
       
     })
-    
     this._Events.subscribe('auth:Success', (res)=>{
-      // this.loader.dismiss();
-     alert("3")
+      this.loader.dismiss();
       this.navCtrl.setRoot(TabsPage)
      
-     
-      
     })
   } 
     //--------------------------------------login with Google-----------------------------------------------
@@ -104,8 +98,6 @@ alert("2")
     })
     
   }
- 
-
   registerOn(){
     this.navCtrl.setRoot(RegisterPage)
   }

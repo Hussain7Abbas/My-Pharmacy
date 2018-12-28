@@ -49,7 +49,6 @@ export class RegisterPage {
     content: "ارسلنا رابط تأكيد للايميل الخاص بك، سيتم تسجيل دخولك بعد الضغط عليه",
     spinner: "crescent",
   })
-
   saveLoading;
   currentImg;
   imgName =''
@@ -69,14 +68,13 @@ export class RegisterPage {
 
   this.myForm = this.fb.group({
     password: new FormControl(null,Validators.compose([Validators.required,Validators.minLength(5)])),
-    email: new FormControl(null, Validators.compose([ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+   email: new FormControl(null, Validators.compose([ Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
     name: new FormControl(null, Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(20), Validators.pattern('[a-zA-Zأ-ي -]*')])),
     province: new FormControl(null,Validators.required),
     zone: new FormControl(null,Validators.required)
+ 
   })
-
   }
-
   ionViewDidLoad() {
 
     console.log('ionViewDidLoad RegisterPage');
@@ -89,31 +87,86 @@ export class RegisterPage {
         this.loader.present(); 
         this.imgName = localStorage.getItem('uid')
         this.imgUpload()
-      }else{
-        this.alertCtrl.create({
+      } else{
+      const alert= this.alertCtrl.create({
           title: 'لم تقم بارفاق الترخيص',
-          subTitle: 'يرجى التقاط صورة لترخيص وزارة الصحة لصيدليتك.'
-        })
-      }
-    }else{
+          subTitle: 'يرجى التقاط صورة لترخيص وزارة الصحة لصيدليتك.',
+          buttons: ['موافق']
+        });
+        alert.present();
+       }
+    } else {
       this.loader.present(); 
       this.registerOn()
     }
-    
   }
 
 
 
   registerOn(){
+    
     this._authFirebaseService.regesterWithEmail(this.userAuthData,this.userInfoData).then(()=>{
       this.loader.dismiss();
       firebase.auth().currentUser.sendEmailVerification();
       this.checkerLoader.present()
       this._authFirebaseService.checkVerified(this.userAuthData)
-    })
+    }).then(()=>{
     this._Events.subscribe("auth:Success", ()=>{
       this.checkerLoader.dismiss();
       this.navCtrl.setRoot(TabsPage)
+    })
+    }).catch(error=>{
+        const email_already_in_use = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "الايميل مسجل به مسبقا",
+          buttons: ['موافق']
+        });
+          
+        const weak_password = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "كلمة المرور ضعيفة",
+          buttons: ['موافق']
+        });
+        const invalid_email = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "الايميل غير صالح ",
+          buttons: ['موافق']
+        });
+        const network_error = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "خطأ في الاتصال في الانترنيت",
+          buttons: ['موافق']
+        });
+        const user_not_found = this.alertCtrl.create({
+          title: "تنبيه",
+          subTitle: "لا يوجد حساب",
+          buttons: ['موافق']
+        });
+        if (error.code=="auth/email-already-in-use") {
+          email_already_in_use.present();
+          this.checkerLoader.dismiss();
+          this.loader.dismiss();
+        }
+        if (error.code=="auth/weak-password") {
+          weak_password.present();
+          this.checkerLoader.dismiss();
+          this.loader.dismiss();
+        }
+        if (error.code=="auth/invalid-email") {
+          invalid_email.present();
+          this.checkerLoader.dismiss();
+          this.loader.dismiss();
+      }
+      if (error.code=="auth/user-not-found") {
+        user_not_found.present();
+        this.checkerLoader.dismiss();
+        this.loader.dismiss();
+      }
+      if (error.code=="auth/network-request-failed") {
+        network_error.present();
+        this.checkerLoader.dismiss();
+        this.loader.dismiss();
+      }          
     })
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events, ViewController, Alert } from 'ionic-angular';
+import { NavController, NavParams, Events, ViewController, Alert ,AlertController} from 'ionic-angular';
 import { authFirebaseService } from '../../providers/firebase-service/firebase-service'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import firebase from 'firebase';
@@ -30,7 +30,7 @@ export class HybridLoginPage {
     oldImgURL
     cameraDidOpened:boolean = false
 
-constructor(public navCtrl: NavController, public params: NavParams, public _Camera:Camera, public _ViewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService, public fb: FormBuilder) {
+constructor( public alertCtrl: AlertController ,public navCtrl: NavController, public params: NavParams, public _Camera:Camera, public _ViewCtrl:ViewController, public _Events:Events, public _authFirebaseService:authFirebaseService, public fb: FormBuilder) {
     this.myForm = this.fb.group({
         province: new FormControl(null,Validators.required),
         zone: new FormControl(null,Validators.required)
@@ -43,38 +43,93 @@ goBack(){
 this._ViewCtrl.dismiss();
 }
 
+// facebookRegister(){
+    
+    
+//     if (this.cameraDidOpened) {
+//         this.imgName = localStorage.getItem('uid')
+//         this.imgUpload()
+//     }
+//     this._authFirebaseService.registerFacebook(this.userInfoData, this.hybridData)
+//     this._Events.subscribe("auth:Success", ()=>{
+//         this._ViewCtrl.dismiss();
+//         this.navCtrl.setRoot(TabsPage)
+        
+//         // this.navCtrl.goToRoot;
+//     })
+// }
+face(){
+    if (this.userInfoData.userType == 'pharmacy'){
+              if (this.cameraDidOpened) {
+                 
+                this.imgName = localStorage.getItem('uid')
+                this.imgUpload()
+              } else{
+              const alert= this.alertCtrl.create({
+                  title: 'لم تقم بارفاق الترخيص',
+                  subTitle: 'يرجى التقاط صورة لترخيص وزارة الصحة لصيدليتك.',
+                  buttons: ['موافق']
+                });
+                alert.present();
+               }
+               this.navCtrl.setRoot(HybridLoginPage)
+    } else {
+                this._ViewCtrl.dismiss();
+                        this.navCtrl.setRoot(TabsPage)
+     }
+}
 facebookRegister(){
     
-    
-    if (this.cameraDidOpened) {
-        this.imgName = localStorage.getItem('uid')
-        this.imgUpload()
-    }
     this._authFirebaseService.registerFacebook(this.userInfoData, this.hybridData)
     this._Events.subscribe("auth:Success", ()=>{
         this._ViewCtrl.dismiss();
-        this.navCtrl.setRoot(TabsPage)
-        
-        // this.navCtrl.goToRoot;
+      
     })
+    this.face()
 }
 
-googleRegister(){
+
+// googleRegister(){
    
-    if (this.cameraDidOpened) {
-        this.imgName = localStorage.getItem('uid')
-        this.imgUpload()
+//     if (this.cameraDidOpened) {
+//         this.imgName = localStorage.getItem('uid')
+//         this.imgUpload()
+//     }
+//     this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
+//     this._Events.subscribe("auth:Success", ()=>{
+//         this._ViewCtrl.dismiss();
+//         this.navCtrl.setRoot(TabsPage)
+//     })
+// }
+google(){
+    if (this.userInfoData.userType == 'pharmacy'){
+        if (this.cameraDidOpened) {
+           
+          this.imgName = localStorage.getItem('uid')
+          this.imgUpload()
+        } else{
+        const alert= this.alertCtrl.create({
+            title: 'لم تقم بارفاق الترخيص',
+            subTitle: 'يرجى التقاط صورة لترخيص وزارة الصحة لصيدليتك.',
+            buttons: ['موافق']
+          });
+          alert.present();
+         }
+         this.navCtrl.setRoot(HybridLoginPage)
+    } else {
+          this._ViewCtrl.dismiss();
+          this.navCtrl.setRoot(TabsPage)
     }
-    this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
-    this._Events.subscribe("auth:Success", ()=>{
-        this._ViewCtrl.dismiss();
-        this.navCtrl.setRoot(TabsPage)
-    })
 }
-
-
+googleRegister(){
+    this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
+        this._Events.subscribe("auth:Success", ()=>{
+            this._ViewCtrl.dismiss();
+        })
+        this.google()
+}
 segment(userType){
-    alert(userType)
+    
     let userSegment = document.getElementById('user')
     let pharmacySegment = document.getElementById('pharmacy')
     let cameraSegment = document.getElementById('camera')
