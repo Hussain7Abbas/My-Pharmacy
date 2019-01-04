@@ -77,7 +77,7 @@ import { UserDataModel } from '../../model/DataModels';
 import firebase, { auth } from 'firebase';
 import { AlertController} from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { Facebook,FacebookLoginResponse} from '@ionic-native/facebook';
+import { Facebook} from '@ionic-native/facebook';
 @Injectable()
 export class authFirebaseService {
 

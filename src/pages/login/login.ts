@@ -4,7 +4,7 @@ import { authFirebaseService } from '../../providers/firebase-service/firebase-s
 import { TabsPage } from '../tabs/tabs';
 import { RegisterPage } from '../register/register';
 
-import { Facebook} from '@ionic-native/facebook';
+// import { Facebook} from '@ionic-native/facebook';
 import { HybridLoginPage } from '../hybrid-login/hybrid-login';
 
 /**
@@ -40,7 +40,6 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public _ModalController: ModalController,
-    private fb: Facebook
     ) {
 
   }
