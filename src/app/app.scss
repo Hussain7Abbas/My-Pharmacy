@@ -50,9 +50,23 @@ h1{
 
 .toolbar-title-ios,
 .toolbar-title-md{
-    color: white;
+    color: rgb(4, 36, 31);
 }
-
+.alertCustomCss{
+    color:#339999;
+    button{
+        color: #339999!important;
+    }
+    .alert-wrapper{
+        background: #E6F4F1;
+    }
+    .alert-message {
+        color: #002E30;
+    }
+    .alert-title{
+        color: #FF8749;
+    }
+}
 
 .splash {
     position: absolute;
