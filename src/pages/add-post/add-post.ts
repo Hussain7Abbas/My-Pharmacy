@@ -130,7 +130,7 @@ export class AddPostPage {
               this._Events.publish("post:Added")
               this.viewCtrl.dismiss();
               this.saveLoading.dismiss();
-              alert('inside Function:' + this.postData.signalId)
+              // alert('inside Function:' + this.postData.signalId)
               this.postNotification(posta);
            
             })
@@ -204,7 +204,7 @@ export class AddPostPage {
             this.viewCtrl.dismiss();
             this.saveLoading.dismiss();
             
-            alert('inside Function:' + this.postData.signalId)
+            // alert('inside Function:' + this.postData.signalId)
             this.postNotification(posta);
 
 
@@ -234,7 +234,6 @@ export class AddPostPage {
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
   ).subscribe(data=>{
     console.log(data)
-    alert(data)
   })
   }
 

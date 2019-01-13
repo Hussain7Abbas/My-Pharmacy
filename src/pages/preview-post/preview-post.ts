@@ -150,7 +150,7 @@ export class PreviewPostPage {
     "include_player_ids": [this.postData.signalId],
     "data":{'postKey': (String(posta).split('/'))[4], 'postData': this.postData},
     "contents": {
-      en: 'السعر: ' + this.replyData.price + ' / ' + this.replyData.details
+      en: this.replyData.price + ' / ' + this.replyData.details
     },
     headings: {
       en: 'صيدليتي: قامت ' + this.userData[1]['name'] + ' بالرد عليك'

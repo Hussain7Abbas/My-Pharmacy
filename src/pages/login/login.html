@@ -32,12 +32,12 @@
     <h3 style="color: #6e6e6e; text-align: center;" >تسجيل بواسطة:</h3>
     <hr style="margin-bottom: 10px; height: 1px; background-color: #00000033;">
 
-    <button ion-button block (click)="logInFacebook()" class="myBtn btnMargin" id="facebookLogin">
-      <ion-icon name="logo-facebook" class="icon"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;حساب فيس بوك
+    <button ion-button block (click)="logInFacebook()" class="myBtn btnMargin" id="facebookLogin"*ngFor="let p of pages">
+      <img width="33px" height="33px" src="{{p.icon}}" class="mg" />&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;حساب فيس بوك
     </button>
 
     <button ion-button block (click)="logInGoogle()" class="myBtn btnMargin" id="googleLogin" >
-      <ion-icon name="logo-google" class="icon"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;حساب جيميل
+      <ion-icon name="logo-google" class="gog"></ion-icon>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;حساب جيميل
     </button>
 
     <h3 style="color: #6e6e6e; text-align: center;">ليس لديك حساب؟</h3>
