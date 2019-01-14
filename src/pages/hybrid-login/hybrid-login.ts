@@ -43,21 +43,6 @@ goBack(){
 this._ViewCtrl.dismiss();
 }
 
-// facebookRegister(){
-    
-    
-//     if (this.cameraDidOpened) {
-//         this.imgName = localStorage.getItem('uid')
-//         this.imgUpload()
-//     }
-//     this._authFirebaseService.registerFacebook(this.userInfoData, this.hybridData)
-//     this._Events.subscribe("auth:Success", ()=>{
-//         this._ViewCtrl.dismiss();
-//         this.navCtrl.setRoot(TabsPage)
-        
-//         // this.navCtrl.goToRoot;
-//     })
-// }
 face(){
     if (this.userInfoData.userType == 'pharmacy'){
               if (this.cameraDidOpened) {
@@ -88,19 +73,6 @@ facebookRegister(){
     this.face()
 }
 
-
-// googleRegister(){
-   
-//     if (this.cameraDidOpened) {
-//         this.imgName = localStorage.getItem('uid')
-//         this.imgUpload()
-//     }
-//     this._authFirebaseService.registerGoogle(this.userInfoData, this.hybridData)
-//     this._Events.subscribe("auth:Success", ()=>{
-//         this._ViewCtrl.dismiss();
-//         this.navCtrl.setRoot(TabsPage)
-//     })
-// }
 google(){
     if (this.userInfoData.userType == 'pharmacy'){
         if (this.cameraDidOpened) {

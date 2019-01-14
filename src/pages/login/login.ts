@@ -47,6 +47,9 @@ export class LoginPage {
   ionViewDidLoad() {
 
   }
+  pages = [
+    { title: 'facebook-app-symbol', icon:'assets/imgs/facebook-app-symbol.png' }
+    ];
    //--------------------------------------login with Email--------------------------------------------
   // onLogin(AuthData){
     onLogin(){
