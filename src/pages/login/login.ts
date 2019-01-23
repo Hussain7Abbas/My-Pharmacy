@@ -47,18 +47,12 @@ export class LoginPage {
   ionViewDidLoad() {
 
   }
-<<<<<<< HEAD
   pagesf = [
     { title: 'facebook-app-symbol', icon:'assets/imgs/facebook-app-symbol.png' }
     ];
     pagesg = [
       { title: 'google-plus', icon:'assets/imgs/google-plus.png' }
       ];
-=======
-  pages = [
-    { title: 'facebook-app-symbol', icon:'assets/imgs/facebook-app-symbol.png' }
-    ];
->>>>>>> refs/remotes/origin/master
    //--------------------------------------login with Email--------------------------------------------
   // onLogin(AuthData){
     onLogin(){
