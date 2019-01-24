@@ -3,7 +3,7 @@
       <div style="height: 40px; background-color: #50A7A7;">
           <ion-title style="line-height: 40px; text-align: center;color: white;">اكمال عملية التسجيل</ion-title>
       </div>
-      <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " name='arrow-down'></ion-icon>
+      <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " md='md-arrow-down' ios='ios-arrow-down'></ion-icon>
       <hr style="height: 1px; background-color: #f2f2f2;">
     </ion-header>
         <!-- =============================== Nav Bar Header ============================== -->
@@ -105,7 +105,7 @@
     </div>
     </form>
     <form [formGroup]="myForm">
-  <button *ngIf="isFacebook" ion-button block (click)="facebookRegister()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
-  <button *ngIf="!isFacebook" ion-button block (click)="googleRegister()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+  <button *ngIf="isFacebook" ion-button block (click)="facebookRegister()" [disabled]="!myForm.valid" ><ion-icon ios="ios-create-outline" md="md-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+  <button *ngIf="!isFacebook" ion-button block (click)="googleRegister()" [disabled]="!myForm.valid" ><ion-icon ios="ios-create-outline" md="md-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
     </form>
 </ion-content> 

@@ -5,7 +5,7 @@
 <ion-content padding>
 
 
-  <ion-icon (click)="goBack()" class="backBtn" name="ios-arrow-forward"></ion-icon>
+  <ion-icon (click)="goBack()" class="backBtn" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
   <h1 style="color: #6e6e6e;  padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">انشاء حساب</h1>
 
 <div>
@@ -18,7 +18,7 @@
   <form [formGroup]="myForm">
 
     <ion-item class="transparentWhite" >
-        <ion-icon item-left name="md-person" style="color: #339999;" ></ion-icon>
+        <ion-icon item-left md="md-person" ios="ios-person" style="color: #339999;" ></ion-icon>
         <ion-input [(ngModel)]="userInfoData.name" placeholder="اسم المستخدم" [formControl]="myForm.controls['name']"></ion-input>
     </ion-item>
     <ion-item no-lines class="no-line error" *ngIf="!myForm.controls.name.valid  && myForm.controls.name.dirty && !myForm.controls.name.pending">
@@ -28,7 +28,7 @@
 
 
     <ion-item class="transparentWhite" id="email" >
-        <ion-icon item-left name="md-at" style="color: #339999;"></ion-icon>
+        <ion-icon item-left md="md-at" ios="ios-at"  style="color: #339999;"></ion-icon>
         <ion-input [(ngModel)]="userAuthData.email" placeholder="البريد الالكتروني" [formControl]="myForm.controls['email']"></ion-input>
     </ion-item>
     <ion-item no-lines  *ngIf="!myForm.controls.email.valid  && myForm.controls.email.dirty && !myForm.controls.email.pending">
@@ -39,7 +39,7 @@
 
 
     <ion-item class="transparentWhite" id="password">
-        <ion-icon item-left name="md-lock" style="color: #339999;" ></ion-icon>
+        <ion-icon item-left md="md-lock" ios="ios-lock" style="color: #339999;" ></ion-icon>
         <ion-input [(ngModel)]="userAuthData.password" placeholder="كلمة المرور" [formControl]="myForm.controls['password']" type='password'></ion-input>
     </ion-item>
     <ion-item no-lines *ngIf="!myForm.controls.password.valid  && myForm.controls.password.dirty && !myForm.controls.password.pending">
@@ -136,7 +136,7 @@
 </form>
   <form [formGroup]="myForm">
     <button ion-button block (click)="onRegister()" [disabled]="!myForm.valid" class="myBtn" id="register">
-    <ion-icon name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+    <ion-icon ios="ios-create-outline" md="md-create-outline" ></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
   </form>
 </div>
 </ion-content>

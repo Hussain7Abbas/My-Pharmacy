@@ -2,7 +2,7 @@
 <ion-header style="margin-top: -1px;">
   <!-- =============================== Nav Bar Header ============================== -->
   <div style="height: 40px; background-color: #339999;">
-    <ion-icon (click)="goBack()" class="navBarCloseIcon" name='close'></ion-icon>
+    <ion-icon (click)="goBack()" class="navBarCloseIcon" md='md-close' ios='ios-close'></ion-icon>
     <hr style="height: 1px; background-color: #f2f2f2;">
   </div>
   <!-- =============================== Nav Bar Header ============================== -->
@@ -27,12 +27,12 @@
 
   <div id="cameraContainer_add" *ngIf="!isEdit">
     <h2>التقاط صورة للعلاج او الوصفة</h2>
-    <ion-icon (click)="openCamera()" name='camera'></ion-icon>
+    <ion-icon (click)="openCamera()" ios="ios-camera" md="md-camera"></ion-icon>
     <img src="{{currentImg}}" style="border-radius: 30px; width: 50%; margin-right: 25%;">
   </div>
 
   <div padding>
-    <button ion-button block (click)="onAddPost()"><ion-icon name="ios-create-outline"></ion-icon>&nbsp;&nbsp; نشر</button>
+    <button ion-button block (click)="onAddPost()"><ion-icon md="md-create-outline"  ios="ios-create-outline"></ion-icon>&nbsp;&nbsp; نشر</button>
     <p>يرجى كتابة اسم الدواء بشكل صحيح و التقاط الصورة بشكل واضح</p>
   </div>
 

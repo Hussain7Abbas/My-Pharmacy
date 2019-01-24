@@ -18,7 +18,7 @@
     <div padding>
       <h1 style="color: #339999;" >هل تريد السؤال عن دواء؟</h1>
       <button id="askButton"  ion-button block color="primary" (click)="goAddQues()">
-        <ion-icon name='md-add'></ion-icon>&nbsp; &nbsp;اضافة منشور
+        <ion-icon md='md-add' ios='ios-add'></ion-icon>&nbsp; &nbsp;اضافة منشور
       </button>
     </div>
     <!-- ============================================================================================== -->
@@ -48,7 +48,7 @@
           </div>
           <h2 class="postTitle">{{item[1]['postBody']}}</h2> <!-- ===== The title of post ===== -->
         </div>
-        <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
+        <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon></button>
       </ion-item>
     </ion-list>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
@@ -93,7 +93,7 @@
         </div>
         <h2 class="postTitle">{{item[1]['postBody']}}</h2> <!-- ===== The title of post ===== -->
       </div>
-      <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon name="ios-arrow-forward"></ion-icon></button>
+      <button ion-button icon-only class="previewQuesBtn" (click)="goPreviewQues(item)"><ion-icon  md="md-arrow-forward" ios="ios-arrow-forward"></ion-icon></button>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

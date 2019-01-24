@@ -5,24 +5,24 @@
 
 <ion-content>
 
-  <ion-icon (click)="goBack()" class="backBtn" name="ios-arrow-forward"></ion-icon>
+  <ion-icon (click)="goBack()" class="backBtn" md="md-arrow-forward" ios="ios-arrow-forward"></ion-icon>
 
   <div padding>
     <h1 style="color: #6e6e6e; padding: 5px; font-weight: bold; margin-bottom: 12px; font-size: 20pt;">تسجيل دخول</h1>
 
 
     <ion-item class="transparentWhite">
-      <ion-icon item-left name="md-at" style=" color:#339999"></ion-icon>
+      <ion-icon item-left md="md-at" ios="ios-at" style=" color:#339999"></ion-icon>
       <ion-input [(ngModel)]="userAuthData.email" placeholder="البريد الالكتروني" ></ion-input>
     </ion-item>
 
     <ion-item class="transparentWhite">
-      <ion-icon item-left name="md-lock" style=" color:#339999"></ion-icon>
+      <ion-icon item-left md="md-lock" ios="ios-lock"  style=" color:#339999"></ion-icon>
       <ion-input [(ngModel)]="userAuthData.password" placeholder="كلمة المرور" type='password'></ion-input>
     </ion-item>
 
 
-    <button ion-button block (click)="onLogin()"class="myBtn" id="login" ><ion-icon name="md-contact"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
+    <button ion-button block (click)="onLogin()"class="myBtn" id="login" ><ion-icon md="md-contact" ios="ios-contact"></ion-icon>&nbsp; &nbsp;&nbsp;&nbsp;  تسجيل الدخول</button>
     <a (click)="forgetPassword()" style="font-weight: bold; font-size: 12pt; width: 100%; text-align: center;color: #6e6e6e;">هل نسيت كلمة المرور؟</a>
 
   </div>
@@ -45,7 +45,7 @@
     <hr style="margin-bottom: 10px; height: 1px; background-color: #00000033;">
 
     <button ion-button block (click)="registerOn()" class="myBtn" id="login" >
-      <ion-icon  name="ios-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب
+      <ion-icon  ios="ios-create-outline" md="md-create-outline"></ion-icon>&nbsp; &nbsp; انشاء حساب
     </button>
 
   </div>

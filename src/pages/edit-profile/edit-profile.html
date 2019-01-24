@@ -3,7 +3,7 @@
   <div style="height: 40px; background-color: #50A7A7;">
     <ion-title style="line-height: 40px; text-align: center;color: white;">تعديل الصفحة الشخصية</ion-title>
   </div>
-  <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " name='ios-arrow-forward'></ion-icon>
+  <ion-icon (click)="goBack()"style="position: absolute; color: white; font-size: 2.2rem; background-color: transparent; height: 34px; box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0.14); top: 10px; left: 15px; " md='md-arrow-forward' ios='ios-arrow-forward'></ion-icon>
   <hr style="height: 1px; background-color: #f2f2f2;">
 </ion-header>
 <!-- =============================== Nav Bar Header ============================== -->
@@ -107,7 +107,7 @@
 
     
   <form [formGroup]="myForm">
-    <button ion-button block (click)="saveEdit()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>
+    <button ion-button block (click)="saveEdit()" [disabled]="!myForm.valid" ><ion-icon md="md-create-outline" name="ios-create-outline"></ion-icon>
       &nbsp; &nbsp; حفظ التعديلات</button>
   </form>
 </ion-content> 
@@ -209,7 +209,7 @@
   
       
     <form [formGroup]="myForm">
-      <button ion-button block (click)="saveEdit()" [disabled]="!myForm.valid" ><ion-icon name="ios-create-outline"></ion-icon>
+      <button ion-button block (click)="saveEdit()" [disabled]="!myForm.valid" ><ion-icon  md="md-create-outline" ios="ios-create-outline"></ion-icon>
         &nbsp; &nbsp; حفظ التعديلات</button>
     </form>
   </ion-content> 

@@ -59,7 +59,7 @@
                           </ion-col>
                       </ion-row>
                   </ion-grid>
-                  <button ion-button full (click)="editProfile()" color="primary"  ><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
+                  <button ion-button full (click)="editProfile()" color="primary"  ><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp; &nbsp;تعديل</button>             
               </ion-list>
           </div>
         <!-- ==================</contentDetails>==================== -->
@@ -84,7 +84,7 @@
                             </div>
                         </ion-item>
                         <ion-item-options side="right"> <!-- ===== The Delete button on the right side ===== -->
-                            <button ion-button color="danger" (click)="onDelete(item[0])" class="slideButton"><ion-icon name="md-trash"></ion-icon>حذف</button>
+                            <button ion-button color="danger" (click)="onDelete(item[0])" class="slideButton"><ion-icon md="md-trash" ios="ios-trash" ></ion-icon>حذف</button>
                           </ion-item-options>
                         <!-- <ion-item-options side="left"> ===== The Edit button on the left side ===== -->
                             <!-- <button ion-button color="primary" (click)="onEdit(thePost)" class="slideButton"><ion-icon name="md-create"></ion-icon>تعديل</button> -->
@@ -105,7 +105,7 @@
     
         <!-- ==============<pharmacyImage&pharmacyName>============ -->           
         <div class="prof">
-            <ion-icon *ngIf="visitProfile" class="backButton" (click)="goBack()" style="position: absolute; top: 50px; right: 16px; " name='md-arrow-back'></ion-icon>
+            <ion-icon *ngIf="visitProfile" class="backButton" (click)="goBack()" style="position: absolute; top: 50px; right: 16px; " md='md-arrow-back' ios='ios-arrow-back'></ion-icon>
             <img class="userimg" src="assets/imgs/pharmacy.png"/>          
             <h2>{{userData[1].name}}</h2>
           </div> 
@@ -176,7 +176,7 @@
                           </ion-col>
                     </ion-row>                     
                   </ion-grid>
-                    <button id="edit" *ngIf="!visitShow" ion-button full (click)="editProfile()" color="primary"><ion-icon name="create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
+                    <button id="edit" *ngIf="!visitShow" ion-button full (click)="editProfile()" color="primary"><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp; &nbsp;تعديل</button>                                   
               </ion-list>
           </div>
         <!-- ==============</pharmacyContentDetails>================ -->
