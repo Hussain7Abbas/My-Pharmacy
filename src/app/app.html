@@ -12,17 +12,17 @@
 
       <ion-list>
           <ion-item (click)="goAbout()" menuClose>
-            <ion-icon class="ionIconList"name='information-circle'></ion-icon>
+            <ion-icon class="ionIconList" ios="ios-information-circle" md='md-information-circle'></ion-icon>
             <h2 style="line-height: 36px; font-weight: bold;">حول التطبيق</h2>
           </ion-item>
 
           <ion-item (click)="goInfo()" menuClose>
-              <ion-icon class="ionIconList" name='people'></ion-icon>
+              <ion-icon class="ionIconList" md="md-people" ios="ios-people"></ion-icon>
               <h2 style="line-height: 36px; font-weight: bold;">اتصل بنا</h2>
           </ion-item>
 
         <ion-item (click)="onLogOut()" menuClose>
-          <ion-icon class="ionIconList" name='log-out'></ion-icon>
+          <ion-icon class="ionIconList" md="md-log-out" ios="ios-log-out"></ion-icon>
           <h2 style="line-height: 36px; font-weight: bold;">تسجيل خروج</h2>
         </ion-item>
       </ion-list>

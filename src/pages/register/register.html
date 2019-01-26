@@ -122,12 +122,10 @@
 
       </ion-select>
     </ion-item>
-
   </form>
   <form [formGroup]="myForm">
   <div id="camera">
     <ion-label class="b" style="padding-top: 15px;">التقاط صورة لترخيص وزارة الصحة </ion-label>
-    
     <ion-icon id="theIcon" (click)='openCamera()' ios="ios-camera" md="md-camera" ></ion-icon>
     <ion-label class="b" style="color:rgba(202,11, 11)">سيتم اغلاق حسابك اذا كان الترخيص مزيف </ion-label>
     <img src="{{currentImg}}" >
@@ -136,7 +134,7 @@
 </form>
   <form [formGroup]="myForm">
     <button ion-button block (click)="onRegister()" [disabled]="!myForm.valid" class="myBtn" id="register">
-    <ion-icon ios="ios-create-outline" md="md-create-outline" ></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
+    <ion-icon ios="ios-person-add" md="md-person-add" ></ion-icon>&nbsp; &nbsp; انشاء حساب</button>
   </form>
 </div>
 </ion-content>
