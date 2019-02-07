@@ -226,11 +226,16 @@ export class AddPostPage {
       "included_segments": ['pharmacySegment'],
       "data":{'postKey': (String(posta).split('/'))[4], 'postData': this.postData},
       "contents": {
-        en: this.postData.postBody
+        // en: this.postData.postBody
+        en: "صيدليتي: قام " + this.userData[1]['name'] + ' بنشر سؤال'+' '+this.postData.postBody
     },
     headings: {
-      en: "صيدليتي: قام " + this.userData[1]['name'] + ' بنشر سؤال'
-    }
+      // en: "صيدليتي: قام " + this.userData[1]['name'] + ' بنشر سؤال'
+      en: 'تطبيق صيدليتي'
+    },
+    
+    
+    
   };
   this.http.post('https://onesignal.com/api/v1/notifications',JSON.stringify(body),{headers:headers}).map(res=>res.json()
   ).subscribe(data=>{
