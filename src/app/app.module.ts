@@ -1,108 +1,23 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-import { Camera } from '@ionic-native/camera';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { OneSignal } from '@ionic-native/onesignal';
-import { Facebook} from '@ionic-native/facebook';
-import { HeroPage } from '../pages/hero/hero';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-import { ProfilePage } from '../pages/profile/profile';
-import { SearchPage } from '../pages/search/search';
-import { LoginPage } from '../pages/login/login';
-import { RegisterPage } from '../pages/register/register';
-import { StartPage } from '../pages/start/start';
-import { HybridLoginPage } from '../pages/hybrid-login/hybrid-login';
-import { EditProfilePage } from '../pages/edit-profile/edit-profile';
-import { NavBarComponent } from '../components/nav-bar/nav-bar';
-import { AddPostPage } from '../pages/add-post/add-post';
-import { PreviewPostPage } from '../pages/preview-post/preview-post';
-import { GooglePlus } from '@ionic-native/google-plus';
-import { StatusBar } from '@ionic-native/status-bar';
+import { RouteReuseStrategy } from '@angular/router';
 
-// ==================================== Firebase =====================================
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { postsFirebaseService, authFirebaseService, ContactUsFirebaseService } from '../providers/firebase-service/firebase-service';
-import {HttpModule} from '@angular/http';
-const firebaseConfig = {
-  apiKey: "AIzaSyCrRhWVyR7IljNxfqOyM1olbuCKV0FF7Aw",
-  authDomain: "my-pharmacy-test.firebaseapp.com",
-  databaseURL: "https://my-pharmacy-test.firebaseio.com",
-  projectId: "my-pharmacy-test",
-  storageBucket: "my-pharmacy-test.appspot.com",
-  messagingSenderId: "40681149794"
-}
-// ==================================== Firebase =====================================
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    NavBarComponent,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    HeroPage,
-    ProfilePage,
-    SearchPage,
-    LoginPage,
-    RegisterPage,
-    StartPage,
-    AddPostPage,
-    PreviewPostPage,
-    HybridLoginPage,
-    EditProfilePage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    HttpModule,
-    // ================ Firebase ==============
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
-    // ================ Firebase ==============
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    HeroPage,
-    ProfilePage,
-    SearchPage,
-    LoginPage,
-    RegisterPage,
-    StartPage,
-    AddPostPage,
-    PreviewPostPage,
-    HybridLoginPage,
-    EditProfilePage
-  ],
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
-    Facebook,
-    GooglePlus,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    // ================ Firebase ==============
-    AngularFireAuth,
-    postsFirebaseService,
-    authFirebaseService,
-    ContactUsFirebaseService,
-    // ================ Firebase ==============
-    Camera,
     SplashScreen,
-    OneSignal,
-    
-  ]
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
-
